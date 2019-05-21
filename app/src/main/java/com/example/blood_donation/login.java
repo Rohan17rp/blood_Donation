@@ -38,4 +38,10 @@ public class login extends AppCompatActivity {
                     .show();
         }
     }
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        startActivity(new Intent(this, MainActivity.class));
+        finish();
     }
+}
