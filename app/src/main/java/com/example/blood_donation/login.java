@@ -12,15 +12,20 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 public class login extends AppCompatActivity {
+
+    Button button;
+    EditText username;
+    EditText password;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login);
-    }
 
-    Button button = (Button) findViewById(R.id.button);
-    EditText username = (EditText) findViewById(R.id.editText);
-    EditText password = (EditText) findViewById(R.id.editText2);
+        button = findViewById(R.id.button);
+        username = findViewById(R.id.editText);
+        password = findViewById(R.id.editText2);
+    }
 
         public void check(View v){
         if (username.getText().toString().equals("admin") && password.getText().toString().equals("admin")) {
