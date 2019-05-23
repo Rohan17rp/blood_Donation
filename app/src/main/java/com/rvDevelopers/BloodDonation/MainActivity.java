@@ -12,10 +12,14 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
     }
-    public void login(View view){
+    public void login(View view) {
         Intent Login = new Intent(this,login.class);
         startActivity(Login);
         MainActivity.this.finish();
+    }
+    public void signUP(View view) {
+        startActivity(new Intent(this, SignUP.class));
+        finish();
     }
     @Override
     public void onBackPressed() {
