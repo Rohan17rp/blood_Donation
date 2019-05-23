@@ -1,11 +1,10 @@
 package com.rvDevelopers.BloodDonation;
-import android.app.Activity;
+
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-
-import android.view.ViewConfiguration;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -15,6 +14,7 @@ public class login extends AppCompatActivity {
     Button button;
     EditText username;
     EditText password;
+    SharedPreferences pref;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -24,10 +24,14 @@ public class login extends AppCompatActivity {
         button = findViewById(R.id.button);
         username = findViewById(R.id.editText);
         password = findViewById(R.id.editText2);
+
+        pref = this.getSharedPreferences("Sign_upData", MODE_PRIVATE);
     }
 
-        public void check(View v){
-        if (username.getText().toString().equals("admin") && password.getText().toString().equals("admin")) {
+    public void check(View v){
+        String UserName = username.getText().toString();
+        String Password = password.getText().toString();
+        if (CheckCredential(UserName, Password)) {
             Intent category = new Intent(this, select_category.class);
             startActivity(category);
             login.this.finish();
@@ -42,5 +46,9 @@ public class login extends AppCompatActivity {
         super.onBackPressed();
         startActivity(new Intent(this, MainActivity.class));
         finish();
+    }
+    public boolean CheckCredential(String UserName, String Password) {
+        String pass = pref.getString(UserName, "null");
+        return (Password.equals(pass));
     }
 }
