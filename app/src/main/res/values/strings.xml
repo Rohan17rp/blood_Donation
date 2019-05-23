@@ -13,4 +13,8 @@
     <string name="confirm_password">Confirm Password</string>
     <string name="enter_email">Enter email Id</string>
     <string name="enter_phoneNo">Enter Mobile No.</string>
+    <string name="profile">Profile</string>
+    <string name="email">E-mail</string>
+    <string name="blood_group">Blood Group</string>
+    <string name="donate">Donate</string>
 </resources>
