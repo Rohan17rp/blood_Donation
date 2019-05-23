@@ -33,12 +33,15 @@ public class login extends AppCompatActivity {
         String Password = password.getText().toString();
         if (CheckCredential(UserName, Password)) {
             Intent category = new Intent(this, select_category.class);
+            category.putExtra("uname", UserName);
             startActivity(category);
             login.this.finish();
         } else {
             Toast
                     .makeText(login.this, "Invalid Credentials", Toast.LENGTH_LONG)
                     .show();
+            username.setText("");
+            password.setText("");
         }
     }
     @Override
