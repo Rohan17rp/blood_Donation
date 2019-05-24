@@ -18,4 +18,5 @@
     <string name="blood_group">Blood Group</string>
     <string name="donate">Donate</string>
     <string name="request">Request</string>
+    <string name="age">Age</string>
 </resources>
