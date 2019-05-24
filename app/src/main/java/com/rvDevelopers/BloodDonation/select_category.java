@@ -21,7 +21,7 @@ public class select_category extends AppCompatActivity {
     Button donate;
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.category);
+        setContentView(R.layout.profile);
 
         category = getIntent();
         Message = "Welcome ";
@@ -70,6 +70,12 @@ public class select_category extends AppCompatActivity {
     }
     public void logout() {
         startActivity(new Intent(this, login.class));
-        finish();
+
+
+    }
+    public void Test(View view) {
+        Intent Test = new Intent(this, BloodBank.class);
+        startActivity(Test);
+        select_category.this.finish();
     }
 }
