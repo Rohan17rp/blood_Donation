@@ -140,30 +140,27 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editText6" />
 
-    <Spinner
-        android:id="@+id/BGspinner"
-        android:layout_width="93dp"
-        android:layout_height="37dp"
-        android:layout_marginStart="96dp"
-        android:layout_marginTop="14dp"
-        android:layout_marginBottom="212dp"
-        app:layout_constraintBottom_toTopOf="@+id/button"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText7"></Spinner>
-
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="64dp"
-        android:layout_height="37dp"
-        android:layout_marginStart="8dp"
+    <EditText
+        android:id="@+id/textAge"
+        android:layout_width="75dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="75dp"
         android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="205dp"
         android:hint="@string/age"
-        app:layout_constraintBottom_toTopOf="@+id/button2"
+        android:inputType="phone"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editText7" />
+
+    <Spinner
+        android:id="@+id/spinner_blood_type"
+        android:layout_width="75dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="75dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="75dp"
+        android:tag="@string/blood_group"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.503"
-        app:layout_constraintStart_toEndOf="@+id/BGspinner"
+        app:layout_constraintStart_toEndOf="@+id/textAge"
         app:layout_constraintTop_toBottomOf="@+id/editText7" />
 
 </android.support.constraint.ConstraintLayout>
