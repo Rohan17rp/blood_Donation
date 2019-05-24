@@ -23,7 +23,7 @@ public class donor extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        startActivity(new Intent(this, select_category.class));
+        startActivity(new Intent(this, Profile.class));
         finish();
     }
 }

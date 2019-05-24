@@ -19,4 +19,5 @@
     <string name="donate">Donate</string>
     <string name="request">Request</string>
     <string name="age">Age</string>
+    <string name="edit_profile">Edit Profile</string>
 </resources>
