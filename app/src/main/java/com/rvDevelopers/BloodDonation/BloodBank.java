@@ -14,12 +14,12 @@ public class BloodBank extends AppCompatActivity implements AvailableBlood.OnFra
     @Override
         protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
-            setContentView(R.layout.test);
+            setContentView(R.layout.blood_bank);
 
             tabLayout = findViewById(R.id.tablayout);
-            tabLayout.addTab(tabLayout.newTab().setText("Tab 1"));
-            tabLayout.addTab(tabLayout.newTab().setText("Tab 2"));
-            tabLayout.addTab(tabLayout.newTab().setText("Tab 3"));
+            tabLayout.addTab(tabLayout.newTab().setText("Available BLood"));
+            tabLayout.addTab(tabLayout.newTab().setText("Donors info"));
+            tabLayout.addTab(tabLayout.newTab().setText("Contact"));
             tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
 
             final ViewPager viewPager = (ViewPager)findViewById(R.id.pager);
