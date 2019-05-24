@@ -8,7 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-
+import com.rvDevelopers.BloodDonation.SignUp;
 public class login extends AppCompatActivity {
 
     Button button;
@@ -32,7 +32,7 @@ public class login extends AppCompatActivity {
         String UserName = username.getText().toString();
         String Password = password.getText().toString();
         if (CheckCredential(UserName, Password)) {
-            Intent category = new Intent(this, select_category.class);
+            Intent category = new Intent(this, Profile.class);
             category.putExtra("uname", UserName);
             startActivity(category);
             login.this.finish();
@@ -54,4 +54,11 @@ public class login extends AppCompatActivity {
         String pass = pref.getString(UserName, "null");
         return (Password.equals(pass));
     }
+
+
+    public void signUP(View view) {
+        startActivity(new Intent(this, SignUp.class));
+        finish();
+    }
+
 }

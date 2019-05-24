@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SignUP">
+    tools:context=".SignUp">
 
     <TextView
         android:id="@+id/textview"
@@ -91,7 +91,7 @@
         android:layout_marginStart="75dp"
         android:layout_marginBottom="8dp"
         android:layout_toStartOf="@+id/button2"
-        android:onClick="SignUp"
+        android:onClick="signUp"
         android:text="@string/sign_up"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

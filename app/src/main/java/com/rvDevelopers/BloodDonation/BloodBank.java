@@ -1,5 +1,6 @@
 package com.rvDevelopers.BloodDonation;
 
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
@@ -49,4 +50,11 @@ public class BloodBank extends AppCompatActivity implements AvailableBlood.OnFra
     public void onFragmentInteraction(Uri uri) {
 
     }
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        startActivity(new Intent(this, login.class));
+        finish();
+    }
+
 }

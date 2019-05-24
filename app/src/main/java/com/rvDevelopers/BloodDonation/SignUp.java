@@ -13,7 +13,7 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-public class SignUP extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
+public class SignUp extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
     boolean blood_selected = false;
     String bloodType;
@@ -60,7 +60,7 @@ public class SignUP extends AppCompatActivity implements AdapterView.OnItemSelec
         user_age = this.getSharedPreferences("age_preference", MODE_PRIVATE);
         age_editor = user_age.edit();
     }
-    public void SignUp(View view) {
+    public void signUp(View view) {
 
         String pass = password.getText().toString();
         String cpass = cpassword.getText().toString();
@@ -119,7 +119,7 @@ public class SignUP extends AppCompatActivity implements AdapterView.OnItemSelec
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        startActivity(new Intent(this, MainActivity.class));
+        startActivity(new Intent(this, login.class));
         finish();
     }
 

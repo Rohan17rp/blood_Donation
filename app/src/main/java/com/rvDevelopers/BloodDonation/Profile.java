@@ -11,7 +11,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class select_category extends AppCompatActivity {
+public class Profile extends AppCompatActivity {
 
     TextView welcome;
     int age;
@@ -43,7 +43,7 @@ public class select_category extends AppCompatActivity {
         if(age >= 18 && age <= 60) {
             Intent Donor = new Intent(this,donor.class);
             startActivity(Donor);
-            select_category.this.finish();
+            Profile.this.finish();
         } else {
             Toast
                     .makeText(this, "To donate blood age should be between 18 and 60", Toast.LENGTH_LONG)
@@ -76,6 +76,6 @@ public class select_category extends AppCompatActivity {
     public void Test(View view) {
         Intent Test = new Intent(this, BloodBank.class);
         startActivity(Test);
-        select_category.this.finish();
+        Profile.this.finish();
     }
 }

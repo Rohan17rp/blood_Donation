@@ -22,7 +22,7 @@
                 <action android:name="android.intent.action.VIEW" />
             </intent-filter>
         </activity>
-        <activity android:name=".select_category">
+        <activity android:name=".Profile">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
             </intent-filter>
@@ -32,7 +32,7 @@
                 <action android:name="android.intent.action.VIEW" />
             </intent-filter>
         </activity>
-        <activity android:name=".SignUP">
+        <activity android:name=".SignUp">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
             </intent-filter>

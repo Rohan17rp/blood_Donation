@@ -10,7 +10,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.login);
     }
     public void login(View view) {
         Intent Login = new Intent(this,login.class);
@@ -18,7 +18,7 @@ public class MainActivity extends AppCompatActivity {
         MainActivity.this.finish();
     }
     public void signUP(View view) {
-        startActivity(new Intent(this, SignUP.class));
+        startActivity(new Intent(this, SignUp.class));
         finish();
     }
     @Override
