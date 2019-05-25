@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -22,6 +23,7 @@ public class SignUp extends AppCompatActivity implements AdapterView.OnItemSelec
     SharedPreferences.Editor login_editor, contact_editor, email_editor, name_editor, blood_editor, age_editor;
     Spinner blood_type_selector;
     ArrayAdapter<CharSequence> blood_type;
+
     @SuppressLint("CommitPrefEdits")
     @Override
     protected void onCreate(Bundle bundle) {
@@ -68,49 +70,71 @@ public class SignUp extends AppCompatActivity implements AdapterView.OnItemSelec
         String Uname = userName.getText().toString();
         String EMAIL = email.getText().toString();
         String phNO = number.getText().toString();
-        int Age = Integer.parseInt(age.getText().toString());
-
-        if(Name.length() == 0 || EMAIL.length() == 0 || phNO.length() == 0 || !blood_selected) {
-            Toast
-                    .makeText(this, "It is compulsory to enter all data", Toast.LENGTH_SHORT)
-                    .show();
+        int Age = 0;
+        if(age.getText().toString().length() != 0) {
+            Age = Integer.parseInt(age.getText().toString());
+        }
+        if(Name.length() == 0 || Uname.length() == 0 || EMAIL.length() == 0 || phNO.length() == 0 || !blood_selected) {
+            try {
+                Toast
+                        .makeText(this, "It is compulsory to enter all data", Toast.LENGTH_SHORT)
+                        .show();
+            } catch (RuntimeException e) {
+                Log.d("222222222222222222", "signUp: hsnhrgbrhvfgbnakhdgvkjrg");
+            }
         } else if(pass.length() < 8) {
-            Toast
-                    .makeText(this, "Password should contain atleast 8 characters", Toast.LENGTH_LONG)
-                    .show();
+            try {
+                Toast
+                        .makeText(this, "Password should contain at least 8 characters", Toast.LENGTH_LONG)
+                        .show();
+            } catch (RuntimeException e) {
+                Log.d("33333333333333333333", "signUp: 6969696969969696969696969696969");
+            }
         } else if(!(pass.equals(cpass))) {
-            Toast
-                    .makeText(this, "Password does not match", Toast.LENGTH_LONG)
-                    .show();
+            try {
+                Toast
+                        .makeText(this, "Password does not match", Toast.LENGTH_LONG)
+                        .show();
+            } catch (RuntimeException e) {
+                Log.d("4444444444444444444", "signUp: hfzd16543zdffghb44684678fhzdvdzf5875");
+            }
         } else {
-            login_editor.putString(Uname, pass);
-            login_editor.commit();
+            try {
+                login_editor.putString(Uname, pass);
+                login_editor.commit();
 
-            email_editor.putString(Uname, EMAIL);
-            email_editor.commit();
+                email_editor.putString(Uname, EMAIL);
+                email_editor.commit();
 
-            contact_editor.putString(Uname, phNO);
-            contact_editor.commit();
+                contact_editor.putString(Uname, phNO);
+                contact_editor.commit();
 
-            name_editor.putString(Uname, Name);
-            name_editor.commit();
+                name_editor.putString(Uname, Name);
+                name_editor.commit();
 
-            blood_editor.putString(Uname, bloodType);
-            blood_editor.commit();
+                blood_editor.putString(Uname, bloodType);
+                blood_editor.commit();
 
-            age_editor.putInt(Uname, Age);
-            age_editor.commit();
-            Toast
+                age_editor.putInt(Uname, Age);
+                age_editor.commit();
+            } catch (RuntimeException e) {
+                Log.d("eeeeeeeeeeeeeeeee", "signUp: ");
+            }
+
+            try {Toast
                     .makeText(this, "Sign Up successful", Toast.LENGTH_SHORT)
                     .show();
 
-            Handler handler = new Handler();
-            handler.postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    onBackPressed();
-                }
-            }, 1000);
+                Handler handler = new Handler();
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        onBackPressed();
+                    }
+                }, 1000);
+            } catch (RuntimeException e) {
+                Log.d("999999999999999999999", "Shut the hell up. Go to hell. You don't deserve to live");
+            }
         }
     }
     public void Cancel(View view) {
