@@ -68,7 +68,10 @@ public class SignUp extends AppCompatActivity implements AdapterView.OnItemSelec
         String Uname = userName.getText().toString();
         String EMAIL = email.getText().toString();
         String phNO = number.getText().toString();
-        int Age = Integer.parseInt(age.getText().toString());
+        int Age = 0;
+        if(age.getText().toString().length() != 0) {
+            Age = Integer.parseInt(age.getText().toString());
+        }
 
         if(Name.length() == 0 || EMAIL.length() == 0 || phNO.length() == 0 || !blood_selected) {
             Toast
