@@ -8,8 +8,8 @@
     android:paddingRight = "2dp"
     android:paddingTop = "2dp"
     android:paddingBottom = "2dp"
-    tools:context=".Tab1">
-
+    tools:context=".LoginFrag">
+<!--<include layout="@layout/login" />-->
     <TextView
         android:id="@+id/textview"
         android:layout_width="wrap_content"
@@ -61,7 +61,6 @@
         android:layout_marginStart="75dp"
         android:layout_marginBottom="8dp"
         android:layout_toStartOf="@+id/button2"
-        android:onClick="check"
         android:text="@string/login"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

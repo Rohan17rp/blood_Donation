@@ -6,7 +6,6 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -23,7 +22,6 @@ public class SignUp extends AppCompatActivity implements AdapterView.OnItemSelec
     SharedPreferences.Editor login_editor, contact_editor, email_editor, name_editor, blood_editor, age_editor;
     Spinner blood_type_selector;
     ArrayAdapter<CharSequence> blood_type;
-
     @SuppressLint("CommitPrefEdits")
     @Override
     protected void onCreate(Bundle bundle) {
@@ -71,17 +69,17 @@ public class SignUp extends AppCompatActivity implements AdapterView.OnItemSelec
         String EMAIL = email.getText().toString();
         String phNO = number.getText().toString();
         int Age = 0;
-        if (age.getText().toString().length() != 0) {
+        if(age.getText().toString().length() != 0) {
             Age = Integer.parseInt(age.getText().toString());
         }
 
-        if (Name.length() == 0 || Uname.length() == 0 || EMAIL.length() == 0 || phNO.length() == 0 || !blood_selected) {
+        if(Name.length() == 0 || EMAIL.length() == 0 || phNO.length() == 0 || !blood_selected) {
             Toast
                     .makeText(this, "It is compulsory to enter all data", Toast.LENGTH_SHORT)
                     .show();
         } else if(pass.length() < 8) {
             Toast
-                    .makeText(this, "Password should contain at least 8 characters", Toast.LENGTH_LONG)
+                    .makeText(this, "Password should contain atleast 8 characters", Toast.LENGTH_LONG)
                     .show();
         } else if(!(pass.equals(cpass))) {
             Toast
@@ -105,7 +103,6 @@ public class SignUp extends AppCompatActivity implements AdapterView.OnItemSelec
 
             age_editor.putInt(Uname, Age);
             age_editor.commit();
-
             Toast
                     .makeText(this, "Sign Up successful", Toast.LENGTH_SHORT)
                     .show();
