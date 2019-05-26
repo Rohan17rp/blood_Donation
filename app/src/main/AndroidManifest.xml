@@ -18,21 +18,31 @@
 
             </intent-filter>
         </activity>
+
+        <activity android:name=".login">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+            </intent-filter>
+        </activity>
+
         <activity android:name=".Profile">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
             </intent-filter>
         </activity>
+
         <activity android:name=".donor">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
             </intent-filter>
         </activity>
+
         <activity android:name=".SignUp">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
             </intent-filter>
         </activity>
+
         <activity android:name=".BloodBank" >
             <intent-filter>
                 <action android:name="android.intent.action.VIEW"/>
@@ -40,6 +50,7 @@
 
             </intent-filter>
         </activity>
+
     </application>
 
 </manifest>
