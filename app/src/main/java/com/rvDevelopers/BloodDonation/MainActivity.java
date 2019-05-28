@@ -1,11 +1,14 @@
 package com.rvDevelopers.BloodDonation;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.design.widget.TabLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -13,34 +16,26 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-public class SignUp extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
+public class MainActivity extends AppCompatActivity implements LoginFrag.OnFragmentInteractionListener, SignUpFrag.OnFragmentInteractionListener, AdapterView.OnItemSelectedListener{
 
     boolean blood_selected = false;
     String bloodType;
-    EditText name, userName, password, cpassword, email, number, age;
+
+    TabLayout tabLayout;
+
+    SharedPreferences pref;
     SharedPreferences sign_up, contact_no, contact_email, customer_name, user_blood, user_age;
     SharedPreferences.Editor login_editor, contact_editor, email_editor, name_editor, blood_editor, age_editor;
+
     Spinner blood_type_selector;
     ArrayAdapter<CharSequence> blood_type;
-    @SuppressLint("CommitPrefEdits")
+
     @Override
-    protected void onCreate(Bundle bundle) {
-        super.onCreate(bundle);
-        setContentView(R.layout.sign_up);
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.main_activity);
 
-        name = findViewById(R.id.editText3);
-        userName = findViewById(R.id.editText);
-        password = findViewById(R.id.editText2);
-        cpassword = findViewById(R.id.editText4);
-        email = findViewById(R.id.editText6);
-        number = findViewById(R.id.editText7);
-        age = findViewById(R.id.textAge);
-
-        blood_type_selector = findViewById(R.id.spinner_blood_type);
-        blood_type = ArrayAdapter.createFromResource(this, R.array.blood_type, android.R.layout.simple_spinner_item);
-        blood_type.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        blood_type_selector.setAdapter(blood_type);
-        blood_type_selector.setOnItemSelectedListener(this);
+        pref = this.getSharedPreferences("Sign_upData", MODE_PRIVATE);
 
         sign_up = this.getSharedPreferences("Sign_upData", MODE_PRIVATE);
         login_editor = sign_up.edit();
@@ -59,8 +54,45 @@ public class SignUp extends AppCompatActivity implements AdapterView.OnItemSelec
 
         user_age = this.getSharedPreferences("age_preference", MODE_PRIVATE);
         age_editor = user_age.edit();
+
+
+        tabLayout = findViewById(R.id.tablayout1);
+        tabLayout.addTab(tabLayout.newTab().setText("Login"));
+        tabLayout.addTab(tabLayout.newTab().setText("Sign Up"));
+        tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
+
+        final ViewPager viewPager = (ViewPager) findViewById(R.id.pager1);
+        final PagerAdapter adapter = new PagerAdapter(getSupportFragmentManager() ,tabLayout.getTabCount());
+        viewPager.setAdapter(adapter);
+        viewPager.setOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
+
+        tabLayout.setOnTabSelectedListener(new TabLayout.BaseOnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                viewPager.setCurrentItem(tab.getPosition());
+                if(tab.getPosition() == 1) {
+                }
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+
+            }
+        });
     }
-    public void signUp(View view) {
+
+    @Override
+    public void onFragmentInteraction(Uri uri) {
+
+    }
+
+    @Override
+    public void SignUp(EditText name, EditText userName, EditText password, EditText cpassword, EditText email, EditText number, EditText age, Spinner blood_type_selector) {
 
         String pass = password.getText().toString();
         String cpass = cpassword.getText().toString();
@@ -68,6 +100,7 @@ public class SignUp extends AppCompatActivity implements AdapterView.OnItemSelec
         String Uname = userName.getText().toString();
         String EMAIL = email.getText().toString();
         String phNO = number.getText().toString();
+
         int Age = 0;
         if(age.getText().toString().length() != 0) {
             Age = Integer.parseInt(age.getText().toString());
@@ -115,14 +148,50 @@ public class SignUp extends AppCompatActivity implements AdapterView.OnItemSelec
                 }
             }, 1000);
         }
+
     }
-    public void Cancel(View view) {
-        onBackPressed();
+    @Override
+    public void pressCancel() {
+        startActivity(new Intent(this, MainActivity.class));
+        finish();
     }
+
+    @Override
+    public void Login(EditText username, EditText password) {
+        String UserName = username.getText().toString();
+        String Password = password.getText().toString();
+        if (CheckCredential(UserName, Password)) {
+            Intent category = new Intent(this, Profile.class);
+            category.putExtra("uname", UserName);
+            startActivity(category);
+            endActivity();
+        } else {
+            Toast
+                    .makeText(this , "Invalid Credentials", Toast.LENGTH_LONG)
+                    .show();
+            username.setText("");
+            password.setText("");
+        }
+
+    }
+
+    @Override
+    public void Exit() {
+        finish();
+    }
+
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        startActivity(new Intent(this, login.class));
+        finish();
+    }
+
+    public boolean CheckCredential(String UserName, String Password) {
+        String pass = pref.getString(UserName, "null");
+        return (Password.equals(pass));
+    }
+
+    public void endActivity() {
         finish();
     }
 
