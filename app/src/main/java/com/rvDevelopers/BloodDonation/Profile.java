@@ -15,10 +15,12 @@ public class Profile extends AppCompatActivity {
 
     TextView welcome;
     int age;
-    String Message, Name, Uname;
+    String Message, Name, Uname, Blood, Email;
     Intent category;
-    SharedPreferences age_pref, name_pref;
+    SharedPreferences age_pref, name_pref, blood_pref, email_pref;
     Button donate;
+    TextView name ,uname, blood, email;
+
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.profile);
@@ -30,18 +32,38 @@ public class Profile extends AppCompatActivity {
 
         name_pref = this.getSharedPreferences("Name_data", MODE_PRIVATE);
         age_pref = this.getSharedPreferences("age_preference", MODE_PRIVATE);
+        blood_pref = this.getSharedPreferences("blood_preference", MODE_PRIVATE);
+        email_pref = this.getSharedPreferences("Email_id", MODE_PRIVATE);
 
+        Blood = blood_pref.getString(Uname, "");
+        Email = email_pref.getString(Uname, "No Mail ID");
         Name = name_pref.getString(Uname, "user");
         Message += Name;
         welcome.setText(Message);
 
         age= age_pref.getInt(Uname, 0);
         donate = findViewById(R.id.button);
+
+        name = findViewById(R.id.textNameShow);
+        uname = findViewById(R.id.textUserNameShow);
+        blood = findViewById(R.id.textBloodGroupShow);
+        email = findViewById(R.id.textEmailShow);
+
+        name.setText(Name);
+        uname.setText(Uname);
+        blood.setText(Blood);
+        email.setText(Email);
     }
 
+    public void EditProfile(View view) {
+        Intent edit = new Intent(this, EditProfile.class);
+        edit.putExtra("uname", Uname);
+        startActivity(edit);
+        finish();
+    }
     public void donor(View d){
         if(age >= 18 && age <= 60) {
-            Intent Donor = new Intent(this,donor.class);
+            Intent Donor = new Intent(this, donor.class);
             startActivity(Donor);
             Profile.this.finish();
         } else {
@@ -55,7 +77,6 @@ public class Profile extends AppCompatActivity {
     }
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
         new AlertDialog.Builder(this)
                 .setMessage("Are you sure you want to logout")
                 .setPositiveButton("Yes", new DialogInterface.OnClickListener() {

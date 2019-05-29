@@ -1,6 +1,7 @@
 package com.rvDevelopers.BloodDonation;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -14,6 +15,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 public class SignUpFrag extends Fragment implements AdapterView.OnItemClickListener {
 
@@ -57,11 +59,11 @@ public class SignUpFrag extends Fragment implements AdapterView.OnItemClickListe
         signup = v.findViewById(R.id.button);
         cancel = v.findViewById(R.id.button2);
 
-        CharSequence[] groups = {"A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-"};
+        CharSequence[] groups = { "A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-" };
         blood_type = new ArrayAdapter(this.getActivity(), android.R.layout.simple_spinner_item, groups);
         blood_type.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        blood_type.notifyDataSetChanged();
         blood_type_selector.setAdapter(blood_type);
-
         signup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -86,6 +88,9 @@ public class SignUpFrag extends Fragment implements AdapterView.OnItemClickListe
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 mListener.spinnerClick(parent, view, position, id);
+//                ((TextView) view).setText(parent.getItemAtPosition(position).toString());
+                ((TextView) view).setTextColor(Color.BLACK);
+                blood_type_selector.getSelectedView();
             }
 
             @Override
