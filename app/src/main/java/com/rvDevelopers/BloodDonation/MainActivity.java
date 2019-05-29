@@ -8,7 +8,6 @@ import android.os.Handler;
 import android.support.design.widget.TabLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v4.view.ViewPager;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -16,7 +15,7 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-public class MainActivity extends AppCompatActivity implements LoginFrag.OnFragmentInteractionListener, SignUpFrag.OnFragmentInteractionListener, AdapterView.OnItemSelectedListener{
+public class MainActivity extends AppCompatActivity implements LoginFrag.OnFragmentInteractionListener, SignUpFrag.OnFragmentInteractionListener {
 
     boolean blood_selected = false;
     String bloodType;
@@ -27,7 +26,6 @@ public class MainActivity extends AppCompatActivity implements LoginFrag.OnFragm
     SharedPreferences sign_up, contact_no, contact_email, customer_name, user_blood, user_age;
     SharedPreferences.Editor login_editor, contact_editor, email_editor, name_editor, blood_editor, age_editor;
 
-    Spinner blood_type_selector;
     ArrayAdapter<CharSequence> blood_type;
 
     @Override
@@ -56,6 +54,9 @@ public class MainActivity extends AppCompatActivity implements LoginFrag.OnFragm
         age_editor = user_age.edit();
 
 
+        blood_type = ArrayAdapter.createFromResource(getBaseContext(), R.array.blood_type, android.R.layout.simple_spinner_item);
+        blood_type.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
         tabLayout = findViewById(R.id.tablayout1);
         tabLayout.addTab(tabLayout.newTab().setText("Login"));
         tabLayout.addTab(tabLayout.newTab().setText("Sign Up"));
@@ -70,8 +71,6 @@ public class MainActivity extends AppCompatActivity implements LoginFrag.OnFragm
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
                 viewPager.setCurrentItem(tab.getPosition());
-                if(tab.getPosition() == 1) {
-                }
             }
 
             @Override
@@ -144,12 +143,19 @@ public class MainActivity extends AppCompatActivity implements LoginFrag.OnFragm
             handler.postDelayed(new Runnable() {
                 @Override
                 public void run() {
-                    onBackPressed();
+                    pressCancel();
                 }
             }, 1000);
         }
 
     }
+
+    @Override
+    public void spinnerClick(AdapterView<?> parent, View view, int position, long id) {
+        bloodType = parent.getItemAtPosition(position).toString();
+        blood_selected = true;
+    }
+
     @Override
     public void pressCancel() {
         startActivity(new Intent(this, MainActivity.class));
@@ -193,18 +199,5 @@ public class MainActivity extends AppCompatActivity implements LoginFrag.OnFragm
 
     public void endActivity() {
         finish();
-    }
-
-    @Override
-    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        if(blood_type_selector != null) {
-            bloodType = parent.getItemAtPosition(position).toString();
-            blood_selected = true;
-        }
-    }
-
-    @Override
-    public void onNothingSelected(AdapterView<?> parent) {
-
     }
 }

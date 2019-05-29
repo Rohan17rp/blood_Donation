@@ -52,7 +52,7 @@ public class BloodBank extends AppCompatActivity implements AvailableBlood.OnFra
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        startActivity(new Intent(this, login.class));
+        startActivity(new Intent(this, MainActivity.class));
         finish();
     }
 
