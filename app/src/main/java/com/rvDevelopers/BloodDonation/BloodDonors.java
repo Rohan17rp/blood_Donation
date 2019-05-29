@@ -1,12 +1,21 @@
 package com.rvDevelopers.BloodDonation;
 
 import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+
+import java.util.ArrayList;
+
+import static android.content.Context.MODE_PRIVATE;
 
 
 /**
@@ -60,11 +69,27 @@ public class BloodDonors extends Fragment {
         }
     }
 
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.blood_donors, container, false);
+
+        ArrayList<String> donors = new ArrayList<>();
+        donors.add("1");
+        donors.add("2");
+        donors.add("3");
+
+        ListView listView = (ListView) view.findViewById(R.id.listview);
+        ArrayAdapter<String> listViewAdapter = new ArrayAdapter<String> (
+            getActivity(),
+            android.R.layout.simple_list_item_1,
+            donors
+        );
+
+        listView.setAdapter(listViewAdapter);
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.blood_donors, container, false);
+        return view;
     }
 
     // TODO: Rename method, update argument and hook method into UI event

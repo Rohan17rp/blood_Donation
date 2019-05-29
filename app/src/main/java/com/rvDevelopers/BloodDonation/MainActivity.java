@@ -53,7 +53,6 @@ public class MainActivity extends AppCompatActivity implements LoginFrag.OnFragm
         user_age = this.getSharedPreferences("age_preference", MODE_PRIVATE);
         age_editor = user_age.edit();
 
-
         blood_type = ArrayAdapter.createFromResource(getBaseContext(), R.array.blood_type, android.R.layout.simple_spinner_item);
         blood_type.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
