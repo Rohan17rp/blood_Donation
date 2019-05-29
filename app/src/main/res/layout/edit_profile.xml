@@ -26,8 +26,8 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="100dp"
         android:ems="10"
-        android:inputType="textPersonName"
-        android:text="@string/email"
+        android:inputType="textEmailAddress"
+        android:hint="@string/email"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textview" />
 
@@ -39,7 +39,7 @@
         android:layout_marginTop="24dp"
         android:ems="10"
         android:inputType="phone"
-        android:text="@string/enter_phoneNo"
+        android:hint="@string/enter_phoneNo"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editText11" />
 
@@ -60,7 +60,7 @@
         android:layout_marginTop="24dp"
         android:ems="10"
         android:inputType="textPassword"
-        android:text="@string/password"
+        android:hint="@string/password"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/spinner" />
 
@@ -73,7 +73,7 @@
         android:layout_marginBottom="8dp"
         android:ems="10"
         android:inputType="phone"
-        android:text="@string/age"
+        android:hint="@string/age"
         app:layout_constraintBottom_toTopOf="@+id/editText5"
         app:layout_constraintStart_toEndOf="@+id/spinner"
         app:layout_constraintTop_toBottomOf="@+id/editText12" />
@@ -85,6 +85,7 @@
         android:layout_marginStart="75dp"
         android:layout_marginEnd="75dp"
         android:layout_marginBottom="50dp"
+        android:onClick="Save"
         android:text="@string/save"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/button4"
@@ -96,6 +97,7 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="75dp"
         android:layout_marginBottom="50dp"
+        android:onClick="Cancel"
         android:text="@string/cancel"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
@@ -108,7 +110,7 @@
         android:layout_marginTop="24dp"
         android:ems="10"
         android:inputType="textPassword"
-        android:text="@string/confirm_password"
+        android:hint="@string/confirm_password"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editText5" />
 
