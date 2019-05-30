@@ -4,7 +4,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    tools:context="com.rvDevelopers.BloodDonation.EditProfile">
 
     <TextView
         android:id="@+id/textview"
@@ -45,7 +46,7 @@
 
     <Spinner
         android:id="@+id/spinner"
-        android:layout_width="75dp"
+        android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="24dp"
@@ -78,7 +79,7 @@
         app:layout_constraintStart_toEndOf="@+id/spinner"
         app:layout_constraintTop_toBottomOf="@+id/editText12" />
 
-    <Button
+    <android.support.v7.widget.AppCompatButton
         android:id="@+id/button3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -91,7 +92,7 @@
         app:layout_constraintEnd_toStartOf="@+id/button4"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <Button
+    <android.support.v7.widget.AppCompatButton
         android:id="@+id/button4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

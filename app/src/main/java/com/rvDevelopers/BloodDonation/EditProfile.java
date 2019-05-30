@@ -6,18 +6,16 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-public class EditProfile extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
+public class EditProfile extends AppCompatActivity {
 
     EditText password, email, number, age, cpassword;
     Spinner blood_type_selector;
-    ArrayAdapter<CharSequence> blood_type;
 
     SharedPreferences sign_up, contact_no, contact_email, user_blood, user_age;
     SharedPreferences.Editor login_editor, contact_editor, email_editor, blood_editor, age_editor;
@@ -30,7 +28,6 @@ public class EditProfile extends AppCompatActivity implements AdapterView.OnItem
     protected void onCreate(Bundle bundle) {
         super.onCreate(bundle);
         setContentView(R.layout.edit_profile);
-
         category = getIntent();
         Uname = category.getStringExtra("uname");
 
@@ -41,10 +38,23 @@ public class EditProfile extends AppCompatActivity implements AdapterView.OnItem
         cpassword = findViewById(R.id.editText14);
         blood_type_selector = findViewById(R.id.spinner);
 
-        blood_type = ArrayAdapter.createFromResource(this, R.array.blood_type, android.R.layout.simple_spinner_item);
+        CharSequence[] groups = { "A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-" };
+        ArrayAdapter<CharSequence> blood_type = new ArrayAdapter<>(getBaseContext(), android.R.layout.simple_spinner_item, groups);
+//        ArrayAdapter<CharSequence> blood_type = ArrayAdapter.createFromResource(this, R.array.blood_type, android.R.layout.simple_spinner_item);
         blood_type.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         blood_type_selector.setAdapter(blood_type);
-        blood_type_selector.setOnItemSelectedListener(this);
+        blood_type_selector.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                Blood = parent.getItemAtPosition(position).toString();
+                blood_selected = true;
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
 
         sign_up = this.getSharedPreferences("Sign_upData", MODE_PRIVATE);
         login_editor = sign_up.edit();
@@ -62,17 +72,8 @@ public class EditProfile extends AppCompatActivity implements AdapterView.OnItem
         age_editor = user_age.edit();
     }
 
-    @Override
-    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        Blood = parent.getItemAtPosition(position).toString();
-        blood_selected = true;
-    }
-
-    @Override
-    public void onNothingSelected(AdapterView<?> parent) {
-
-    }
-    public void Save(final View view) { String pass = password.getText().toString();
+    public void Save(View view) {
+        String pass = password.getText().toString();
         String cpass = cpassword.getText().toString();
         String EMAIL = email.getText().toString();
         String phNO = number.getText().toString();
@@ -109,6 +110,10 @@ public class EditProfile extends AppCompatActivity implements AdapterView.OnItem
 
             age_editor.putInt(Uname, Age);
             age_editor.commit();
+
+            Toast
+                    .makeText(this, "Save successful", Toast.LENGTH_LONG)
+                    .show();
 
             Handler handler = new Handler();
             handler.postDelayed(new Runnable() {

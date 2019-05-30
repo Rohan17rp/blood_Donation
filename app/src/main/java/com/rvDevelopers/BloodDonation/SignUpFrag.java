@@ -62,7 +62,6 @@ public class SignUpFrag extends Fragment implements AdapterView.OnItemClickListe
         CharSequence[] groups = { "A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-" };
         blood_type = new ArrayAdapter(this.getActivity(), android.R.layout.simple_spinner_item, groups);
         blood_type.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        blood_type.notifyDataSetChanged();
         blood_type_selector.setAdapter(blood_type);
         signup.setOnClickListener(new View.OnClickListener() {
             @Override
