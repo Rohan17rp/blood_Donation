@@ -81,11 +81,7 @@ public class BloodDonors extends Fragment {
         donors.add("3");
 
         ListView listView = (ListView) view.findViewById(R.id.listview);
-        ArrayAdapter<String> listViewAdapter = new ArrayAdapter<String> (
-            getActivity(),
-            android.R.layout.simple_list_item_1,
-            donors
-        );
+        ArrayAdapter<String> listViewAdapter = new ArrayAdapter<String> (getActivity(), android.R.layout.simple_list_item_1, donors);
 
         listView.setAdapter(listViewAdapter);
         // Inflate the layout for this fragment

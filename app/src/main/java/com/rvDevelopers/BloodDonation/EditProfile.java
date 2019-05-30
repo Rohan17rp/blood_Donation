@@ -21,7 +21,7 @@ public class EditProfile extends AppCompatActivity {
     SharedPreferences.Editor login_editor, contact_editor, email_editor, blood_editor, age_editor;
 
     Intent category;
-    String Name, Uname, Blood;
+    String Uname, Blood;
     boolean blood_selected = false;
 
     @Override
@@ -73,17 +73,22 @@ public class EditProfile extends AppCompatActivity {
     }
 
     public void Save(View view) {
-        String pass = password.getText().toString();
-        String cpass = cpassword.getText().toString();
-        String EMAIL = email.getText().toString();
-        String phNO = number.getText().toString();
+        String pass = "";
+        String cpass = "";
+        String EMAIL = "";
+        String phNO = "";
+
+        pass = password.getText().toString();
+        cpass = cpassword.getText().toString();
+        EMAIL = email.getText().toString();
+        phNO = number.getText().toString();
 
         int Age = 0;
         if(age.getText().toString().length() != 0) {
             Age = Integer.parseInt(age.getText().toString());
         }
 
-        if(Name.length() == 0 || EMAIL.length() == 0 || phNO.length() == 0 || !blood_selected) {
+        if(EMAIL.length() == 0 || phNO.length() == 0 || !blood_selected) {
             Toast
                     .makeText(this, "It is compulsory to enter all data", Toast.LENGTH_SHORT)
                     .show();
@@ -112,7 +117,7 @@ public class EditProfile extends AppCompatActivity {
             age_editor.commit();
 
             Toast
-                    .makeText(this, "Save successful", Toast.LENGTH_LONG)
+                    .makeText(this, "Save successful", Toast.LENGTH_SHORT)
                     .show();
 
             Handler handler = new Handler();
@@ -132,5 +137,9 @@ public class EditProfile extends AppCompatActivity {
         category.putExtra("uname", Uname);
         startActivity(category);
         finish();
+    }
+    @Override
+    public void onBackPressed() {
+        savedata();
     }
 }

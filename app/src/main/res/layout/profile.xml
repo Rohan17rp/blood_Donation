@@ -103,7 +103,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="23dp"
         android:layout_marginBottom="57dp"
-        android:onClick="donor"
+        android:onClick="EditProfile"
         android:text="@string/edit_profile"
         android:textSize="12sp"
         app:layout_constraintBottom_toTopOf="@+id/button5"

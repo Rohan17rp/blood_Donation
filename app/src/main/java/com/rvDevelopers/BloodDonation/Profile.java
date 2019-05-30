@@ -61,7 +61,8 @@ public class Profile extends AppCompatActivity {
         startActivity(edit);
         finish();
     }
-    public void donor(View d){
+
+    /*public void donor(View d){
         if(age >= 18 && age <= 60) {
             Intent Donor = new Intent(this, donor.class);
             startActivity(Donor);
@@ -71,7 +72,7 @@ public class Profile extends AppCompatActivity {
                     .makeText(this, "To donate blood age should be between 18 and 60", Toast.LENGTH_LONG)
                     .show();
         }
-    }
+    }*/
     public void reciever(View view) {
 
     }
@@ -91,8 +92,7 @@ public class Profile extends AppCompatActivity {
     }
     public void logout() {
         startActivity(new Intent(this, MainActivity.class));
-
-
+        finish();
     }
     public void Test(View view) {
         Intent Test = new Intent(this, BloodBank.class);

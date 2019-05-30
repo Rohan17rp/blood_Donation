@@ -174,7 +174,6 @@ public class MainActivity extends AppCompatActivity implements LoginFrag.OnFragm
             Toast
                     .makeText(this , "Invalid Credentials", Toast.LENGTH_LONG)
                     .show();
-            username.setText("");
             password.setText("");
         }
 
