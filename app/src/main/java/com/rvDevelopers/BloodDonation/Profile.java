@@ -8,6 +8,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -20,6 +21,8 @@ public class Profile extends AppCompatActivity {
     SharedPreferences age_pref, name_pref, blood_pref, email_pref;
     Button donate;
     TextView name ,uname, blood, email;
+    boolean check;
+    CheckBox checkBox;
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,6 +56,23 @@ public class Profile extends AppCompatActivity {
         uname.setText(Uname);
         blood.setText(Blood);
         email.setText(Email);
+
+        checkBox = findViewById(R.id.checkBox);
+
+    }
+
+    public void onCheckboxClicked(View view){
+        check = ((CheckBox)view).isChecked();
+        if(check){
+            Toast
+                    .makeText(this,"You are a donor",Toast.LENGTH_LONG)
+                    .show();
+        }
+        else {
+            Toast
+                    .makeText(this,"You are not a donar",Toast.LENGTH_LONG)
+                    .show();
+        }
     }
 
     public void EditProfile(View view) {
