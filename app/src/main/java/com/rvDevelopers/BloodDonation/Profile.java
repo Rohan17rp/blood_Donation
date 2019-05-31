@@ -62,6 +62,11 @@ public class Profile extends AppCompatActivity {
         finish();
     }
 
+    public void receiver(View view){
+        Intent request = new Intent(this, Receiver.class);
+        startActivity(request);
+        Profile.this.finish();
+    }
     /*public void donor(View d){
         if(age >= 18 && age <= 60) {
             Intent Donor = new Intent(this, donor.class);
@@ -73,9 +78,6 @@ public class Profile extends AppCompatActivity {
                     .show();
         }
     }*/
-    public void reciever(View view) {
-
-    }
     @Override
     public void onBackPressed() {
         new AlertDialog.Builder(this)
@@ -99,4 +101,5 @@ public class Profile extends AppCompatActivity {
         startActivity(Test);
         Profile.this.finish();
     }
+
 }

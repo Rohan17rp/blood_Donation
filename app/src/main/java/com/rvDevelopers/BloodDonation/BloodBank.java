@@ -14,10 +14,13 @@ import android.widget.ListView;
 import java.util.ArrayList;
 import java.util.jar.Attributes;
 
-public class BloodBank extends AppCompatActivity implements AvailableBlood.OnFragmentInteractionListener, BloodDonors.OnFragmentInteractionListener, Contact.OnFragmentInteractionListener {
+public class BloodBank extends AppCompatActivity implements AvailableBlood.OnFragmentInteractionListener, BloodDonors.OnFragmentInteractionListener, Contact.OnFragmentInteractionListener{
 
     TabLayout tabLayout;
     ListView listView;
+    SharedPreferences pref;
+    SharedPreferences Donor_name;
+    Intent Display;
 
     @Override
         protected void onCreate(Bundle savedInstanceState) {
@@ -63,14 +66,17 @@ public class BloodBank extends AppCompatActivity implements AvailableBlood.OnFra
         startActivity(new Intent(this, MainActivity.class));
         finish();
     }
-    public void setListView(){
 
-        ArrayList<String> arrayList= new ArrayList<>();
+    @Override
+    public String donorName(String UserName) {
+        Display = getIntent();
+        UserName = Display.getStringExtra("uname");
 
-        arrayList.add("Rohan");
-        arrayList.add("Ved");
+        pref = this.getSharedPreferences("Sign_upData", MODE_PRIVATE);
+        Donor_name = this.getSharedPreferences("Name_data", MODE_PRIVATE);
+        String Donor_name = pref.getString(UserName,"null");
+        return (Donor_name);
 
-        ArrayAdapter arrayAdapter = new ArrayAdapter(this,android.R.layout.simple_list_item_1,arrayList);
-        listView.setAdapter(arrayAdapter);
     }
+
 }
