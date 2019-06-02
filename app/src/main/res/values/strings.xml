@@ -22,4 +22,6 @@
     <string name="edit_profile">Edit Profile</string>
     <string name="exit">Exit</string>
     <string name="save">Save</string>
+    <string name="open">Open</string>
+    <string name="close">Close</string>
 </resources>

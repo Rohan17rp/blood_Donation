@@ -4,13 +4,20 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.design.widget.NavigationView;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import java.util.Objects;
 
 public class Profile extends AppCompatActivity {
 
@@ -24,9 +31,50 @@ public class Profile extends AppCompatActivity {
     boolean check;
     CheckBox checkBox;
 
+    DrawerLayout dl;
+    ActionBarDrawerToggle t;
+    NavigationView nv;
+
+
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.profile);
+
+        dl = (DrawerLayout) findViewById(R.id.drawerLayout);
+        t = new ActionBarDrawerToggle(this, dl, R.string.open, R.string.close);
+
+        dl.addDrawerListener(t);
+        t.syncState();
+
+        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
+        nv = (NavigationView) findViewById(R.id.nv);
+
+
+        nv.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                int id = item.getItemId();
+                switch (id) {
+                    case R.id.account:
+                        Toast.makeText(Profile.this, "My Account", Toast.LENGTH_SHORT).show();
+                        break;
+                    case R.id.settings:
+                        Toast.makeText(Profile.this, "Settings", Toast.LENGTH_SHORT).show();
+                        break;
+                    case R.id.mycart:
+                        Toast.makeText(Profile.this, "My Cart", Toast.LENGTH_SHORT).show();
+                        break;
+                    default:
+                        return true;
+                }
+
+
+                return true;
+
+            }
+        });
+
+
 
         category = getIntent();
         Message = "Welcome ";
@@ -44,7 +92,7 @@ public class Profile extends AppCompatActivity {
         Message += Name;
         welcome.setText(Message);
 
-        age= age_pref.getInt(Uname, 0);
+        age = age_pref.getInt(Uname, 0);
         donate = findViewById(R.id.button);
 
         name = findViewById(R.id.textNameShow);
@@ -58,6 +106,7 @@ public class Profile extends AppCompatActivity {
         email.setText(Email);
 
         checkBox = findViewById(R.id.checkBox);
+
 
     }
 
@@ -121,5 +170,14 @@ public class Profile extends AppCompatActivity {
         startActivity(Test);
         Profile.this.finish();
     }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (t.onOptionsItemSelected(item))
+            return true;
+
+        return super.onOptionsItemSelected(item);
+    }
+
 
 }
