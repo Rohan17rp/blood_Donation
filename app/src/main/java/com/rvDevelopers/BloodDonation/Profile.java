@@ -43,7 +43,6 @@ public class Profile extends AppCompatActivity {
         t = new ActionBarDrawerToggle(this, dl, toolbar, R.string.open, R.string.close);
         dl.addDrawerListener(t);
         t.syncState();
-
 //        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
         setSupportActionBar(toolbar);
         nv = findViewById(R.id.nv);
@@ -53,14 +52,26 @@ public class Profile extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 int id = item.getItemId();
                 switch (id) {
-                    case R.id.account:
-                        Toast.makeText(Profile.this, "My Account", Toast.LENGTH_SHORT).show();
+                    case R.id.edit:
+                        Toast.makeText(Profile.this, "Edit Account", Toast.LENGTH_SHORT).show();
                         break;
-                    case R.id.settings:
+                    case R.id.hospitals:
                         Toast.makeText(Profile.this, "Settings", Toast.LENGTH_SHORT).show();
                         break;
-                    case R.id.mycart:
-                        Toast.makeText(Profile.this, "My Cart", Toast.LENGTH_SHORT).show();
+                    case R.id.cart:
+                        Toast.makeText(Profile.this, "My cart", Toast.LENGTH_SHORT).show();
+                        break;
+                    case R.id.donate:
+                        Toast.makeText(Profile.this, "My cart", Toast.LENGTH_SHORT).show();
+                        break;
+                    case R.id.help:
+                        Toast.makeText(Profile.this, "My cart", Toast.LENGTH_SHORT).show();
+                        break;
+                    case R.id.about:
+                        Toast.makeText(Profile.this, "Edit Account", Toast.LENGTH_SHORT).show();
+                        break;
+                    case R.id.exit:
+                        Toast.makeText(Profile.this, "My cart", Toast.LENGTH_SHORT).show();
                         break;
                     default:
                         return true;
