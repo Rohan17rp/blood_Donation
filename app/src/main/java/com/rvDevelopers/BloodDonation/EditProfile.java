@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -17,12 +18,13 @@ public class EditProfile extends AppCompatActivity {
     EditText password, email, number, age, cpassword;
     Spinner blood_type_selector;
 
-    SharedPreferences sign_up, contact_no, contact_email, user_blood, user_age;
-    SharedPreferences.Editor login_editor, contact_editor, email_editor, blood_editor, age_editor;
+    SharedPreferences sign_up, contact_no, contact_email, user_blood, user_age, donarList_pref;
+    SharedPreferences.Editor login_editor, contact_editor, email_editor, blood_editor, age_editor, donarList_editor;
 
     Intent category;
     String Uname, Blood;
     boolean blood_selected = false;
+    CheckBox checkBox;
 
     @Override
     protected void onCreate(Bundle bundle) {
@@ -37,10 +39,10 @@ public class EditProfile extends AppCompatActivity {
         password = findViewById(R.id.editText5);
         cpassword = findViewById(R.id.editText14);
         blood_type_selector = findViewById(R.id.spinner);
+        checkBox = findViewById(R.id.checkBox);
 
         CharSequence[] groups = { "A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-" };
         ArrayAdapter<CharSequence> blood_type = new ArrayAdapter<>(getBaseContext(), android.R.layout.simple_spinner_item, groups);
-//        ArrayAdapter<CharSequence> blood_type = ArrayAdapter.createFromResource(this, R.array.blood_type, android.R.layout.simple_spinner_item);
         blood_type.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         blood_type_selector.setAdapter(blood_type);
         blood_type_selector.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -70,6 +72,9 @@ public class EditProfile extends AppCompatActivity {
 
         user_age = this.getSharedPreferences("age_preference", MODE_PRIVATE);
         age_editor = user_age.edit();
+
+        donarList_pref = this.getSharedPreferences("donation_pref", MODE_PRIVATE);
+        donarList_editor = donarList_pref.edit();
     }
 
     public void Save(View view) {
@@ -115,6 +120,9 @@ public class EditProfile extends AppCompatActivity {
 
             age_editor.putInt(Uname, Age);
             age_editor.commit();
+
+            donarList_editor.putBoolean(Uname, checkBox.isChecked());
+            donarList_editor.commit();
 
             Toast
                     .makeText(this, "Save successful", Toast.LENGTH_SHORT)

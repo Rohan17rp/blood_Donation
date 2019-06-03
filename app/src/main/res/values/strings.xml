@@ -24,4 +24,6 @@
     <string name="save">Save</string>
     <string name="open">Open</string>
     <string name="close">Close</string>
+    <string name="isDonar">Ready to donate?</string>
+    <string name="donar">Become a donar</string>
 </resources>
