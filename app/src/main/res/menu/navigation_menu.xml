@@ -1,16 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:showIn="navigation_view">
     <group android:checkableBehavior="single">
-        <item android:id="@+id/account"
-            android:icon="@drawable/contacts"
-            android:title="My Account"/>
-        <item android:id="@+id/settings"
-            android:icon="@drawable/contacts"
-            android:title="Settings"/>
-        <item android:id="@+id/mycart"
-            android:icon="@drawable/contacts"
-            android:title="My Cart"/>
+        <item android:id="@+id/edit"
+            android:icon="@drawable/edit"
+            android:title="Edit Profile" />
+        <item android:id="@+id/hospitals"
+            android:icon="@drawable/hospital"
+            android:title="Hospitals"/>
+        <item android:id="@+id/cart"
+            android:icon="@drawable/cart"
+            android:title="Request"/>
+        <item android:id="@+id/donate"
+            android:icon="@drawable/donate"
+            android:title="Donate" />
+        <item android:id="@+id/help"
+            android:icon="@drawable/help"
+            android:title="Help"/>
+        <item android:id="@+id/about"
+            android:icon="@drawable/about"
+            android:title="About"/>
+        <item android:id="@+id/exit"
+            android:icon="@drawable/exit"
+            android:title="Exit"/>
     </group>
 </menu>
