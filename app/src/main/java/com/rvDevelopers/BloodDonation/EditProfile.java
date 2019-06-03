@@ -75,6 +75,20 @@ public class EditProfile extends AppCompatActivity {
 
         donarList_pref = this.getSharedPreferences("donation_pref", MODE_PRIVATE);
         donarList_editor = donarList_pref.edit();
+
+        checkBox.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int age = user_age.getInt(Uname, 0);
+                if(age < 18 || age > 60) {
+                    Toast
+                            .makeText(EditProfile.this, "Age should be greater than 18 and less than 60 to donate blood", Toast.LENGTH_SHORT)
+                            .show();
+
+                    checkBox.setChecked(false);
+                }
+            }
+        });
     }
 
     public void Save(View view) {

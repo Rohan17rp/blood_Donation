@@ -65,10 +65,8 @@ public class Profile extends AppCompatActivity {
                     default:
                         return true;
                 }
-
-
+                dl.closeDrawer(GravityCompat.START);
                 return true;
-
             }
         });
 
@@ -157,8 +155,9 @@ public class Profile extends AppCompatActivity {
         finish();
     }
     public void Test(View view) {
-        Intent Test = new Intent(this, BloodBank.class);
-        startActivity(Test);
+        Intent category = new Intent(this, BloodBank.class);
+        category.putExtra("uname", Uname);
+        startActivity(category);
         Profile.this.finish();
     }
 

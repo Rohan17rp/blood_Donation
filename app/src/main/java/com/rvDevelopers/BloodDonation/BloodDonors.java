@@ -1,12 +1,9 @@
 package com.rvDevelopers.BloodDonation;
 
 import android.content.Context;
-import android.content.Intent;
-import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,42 +12,19 @@ import android.widget.ListView;
 
 import java.util.ArrayList;
 
-import static android.content.Context.MODE_PRIVATE;
-
-
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link BloodDonors.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link BloodDonors#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class BloodDonors extends Fragment  {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
     String UserName;
-    // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
 
     private OnFragmentInteractionListener mListener;
 
     public BloodDonors() {
-        // Required empty public constructor
+
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment BloodDonors.
-     */
-    // TODO: Rename and change types and number of parameters
     public static BloodDonors newInstance(String param1, String param2) {
         BloodDonors fragment = new BloodDonors();
         Bundle args = new Bundle();
@@ -75,19 +49,19 @@ public class BloodDonors extends Fragment  {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.blood_donors, container, false);
 
-        ArrayList<String> donors = new ArrayList<>();
-
-        donors.add(mListener.donorName(UserName));
-
+        ArrayList<String> donarUserName = mListener.getDonorUserNameList();
+//        ArrayList<String> donors = new ArrayList<>();
+//
+//        donors.add(mListener.donorName(UserName));
+//
         ListView listView = (ListView) view.findViewById(R.id.listview);
-        ArrayAdapter<String> listViewAdapter = new ArrayAdapter<String> (getActivity(), android.R.layout.simple_list_item_1, donors);
-
+        ArrayAdapter<String> listViewAdapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_1, mListener.getNames(donarUserName));
+//
         listView.setAdapter(listViewAdapter);
         // Inflate the layout for this fragment
         return view;
     }
 
-    // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
         if (mListener != null) {
             mListener.onFragmentInteraction(uri);
@@ -111,21 +85,10 @@ public class BloodDonors extends Fragment  {
         mListener = null;
     }
 
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
-
     public interface OnFragmentInteractionListener {
         String donorName (String UserName);
-        // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
-
+        ArrayList<String> getDonorUserNameList();
+        ArrayList<String> getNames(ArrayList<String> username);
     }
 }
