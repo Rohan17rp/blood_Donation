@@ -35,7 +35,7 @@ public class BloodBank extends AppCompatActivity implements AvailableBlood.OnFra
         tabLayout = findViewById(R.id.tablayout);
         tabLayout.addTab(tabLayout.newTab().setText("Available BLood"));
         tabLayout.addTab(tabLayout.newTab().setText("Donors").setCustomView((ListView)findViewById(R.id.listview)));
-        tabLayout.addTab(tabLayout.newTab().setText("Contact"));
+//        tabLayout.addTab(tabLayout.newTab().setText("Contact"));
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
 
         final ViewPager viewPager = (ViewPager)findViewById(R.id.pager);
