@@ -61,7 +61,7 @@ public class MainActivity extends AppCompatActivity implements LoginFrag.OnFragm
         tabLayout.addTab(tabLayout.newTab().setText("Sign Up"));
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
 
-        final ViewPager viewPager = (ViewPager) findViewById(R.id.pager1);
+        final ViewPager viewPager = findViewById(R.id.pager1);
         final PagerAdapter adapter = new PagerAdapter(getSupportFragmentManager() ,tabLayout.getTabCount());
         viewPager.setAdapter(adapter);
         viewPager.setOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));

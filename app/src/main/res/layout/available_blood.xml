@@ -62,14 +62,16 @@
                 android:layout_height="wrap_content"
                 android:layout_column="1"
                 android:padding="2dp"
-                android:id="@+id/textview5"/>
+                android:id="@+id/textview5"
+                android:text="23"/>
             <TextView
                 android:hint="No. of Donors"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_column="1"
                 android:padding="2dp"
-                android:id="@+id/textview6"/>
+                android:id="@+id/textview6"
+                android:text="23"/>
         </TableRow>
         <TableRow>
             <TextView
@@ -79,7 +81,7 @@
                 android:layout_column="1"
                 android:padding="2dp"
                 android:id="@+id/textview7"
-                android:textAlignment="center"/>
+                android:textAlignment="center" />
 
             <TextView
                 android:hint="Available Stock"
@@ -87,14 +89,16 @@
                 android:layout_height="wrap_content"
                 android:layout_column="1"
                 android:padding="2dp"
-                android:id="@+id/textview8"/>
+                android:id="@+id/textview8"
+                android:text="23"/>
             <TextView
                 android:hint="No. of Donors"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_column="1"
                 android:padding="2dp"
-                android:id="@+id/textview9"/>
+                android:id="@+id/textview9"
+                android:text="23"/>
         </TableRow>
         <TableRow>
             <TextView
@@ -107,19 +111,20 @@
                 android:textAlignment="center"/>
 
             <TextView
-                android:hint="Available Stock"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_column="1"
                 android:padding="2dp"
-                android:id="@+id/textview11"/>
+                android:id="@+id/textview11"
+                android:text="23"/>
             <TextView
                 android:hint="No. of Donors"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_column="1"
                 android:padding="2dp"
-                android:id="@+id/textview12"/>
+                android:id="@+id/textview12"
+                android:text="23"/>
         </TableRow>
         <TableRow>
             <TextView
@@ -137,14 +142,16 @@
                 android:layout_height="wrap_content"
                 android:layout_column="1"
                 android:padding="2dp"
-                android:id="@+id/textview14"/>
+                android:id="@+id/textview14"
+                android:text="23"/>
             <TextView
                 android:hint="No. of Donors"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_column="1"
                 android:padding="2dp"
-                android:id="@+id/textview15"/>
+                android:id="@+id/textview15"
+                android:text="23"/>
         </TableRow>
         <TableRow>
             <TextView
@@ -162,14 +169,16 @@
                 android:layout_height="wrap_content"
                 android:layout_column="1"
                 android:padding="2dp"
-                android:id="@+id/textview17"/>
+                android:id="@+id/textview17"
+                android:text="23"/>
             <TextView
                 android:hint="No. of Donors"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_column="1"
                 android:padding="2dp"
-                android:id="@+id/textview18"/>
+                android:id="@+id/textview18"
+                android:text="23"/>
         </TableRow>
         <TableRow>
 
@@ -188,14 +197,16 @@
                 android:layout_height="wrap_content"
                 android:layout_column="1"
                 android:padding="2dp"
-                android:id="@+id/textview20"/>
+                android:id="@+id/textview20"
+                android:text="23"/>
             <TextView
                 android:hint="No. of Donors"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_column="1"
                 android:padding="2dp"
-                android:id="@+id/textview21"/>
+                android:id="@+id/textview21"
+                android:text="23"/>
         </TableRow>
         <TableRow>
             <TextView
@@ -213,14 +224,16 @@
                 android:layout_height="wrap_content"
                 android:layout_column="1"
                 android:padding="2dp"
-                android:id="@+id/textview23"/>
+                android:id="@+id/textview23"
+                android:text="23"/>
             <TextView
                 android:hint="No. of Donors"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_column="1"
                 android:padding="2dp"
-                android:id="@+id/textview24"/>
+                android:id="@+id/textview24"
+                android:text="23"/>
         </TableRow>
         <TableRow>
             <TextView
@@ -238,14 +251,16 @@
                 android:layout_height="wrap_content"
                 android:layout_column="1"
                 android:padding="2dp"
-                android:id="@+id/textview26"/>
+                android:id="@+id/textview26"
+                android:text="23"/>
             <TextView
                 android:hint="No. of Donors"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_column="1"
                 android:padding="2dp"
-                android:id="@+id/textview27"/>
+                android:id="@+id/textview27"
+                android:text="23"/>
         </TableRow>
 
 
