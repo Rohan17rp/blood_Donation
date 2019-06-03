@@ -1,10 +1,16 @@
 package com.rvDevelopers.BloodDonation;
 
+import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
+import android.support.v4.app.DialogFragment;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v4.view.ViewPager;
 import android.widget.ListView;
@@ -16,9 +22,10 @@ public class BloodBank extends AppCompatActivity implements AvailableBlood.OnFra
 
     TabLayout tabLayout;
     SharedPreferences pref;
-    SharedPreferences Donor_name, donarList_pref;
+    SharedPreferences Donor_name, donarList_pref, blood_pref, contact_pref, email_pref, age_pref;
     Intent Display;
-    String UserName, Name;
+    String UserName, Name, bloodGroup, contact, email;
+    int age;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,6 +66,11 @@ public class BloodBank extends AppCompatActivity implements AvailableBlood.OnFra
         Name = Donor_name.getString(UserName, "user");
 
         donarList_pref = this.getSharedPreferences("donation_pref", MODE_PRIVATE);
+        blood_pref = this.getSharedPreferences("blood_preference", MODE_PRIVATE);
+        contact_pref = this.getSharedPreferences("Contact_no", MODE_PRIVATE);
+        email_pref = this.getSharedPreferences("Email_id", MODE_PRIVATE);
+        age_pref = this.getSharedPreferences("age_preference", MODE_PRIVATE);
+
     }
 
     @Override
@@ -99,6 +111,23 @@ public class BloodBank extends AppCompatActivity implements AvailableBlood.OnFra
         }
         return name;
     }
+
+    @Override
+    public void showData(String username) {
+        bloodGroup = blood_pref.getString(username, "");
+        contact = contact_pref.getString(username, "");
+        email = email_pref.getString(username, "");
+        age = age_pref.getInt(username, 0);
+
+        String message = "Blood group: "+bloodGroup+"\nAge:"+age+"\nContact number:"+contact+"\nEmail id:"+email;
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder
+                .setTitle("Donor info")
+                .setMessage(message)
+                .setCancelable(true)
+                .show();
+    }
+
     @Override
     public void onBackPressed() {
         Intent category = new Intent(this, Profile.class);
