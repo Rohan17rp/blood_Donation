@@ -18,14 +18,5 @@ import android.widget.Toast;
             startActivity(new Intent(this, Profile.class));
             finish();
         }
-        public void submitRequest(View view){
-            Toast
-                    .makeText(this,"Feature Still developing", Toast.LENGTH_LONG)
-                    .show();
-        }
 
-        public void pressCancel(View v) {
-            startActivity(new Intent(this, MainActivity.class));
-            finish();
-        }
 }
