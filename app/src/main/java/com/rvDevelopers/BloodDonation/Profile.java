@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -27,6 +28,9 @@ public class Profile extends AppCompatActivity {
     SharedPreferences age_pref, name_pref, blood_pref, email_pref, donarList_pref;
     Button donate;
     TextView name ,uname, blood, email, donationCheckBox;
+    TextView About,help;
+
+
     boolean check;
 
     DrawerLayout dl;
@@ -56,22 +60,29 @@ public class Profile extends AppCompatActivity {
                         Toast.makeText(Profile.this, "Edit Account", Toast.LENGTH_SHORT).show();
                         break;
                     case R.id.hospitals:
-                        Toast.makeText(Profile.this, "Settings", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(Profile.this, "Hospitals", Toast.LENGTH_SHORT).show();
                         break;
                     case R.id.cart:
-                        Toast.makeText(Profile.this, "My cart", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(Profile.this, "Request", Toast.LENGTH_SHORT).show();
                         break;
                     case R.id.donate:
-                        Toast.makeText(Profile.this, "My cart", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(Profile.this, "Donate", Toast.LENGTH_SHORT).show();
                         break;
                     case R.id.help:
-                        Toast.makeText(Profile.this, "My cart", Toast.LENGTH_SHORT).show();
+                        setContentView(R.layout.help);
+                        help = findViewById(R.id.help_page);
+                        help .setText("\nFor help Call on Helpline no \nHelpline No. : XXXXXXXXXX\nOr mail us on \nMail Id : XXXXX@XXXXX.XX");
+                        Toast.makeText(Profile.this, "Help", Toast.LENGTH_SHORT).show();
                         break;
                     case R.id.about:
-                        Toast.makeText(Profile.this, "Edit Account", Toast.LENGTH_SHORT).show();
+                        setContentView(R.layout.about);
+                        About = findViewById(R.id.about_page);
+                        About.setText("It is a app used for blood as well as organ donation\nBy\nRohan Patil\tVed Patil\n");
+                        Toast.makeText(Profile.this, "About", Toast.LENGTH_SHORT).show();
                         break;
                     case R.id.exit:
-                        Toast.makeText(Profile.this, "My cart", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Profile.this, "You have been successfully logged out", Toast.LENGTH_SHORT).show();
+                        logout();
                         break;
                     default:
                         return true;
@@ -179,6 +190,14 @@ public class Profile extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
-
+    public void Cancel(View view) {
+        savedata();
+    }
+    public void savedata() {
+        Intent category = new Intent(this, Profile.class);
+        category.putExtra("uname", Uname);
+        startActivity(category);
+        finish();
+    }
 
 }
