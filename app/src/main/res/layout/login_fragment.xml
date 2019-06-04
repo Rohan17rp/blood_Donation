@@ -7,7 +7,8 @@
     android:paddingLeft= "2dp"
     android:paddingRight = "2dp"
     android:paddingTop = "2dp"
-    android:paddingBottom = "2dp" >
+    android:paddingBottom = "2dp"
+    tools:context=".LoginFrag">
 
     <TextView
         android:id="@+id/textview"
@@ -60,7 +61,6 @@
         android:layout_marginStart="75dp"
         android:layout_marginBottom="8dp"
         android:layout_toStartOf="@+id/button2"
-        android:onClick="check"
         android:text="@string/login"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -72,8 +72,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
-        android:onClick="signUP"
-        android:text="@string/sign_up"
+        android:text="@string/exit"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/button"
