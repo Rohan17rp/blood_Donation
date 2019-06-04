@@ -122,7 +122,7 @@ public class BloodBank extends AppCompatActivity implements AvailableBlood.OnFra
         String message = "Blood group: "+bloodGroup+"\nAge:"+age+"\nContact number:"+contact+"\nEmail id:"+email;
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder
-                .setTitle("Donor info")
+                .setTitle("Donate_list info")
                 .setMessage(message)
                 .setCancelable(true)
                 .show();

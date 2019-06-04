@@ -29,7 +29,7 @@ public class Profile extends AppCompatActivity {
     Button donate;
     TextView name ,uname, blood, email, donationCheckBox;
     TextView About,help;
-
+    Intent edit;
 
     boolean check;
 
@@ -57,15 +57,18 @@ public class Profile extends AppCompatActivity {
                 int id = item.getItemId();
                 switch (id) {
                     case R.id.edit:
+                        EditProfile(findViewById(R.id.editText9));
                         Toast.makeText(Profile.this, "Edit Account", Toast.LENGTH_SHORT).show();
                         break;
                     case R.id.hospitals:
                         Toast.makeText(Profile.this, "Hospitals", Toast.LENGTH_SHORT).show();
                         break;
                     case R.id.cart:
+                        receiver(findViewById(R.id.editText9));
                         Toast.makeText(Profile.this, "Request", Toast.LENGTH_SHORT).show();
                         break;
                     case R.id.donate:
+                        donate_list(findViewById(R.id.editText9));
                         Toast.makeText(Profile.this, "Donate", Toast.LENGTH_SHORT).show();
                         break;
                     case R.id.help:
@@ -142,10 +145,15 @@ public class Profile extends AppCompatActivity {
         startActivity(request);
         Profile.this.finish();
     }
+    public void donate_list(View view){
+        Intent donate = new Intent(this, Donate_list.class);
+        startActivity(donate);
+        Profile.this.finish();
+    }
     /*public void donor(View d){
         if(age >= 18 && age <= 60) {
-            Intent Donor = new Intent(this, donor.class);
-            startActivity(Donor);
+            Intent Donate_list = new Intent(this, donor.class);
+            startActivity(Donate_list);
             Profile.this.finish();
         } else {
             Toast
