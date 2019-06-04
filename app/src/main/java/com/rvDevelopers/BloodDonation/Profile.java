@@ -67,9 +67,13 @@ public class Profile extends AppCompatActivity {
                         receiver(findViewById(R.id.editText9));
                         Toast.makeText(Profile.this, "Request", Toast.LENGTH_SHORT).show();
                         break;
-                    case R.id.donate:
+                    case R.id.organ_donate:
                         donate_list(findViewById(R.id.editText9));
-                        Toast.makeText(Profile.this, "Donate", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(Profile.this, "Organ Donation", Toast.LENGTH_SHORT).show();
+                        break;
+                    case R.id.blood_donate:
+                        Test(findViewById(R.id.editText9));
+                        Toast.makeText(Profile.this, "Blood Donation", Toast.LENGTH_SHORT).show();
                         break;
                     case R.id.help:
                         setContentView(R.layout.help);

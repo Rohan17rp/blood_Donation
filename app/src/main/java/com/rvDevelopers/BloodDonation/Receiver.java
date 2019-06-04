@@ -16,6 +16,7 @@ public class Receiver extends AppCompatActivity  {
 
     @Override
     public void onBackPressed() {
+
         startActivity(new Intent(this, Profile.class));
         finish();
     }
