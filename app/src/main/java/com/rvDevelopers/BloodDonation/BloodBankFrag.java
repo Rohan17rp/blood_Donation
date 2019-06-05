@@ -8,7 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-public class AvailableBlood extends Fragment {
+public class BloodBankFrag extends Fragment {
 
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
@@ -18,12 +18,12 @@ public class AvailableBlood extends Fragment {
 
     private OnFragmentInteractionListener mListener;
 
-    public AvailableBlood() {
+    public BloodBankFrag() {
 
     }
 
-    public static AvailableBlood newInstance(String param1, String param2) {
-        AvailableBlood fragment = new AvailableBlood();
+    public static BloodBankFrag newInstance(String param1, String param2) {
+        BloodBankFrag fragment = new BloodBankFrag();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -42,7 +42,7 @@ public class AvailableBlood extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.available_blood, container, false);
+        return inflater.inflate(R.layout.fragment_blood_bank, container, false);
     }
 
     public void onButtonPressed(Uri uri) {
@@ -67,7 +67,6 @@ public class AvailableBlood extends Fragment {
         super.onDetach();
         mListener = null;
     }
-
     public interface OnFragmentInteractionListener {
         void onFragmentInteraction(Uri uri);
     }

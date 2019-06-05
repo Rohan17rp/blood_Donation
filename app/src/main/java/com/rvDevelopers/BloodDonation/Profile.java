@@ -3,10 +3,12 @@ package com.rvDevelopers.BloodDonation;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -19,7 +21,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class Profile extends AppCompatActivity {
+public class Profile extends AppCompatActivity implements ProfileFrag.OnFragmentInteractionListener, Help.helpListner {
 
     TextView welcome;
     int age;
@@ -27,9 +29,7 @@ public class Profile extends AppCompatActivity {
     Intent category;
     SharedPreferences age_pref, name_pref, blood_pref, email_pref, donarList_pref;
     Button donate;
-    TextView name ,uname, blood, email, donationCheckBox;
-    TextView About,help;
-    Intent edit;
+    TextView About;
 
     boolean check;
 
@@ -51,20 +51,26 @@ public class Profile extends AppCompatActivity {
         setSupportActionBar(toolbar);
         nv = findViewById(R.id.nv);
 
+        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+        fragmentTransaction.replace(R.id.fragment_container, new ProfileFrag());
+        fragmentTransaction.commit();
+
         nv.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 int id = item.getItemId();
                 switch (id) {
-                    case R.id.edit:
-                        EditProfile(findViewById(R.id.editText9));
-                        Toast.makeText(Profile.this, "Edit Account", Toast.LENGTH_SHORT).show();
+                    case R.id.profile:
+                        getSupportFragmentManager()
+                                .beginTransaction()
+                                .replace(R.id.fragment_container, new ProfileFrag())
+                                .commit();
                         break;
                     case R.id.hospitals:
                         Toast.makeText(Profile.this, "Hospitals", Toast.LENGTH_SHORT).show();
                         break;
                     case R.id.cart:
-                        receiver(findViewById(R.id.editText9));
+//                        receiver(findViewById(R.id.editText9));
                         Toast.makeText(Profile.this, "Request", Toast.LENGTH_SHORT).show();
                         break;
                     case R.id.organ_donate:
@@ -72,14 +78,14 @@ public class Profile extends AppCompatActivity {
                         Toast.makeText(Profile.this, "Organ Donation", Toast.LENGTH_SHORT).show();
                         break;
                     case R.id.blood_donate:
-                        Test(findViewById(R.id.editText9));
+//                        Test(findViewById(R.id.editText9));
                         Toast.makeText(Profile.this, "Blood Donation", Toast.LENGTH_SHORT).show();
                         break;
                     case R.id.help:
-                        setContentView(R.layout.help);
-                        help = findViewById(R.id.help_page);
-                        help .setText("\nFor help Call on Helpline no \nHelpline No. : XXXXXXXXXX\nOr mail us on \nMail Id : XXXXX@XXXXX.XX");
-                        Toast.makeText(Profile.this, "Help", Toast.LENGTH_SHORT).show();
+                        getSupportFragmentManager()
+                                .beginTransaction()
+                                .replace(R.id.fragment_container, new Help())
+                                .commit();
                         break;
                     case R.id.about:
                         setContentView(R.layout.about);
@@ -114,41 +120,20 @@ public class Profile extends AppCompatActivity {
         Email = email_pref.getString(Uname, "No Mail ID");
         Name = name_pref.getString(Uname, "user");
         Message += Name;
-        welcome.setText(Message);
 
         check = donarList_pref.getBoolean(Uname, false);
         age = age_pref.getInt(Uname, 0);
         donate = findViewById(R.id.button);
-
-        name = findViewById(R.id.textNameShow);
-        uname = findViewById(R.id.textUserNameShow);
-        blood = findViewById(R.id.textBloodGroupShow);
-        email = findViewById(R.id.textEmailShow);
-        donationCheckBox = findViewById(R.id.textDonarStatus);
-
-        name.setText(Name);
-        uname.setText(Uname);
-        blood.setText(Blood);
-        email.setText(Email);
-        if(check) {
-            donationCheckBox.setText("Yes");
-        } else {
-            donationCheckBox.setText("No");
-        }
     }
 
-    public void EditProfile(View view) {
+    @Override
+    public void EditProfile() {
         Intent edit = new Intent(this, EditProfile.class);
         edit.putExtra("uname", Uname);
         startActivity(edit);
         finish();
     }
 
-    public void receiver(View view){
-        Intent request = new Intent(this, Receiver.class);
-        startActivity(request);
-        Profile.this.finish();
-    }
     public void donate_list(View view){
         Intent donate = new Intent(this, Donate_list.class);
         startActivity(donate);
@@ -188,12 +173,6 @@ public class Profile extends AppCompatActivity {
         startActivity(new Intent(this, MainActivity.class));
         finish();
     }
-    public void Test(View view) {
-        Intent category = new Intent(this, BloodBank.class);
-        category.putExtra("uname", Uname);
-        startActivity(category);
-        Profile.this.finish();
-    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -205,6 +184,42 @@ public class Profile extends AppCompatActivity {
     public void Cancel(View view) {
         savedata();
     }
+
+    @Override
+    public void onFragmentInteraction(Uri uri) {
+
+    }
+
+    @Override
+    public void showData(TextView name ,TextView uname, TextView blood, TextView email, TextView donationCheckBox, TextView welcome) {
+        name.setText(Name);
+        uname.setText(Uname);
+        blood.setText(Blood);
+        email.setText(Email);
+        if(check) {
+            donationCheckBox.setText("Yes");
+        } else {
+            donationCheckBox.setText("No");
+        }
+
+        welcome.setText(Message);
+    }
+
+    @Override
+    public void BloodBank() {
+        Intent category = new Intent(this, BloodBank.class);
+        category.putExtra("uname", Uname);
+        startActivity(category);
+        Profile.this.finish();
+    }
+
+    @Override
+    public void Request() {
+        Intent request = new Intent(this, Receiver.class);
+        startActivity(request);
+        Profile.this.finish();
+    }
+
     public void savedata() {
         Intent category = new Intent(this, Profile.class);
         category.putExtra("uname", Uname);
