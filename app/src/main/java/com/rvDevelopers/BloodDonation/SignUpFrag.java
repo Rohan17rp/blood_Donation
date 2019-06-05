@@ -1,25 +1,27 @@
 package com.rvDevelopers.BloodDonation;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 
-public class SignUpFrag extends Fragment {
-
+public class SignUpFrag extends Fragment implements AdapterView.OnItemClickListener {
 
     EditText name, userName, password, cpassword, email, number, age;
     Spinner blood_type_selector;
     Button signup, cancel;
-
     ArrayAdapter<CharSequence> blood_type;
 
     private OnFragmentInteractionListener mListener;
@@ -57,16 +59,9 @@ public class SignUpFrag extends Fragment {
         signup = v.findViewById(R.id.button);
         cancel = v.findViewById(R.id.button2);
 
-        blood_type = new ArrayAdapter<CharSequence>(getContext(), android.R.layout.simple_spinner_dropdown_item);
+        CharSequence[] groups = { "A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-" };
+        blood_type = new ArrayAdapter(this.getActivity(), android.R.layout.simple_spinner_item, groups);
         blood_type.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        blood_type.add("A+");
-        blood_type.add("A-");
-        blood_type.add("B+");
-        blood_type.add("B-");
-        blood_type.add("AB+");
-        blood_type.add("AB-");
-        blood_type.add("O+");
-        blood_type.add("O-");
         blood_type_selector.setAdapter(blood_type);
         signup.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -81,7 +76,27 @@ public class SignUpFrag extends Fragment {
                 mListener.pressCancel();
             }
         });
+
         return v;
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        blood_type_selector.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                mListener.spinnerClick(parent, view, position, id);
+//                ((TextView) view).setText(parent.getItemAtPosition(position).toString());
+                ((TextView) view).setTextColor(Color.BLACK);
+                blood_type_selector.getSelectedView();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
     }
 
     public void onButtonPressed(Uri uri) {
@@ -107,9 +122,15 @@ public class SignUpFrag extends Fragment {
         mListener = null;
     }
 
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+    }
+
     public interface OnFragmentInteractionListener {
         void onFragmentInteraction(Uri uri);
         void SignUp(EditText name, EditText userName, EditText password, EditText cpassword, EditText email, EditText number, EditText age, Spinner blood_type_selector);
+        void spinnerClick(AdapterView<?> parent, View view, int position, long id);
         void pressCancel();
     }
 }

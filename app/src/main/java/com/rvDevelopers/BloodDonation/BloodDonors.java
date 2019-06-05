@@ -7,41 +7,25 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 
+import java.util.ArrayList;
 
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link BloodDonors.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link BloodDonors#newInstance} factory method to
- * create an instance of this fragment.
- */
-public class BloodDonors extends Fragment {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
+public class BloodDonors extends Fragment  {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
+    String UserName;
     private String mParam1;
     private String mParam2;
 
     private OnFragmentInteractionListener mListener;
 
     public BloodDonors() {
-        // Required empty public constructor
+
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment BloodDonors.
-     */
-    // TODO: Rename and change types and number of parameters
     public static BloodDonors newInstance(String param1, String param2) {
         BloodDonors fragment = new BloodDonors();
         Bundle args = new Bundle();
@@ -60,14 +44,30 @@ public class BloodDonors extends Fragment {
         }
     }
 
+
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView (LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.blood_donors, container, false);
+
+        final ArrayList<String> donarUserName = mListener.getDonorUserNameList();
+//        ArrayList<String> donors = new ArrayList<>();
+//
+//        donors.add(mListener.donorName(UserName));
+//
+        ListView listView = (ListView) view.findViewById(R.id.listview);
+        ArrayAdapter<String> listViewAdapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_1, mListener.getNames(donarUserName));
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                mListener.showData(donarUserName.get(position));
+            }
+        });
+        listView.setAdapter(listViewAdapter);
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.blood_donors, container, false);
+        return view;
     }
 
-    // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
         if (mListener != null) {
             mListener.onFragmentInteraction(uri);
@@ -91,18 +91,11 @@ public class BloodDonors extends Fragment {
         mListener = null;
     }
 
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
     public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
+        String donorName (String UserName);
         void onFragmentInteraction(Uri uri);
+        ArrayList<String> getDonorUserNameList();
+        ArrayList<String> getNames(ArrayList<String> username);
+        void showData(String username);
     }
 }

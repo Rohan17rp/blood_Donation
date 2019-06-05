@@ -21,9 +21,9 @@ public class BloodBank_PagerAdapter extends FragmentStatePagerAdapter {
             case 1:
                 BloodDonors bloodDonors = new BloodDonors();
                 return bloodDonors;
-            case 2:
-                Contact contact = new Contact();
-                return contact;
+//            case 2:
+//                Contact contact = new Contact();
+//                return contact;
             default:
                 return null;
         }
