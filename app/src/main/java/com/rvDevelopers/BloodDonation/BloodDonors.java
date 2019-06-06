@@ -67,7 +67,6 @@ public class BloodDonors extends Fragment  {
             }
         });
         listView.setAdapter(listViewAdapter);
-        // Inflate the layout for this fragment
         return view;
     }
 

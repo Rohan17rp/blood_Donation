@@ -55,16 +55,9 @@ public class ProfileFrag extends Fragment {
         blood = v.findViewById(R.id.textBloodGroupShow);
         email = v.findViewById(R.id.textEmailShow);
         welcome = v.findViewById(R.id.textView);
-        bank = v.findViewById(R.id.button5);
         request = v.findViewById(R.id.button6);
         edit = v.findViewById(R.id.button8);
         donationCheckBox = v.findViewById(R.id.textDonarStatus);
-        bank.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mListener.BloodBank();
-            }
-        });
         request.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -112,7 +105,6 @@ public class ProfileFrag extends Fragment {
     public interface OnFragmentInteractionListener {
         void onFragmentInteraction(Uri uri);
         void showData(TextView name ,TextView uname, TextView blood, TextView email, TextView donationCheckBox, TextView welcome);
-        void BloodBank();
         void Request();
         void EditProfile();
     }

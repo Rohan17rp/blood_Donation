@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 
 import android.support.design.widget.NavigationView;
+import android.support.design.widget.TabLayout;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -21,7 +22,10 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class Profile extends AppCompatActivity implements ProfileFrag.OnFragmentInteractionListener, Help.helpListner {
+import java.util.ArrayList;
+import java.util.Map;
+
+public class Profile extends AppCompatActivity implements ProfileFrag.OnFragmentInteractionListener, Help.helpListner, BloodBankFrag.OnFragmentInteractionListener, AvailableBlood.OnFragmentInteractionListener, BloodDonors.OnFragmentInteractionListener {
 
     TextView welcome;
     int age;
@@ -78,8 +82,10 @@ public class Profile extends AppCompatActivity implements ProfileFrag.OnFragment
                         Toast.makeText(Profile.this, "Organ Donation", Toast.LENGTH_SHORT).show();
                         break;
                     case R.id.blood_donate:
-//                        Test(findViewById(R.id.editText9));
-                        Toast.makeText(Profile.this, "Blood Donation", Toast.LENGTH_SHORT).show();
+                        getSupportFragmentManager()
+                                .beginTransaction()
+                                .replace(R.id.fragment_container, new BloodBankFrag())
+                                .commit();
                         break;
                     case R.id.help:
                         getSupportFragmentManager()
@@ -191,6 +197,12 @@ public class Profile extends AppCompatActivity implements ProfileFrag.OnFragment
     }
 
     @Override
+    public BloodBank_PagerAdapter getPagerAdapter(TabLayout tabLayout) {
+        BloodBank_PagerAdapter adapter = new BloodBank_PagerAdapter(getSupportFragmentManager(),tabLayout.getTabCount());
+        return adapter;
+    }
+
+    @Override
     public void showData(TextView name ,TextView uname, TextView blood, TextView email, TextView donationCheckBox, TextView welcome) {
         name.setText(Name);
         uname.setText(Uname);
@@ -203,14 +215,6 @@ public class Profile extends AppCompatActivity implements ProfileFrag.OnFragment
         }
 
         welcome.setText(Message);
-    }
-
-    @Override
-    public void BloodBank() {
-        Intent category = new Intent(this, BloodBank.class);
-        category.putExtra("uname", Uname);
-        startActivity(category);
-        Profile.this.finish();
     }
 
     @Override
@@ -227,4 +231,50 @@ public class Profile extends AppCompatActivity implements ProfileFrag.OnFragment
         finish();
     }
 
+    @Override
+    public String donorName(String UserName) {
+        SharedPreferences pref = this.getSharedPreferences("Name_data", MODE_PRIVATE);
+        String Donor_name = pref.getString(UserName,"null");
+        return (Donor_name);
+    }
+
+    @Override
+    public ArrayList<String> getDonorUserNameList() {
+        Map<String, Boolean> donorNames = (Map<String, Boolean>) donarList_pref.getAll();
+        ArrayList<String> names = new ArrayList<>();
+        for(Map.Entry<String, Boolean> stringMap : donorNames.entrySet()) {
+            if(stringMap.getValue()) {
+                names.add(stringMap.getKey());
+            }
+        }
+        return names;
+    }
+
+    @Override
+    public ArrayList<String> getNames(ArrayList<String> username) {
+        int i;
+        SharedPreferences Donor_name = this.getSharedPreferences("Name_data", MODE_PRIVATE);
+        ArrayList<String> name = new ArrayList<>();
+        for(i=0;i<username.size();i++) {
+            name.add(Donor_name.getString(username.get(i), "null"));
+        }
+        return name;
+    }
+
+    @Override
+    public void showData(String username) {
+        String bloodGroup = blood_pref.getString(username, "");
+        SharedPreferences contact_pref = this.getSharedPreferences("Contact_no", MODE_PRIVATE);
+        String contact = contact_pref.getString(username, "");
+        String email = email_pref.getString(username, "");
+        age = age_pref.getInt(username, 0);
+
+        String message = "Blood group: "+bloodGroup+"\nAge:"+age+"\nContact number:"+contact+"\nEmail id:"+email;
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder
+                .setTitle("Donate_list info")
+                .setMessage(message)
+                .setCancelable(true)
+                .show();
+    }
 }
