@@ -5,11 +5,11 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -25,7 +25,8 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.Map;
 
-public class Profile extends AppCompatActivity implements ProfileFrag.OnFragmentInteractionListener, Help.helpListner, BloodBankFrag.OnFragmentInteractionListener, AvailableBlood.OnFragmentInteractionListener, BloodDonors.OnFragmentInteractionListener {
+public class Profile extends AppCompatActivity implements ProfileFrag.OnFragmentInteractionListener, Help.helpListner, BloodBankFrag.OnFragmentInteractionListener,
+        AvailableBlood.OnFragmentInteractionListener, BloodDonors.OnFragmentInteractionListener, ReceiverFrag.OnFragmentInteractionListener {
 
     TextView welcome;
     int age;
@@ -51,13 +52,16 @@ public class Profile extends AppCompatActivity implements ProfileFrag.OnFragment
         t = new ActionBarDrawerToggle(this, dl, toolbar, R.string.open, R.string.close);
         dl.addDrawerListener(t);
         t.syncState();
-//        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
         setSupportActionBar(toolbar);
         nv = findViewById(R.id.nv);
 
-        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-        fragmentTransaction.replace(R.id.fragment_container, new ProfileFrag());
-        fragmentTransaction.commit();
+        if(savedInstanceState == null) {
+            nv.setCheckedItem(R.id.profile);
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.fragment_container, new ProfileFrag())
+                    .commit();
+        }
 
         nv.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -74,8 +78,10 @@ public class Profile extends AppCompatActivity implements ProfileFrag.OnFragment
                         Toast.makeText(Profile.this, "Hospitals", Toast.LENGTH_SHORT).show();
                         break;
                     case R.id.cart:
-//                        receiver(findViewById(R.id.editText9));
-                        Toast.makeText(Profile.this, "Request", Toast.LENGTH_SHORT).show();
+                        getSupportFragmentManager()
+                                .beginTransaction()
+                                .replace(R.id.fragment_container, new ReceiverFrag())
+                                .commit();
                         break;
                     case R.id.organ_donate:
                         donate_list(findViewById(R.id.editText9));
@@ -198,8 +204,7 @@ public class Profile extends AppCompatActivity implements ProfileFrag.OnFragment
 
     @Override
     public BloodBank_PagerAdapter getPagerAdapter(TabLayout tabLayout) {
-        BloodBank_PagerAdapter adapter = new BloodBank_PagerAdapter(getSupportFragmentManager(),tabLayout.getTabCount());
-        return adapter;
+        return new BloodBank_PagerAdapter(getSupportFragmentManager(),tabLayout.getTabCount());
     }
 
     @Override
@@ -215,13 +220,6 @@ public class Profile extends AppCompatActivity implements ProfileFrag.OnFragment
         }
 
         welcome.setText(Message);
-    }
-
-    @Override
-    public void Request() {
-        Intent request = new Intent(this, Receiver.class);
-        startActivity(request);
-        Profile.this.finish();
     }
 
     public void savedata() {
@@ -276,5 +274,24 @@ public class Profile extends AppCompatActivity implements ProfileFrag.OnFragment
                 .setMessage(message)
                 .setCancelable(true)
                 .show();
+    }
+
+    @Override
+    public void submitRequest() {
+//        SharedPreferences address_pref = this.getSharedPreferences("address_pref", MODE_PRIVATE);
+//        SharedPreferences.Editor address_edit = address_pref.edit();
+        Toast
+                .makeText(this, "Feature Under Development", Toast.LENGTH_SHORT)
+                .show();
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.fragment_container, new ProfileFrag())
+                        .commit();
+            }
+        }, 1000);
     }
 }

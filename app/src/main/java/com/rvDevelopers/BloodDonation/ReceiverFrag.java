@@ -3,16 +3,15 @@ package com.rvDevelopers.BloodDonation;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
-public class ProfileFrag extends Fragment {
+public class ReceiverFrag extends Fragment {
 
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
@@ -20,17 +19,16 @@ public class ProfileFrag extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    TextView welcome;
-    TextView name ,uname, blood, email, donationCheckBox;
-    Button edit;
     private OnFragmentInteractionListener mListener;
 
-    public ProfileFrag() {
+    EditText address, date, amount;
+    Button Request;
+    public ReceiverFrag() {
 
     }
 
-    public static ProfileFrag newInstance(String param1, String param2) {
-        ProfileFrag fragment = new ProfileFrag();
+    public static ReceiverFrag newInstance(String param1, String param2) {
+        ReceiverFrag fragment = new ReceiverFrag();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -48,28 +46,19 @@ public class ProfileFrag extends Fragment {
     }
 
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.fragment_profile, container, false);
-        name = v.findViewById(R.id.textNameShow);
-        uname = v.findViewById(R.id.textUserNameShow);
-        blood = v.findViewById(R.id.textBloodGroupShow);
-        email = v.findViewById(R.id.textEmailShow);
-        welcome = v.findViewById(R.id.textView);
-        edit = v.findViewById(R.id.button8);
-        donationCheckBox = v.findViewById(R.id.textDonarStatus);
-        edit.setOnClickListener(new View.OnClickListener() {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View v = inflater.inflate(R.layout.receiver, container, false);
+        address = v.findViewById(R.id.editText16);
+        date = v.findViewById(R.id.editText17);
+        amount = v.findViewById(R.id.editText);
+        Request = v.findViewById(R.id.button7);
+        Request.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mListener.EditProfile();
+                mListener.submitRequest();
             }
         });
         return v;
-    }
-
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        mListener.showData(name, uname, blood, email, donationCheckBox, welcome);
     }
 
     public void onButtonPressed(Uri uri) {
@@ -97,7 +86,6 @@ public class ProfileFrag extends Fragment {
 
     public interface OnFragmentInteractionListener {
         void onFragmentInteraction(Uri uri);
-        void showData(TextView name ,TextView uname, TextView blood, TextView email, TextView donationCheckBox, TextView welcome);
-        void EditProfile();
+        void submitRequest();
     }
 }
