@@ -26,7 +26,7 @@ import java.util.ArrayList;
 import java.util.Map;
 
 public class Profile extends AppCompatActivity implements ProfileFrag.OnFragmentInteractionListener, Help.helpListner, BloodBankFrag.OnFragmentInteractionListener,
-        AvailableBlood.OnFragmentInteractionListener, BloodDonors.OnFragmentInteractionListener, ReceiverFrag.OnFragmentInteractionListener {
+        AvailableBlood.OnFragmentInteractionListener, BloodDonors.OnFragmentInteractionListener, ReceiverFrag.OnFragmentInteractionListener, About.OnFragmentInteractionListener {
 
     TextView welcome;
     int age;
@@ -105,10 +105,10 @@ public class Profile extends AppCompatActivity implements ProfileFrag.OnFragment
                                 .commit();
                         break;
                     case R.id.about:
-                        setContentView(R.layout.about);
-                        About = findViewById(R.id.about_page);
-                        About.setText("It is a app used for blood as well as organ donation\nBy\nRohan Patil\tVed Patil\n");
-                        Toast.makeText(Profile.this, "About", Toast.LENGTH_SHORT).show();
+                        getSupportFragmentManager()
+                                .beginTransaction()
+                                .replace(R.id.fragment_container, new About())
+                                .commit();
                         break;
                     case R.id.logout:
                         logout();
@@ -302,6 +302,7 @@ public class Profile extends AppCompatActivity implements ProfileFrag.OnFragment
                 .setCancelable(true)
                 .show();
     }
+
     @Override
     public void onBackPressed() {
         if(dl.isDrawerOpen(GravityCompat.START)) {
