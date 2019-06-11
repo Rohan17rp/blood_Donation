@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 
 public class LoginFrag extends Fragment {
@@ -20,6 +21,7 @@ public class LoginFrag extends Fragment {
 
     EditText username, password;
     Button login, exit;
+    CheckBox checkBox;
     private OnFragmentInteractionListener mListener;
 
     public LoginFrag() {
@@ -51,10 +53,11 @@ public class LoginFrag extends Fragment {
         password = v.findViewById(R.id.editText2);
         login = v.findViewById(R.id.button);
         exit = v.findViewById(R.id.button2);
+        checkBox = v.findViewById(R.id.checkBox2);
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mListener.Login(username, password);
+                mListener.Login(username, password, checkBox);
             }
         });
         exit.setOnClickListener(new View.OnClickListener() {
@@ -91,7 +94,7 @@ public class LoginFrag extends Fragment {
 
     public interface OnFragmentInteractionListener {
         void onFragmentInteraction(Uri uri);
-        void Login(EditText username, EditText password);
+        void Login(EditText username, EditText password, CheckBox checkBox);
         void Exit();
     }
 }

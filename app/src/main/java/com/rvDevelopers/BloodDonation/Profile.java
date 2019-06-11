@@ -32,7 +32,8 @@ public class Profile extends AppCompatActivity implements ProfileFrag.OnFragment
     int age;
     String Message, Name, Uname, Blood, Email;
     Intent category;
-    SharedPreferences age_pref, name_pref, blood_pref, email_pref, donarList_pref;
+    SharedPreferences age_pref, name_pref, blood_pref, email_pref, donarList_pref, prev_user;
+    SharedPreferences.Editor prev_editor;
     Button donate;
     TextView About;
 
@@ -75,7 +76,9 @@ public class Profile extends AppCompatActivity implements ProfileFrag.OnFragment
                                 .commit();
                         break;
                     case R.id.hospitals:
-                        Toast.makeText(Profile.this, "Hospitals", Toast.LENGTH_SHORT).show();
+                        Toast
+                                .makeText(Profile.this, "Hospitals", Toast.LENGTH_SHORT)
+                                .show();
                         break;
                     case R.id.cart:
                         getSupportFragmentManager()
@@ -85,7 +88,9 @@ public class Profile extends AppCompatActivity implements ProfileFrag.OnFragment
                         break;
                     case R.id.organ_donate:
                         donate_list(findViewById(R.id.editText9));
-                        Toast.makeText(Profile.this, "Organ Donation", Toast.LENGTH_SHORT).show();
+                        Toast
+                                .makeText(Profile.this, "Organ Donation", Toast.LENGTH_SHORT)
+                                .show();
                         break;
                     case R.id.blood_donate:
                         getSupportFragmentManager()
@@ -105,9 +110,11 @@ public class Profile extends AppCompatActivity implements ProfileFrag.OnFragment
                         About.setText("It is a app used for blood as well as organ donation\nBy\nRohan Patil\tVed Patil\n");
                         Toast.makeText(Profile.this, "About", Toast.LENGTH_SHORT).show();
                         break;
-                    case R.id.exit:
-                    Toast.makeText(Profile.this, "You have been successfully logged out", Toast.LENGTH_SHORT).show();
+                    case R.id.logout:
                         logout();
+                        break;
+                    case R.id.exit:
+                        exit();
                         break;
                     default:
                         return true;
@@ -127,6 +134,8 @@ public class Profile extends AppCompatActivity implements ProfileFrag.OnFragment
         blood_pref = this.getSharedPreferences("blood_preference", MODE_PRIVATE);
         email_pref = this.getSharedPreferences("Email_id", MODE_PRIVATE);
         donarList_pref = this.getSharedPreferences("donation_pref", MODE_PRIVATE);
+        prev_user = this.getSharedPreferences("SignedInPref", MODE_PRIVATE);
+        prev_editor = prev_user.edit();
 
         Blood = blood_pref.getString(Uname, "");
         Email = email_pref.getString(Uname, "No Mail ID");
@@ -151,39 +160,20 @@ public class Profile extends AppCompatActivity implements ProfileFrag.OnFragment
         startActivity(donate);
         Profile.this.finish();
     }
-    /*public void donor(View d){
-        if(age >= 18 && age <= 60) {
-            Intent Donate_list = new Intent(this, donor.class);
-            startActivity(Donate_list);
-            Profile.this.finish();
-        } else {
-            Toast
-                    .makeText(this, "To donate blood age should be between 18 and 60", Toast.LENGTH_LONG)
-                    .show();
-        }
-    }*/
-    @Override
-    public void onBackPressed() {
-        if(dl.isDrawerOpen(GravityCompat.START)) {
-            dl.closeDrawer(GravityCompat.START);
-        } else {
-            new AlertDialog.Builder(this)
-                    .setMessage("Are you sure you want to logout")
-                    .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            logout();
-                        }
-                    })
-                    .setNegativeButton("No", null)
-                    .setCancelable(true)
-                    .show();
-        }
-    }
 
     public void logout() {
-        startActivity(new Intent(this, MainActivity.class));
-        finish();
+        new AlertDialog.Builder(this)
+                .setTitle("Warning")
+                .setMessage("Are you sure you want to logout?")
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Back();
+                    }
+                })
+                .setNegativeButton("No", null)
+                .setCancelable(true)
+                .show();
     }
 
     @Override
@@ -192,9 +182,6 @@ public class Profile extends AppCompatActivity implements ProfileFrag.OnFragment
             return true;
 
         return super.onOptionsItemSelected(item);
-    }
-    public void Cancel(View view) {
-        savedata();
     }
 
     @Override
@@ -278,11 +265,10 @@ public class Profile extends AppCompatActivity implements ProfileFrag.OnFragment
 
     @Override
     public void submitRequest() {
-//        SharedPreferences address_pref = this.getSharedPreferences("address_pref", MODE_PRIVATE);
-//        SharedPreferences.Editor address_edit = address_pref.edit();
         Toast
                 .makeText(this, "Feature Under Development", Toast.LENGTH_SHORT)
                 .show();
+
         Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
             @Override
@@ -293,5 +279,45 @@ public class Profile extends AppCompatActivity implements ProfileFrag.OnFragment
                         .commit();
             }
         }, 1000);
+    }
+
+    public void Back() {
+        prev_editor.putBoolean("is", false);
+        prev_editor.commit();
+        startActivity(new Intent(this, MainActivity.class));
+        finish();
+    }
+
+    public void exit() {
+        new AlertDialog.Builder(this)
+                .setMessage("Warning")
+                .setMessage("Do you want to exit")
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        finish();
+                    }
+                })
+                .setNegativeButton("No", null)
+                .setCancelable(true)
+                .show();
+    }
+    @Override
+    public void onBackPressed() {
+        if(dl.isDrawerOpen(GravityCompat.START)) {
+            dl.closeDrawer(GravityCompat.START);
+        } else {
+            new AlertDialog.Builder(this)
+                    .setMessage("Are you sure you want to logout")
+                    .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            logout();
+                        }
+                    })
+                    .setNegativeButton("No", null)
+                    .setCancelable(true)
+                    .show();
+        }
     }
 }
