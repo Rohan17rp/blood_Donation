@@ -55,7 +55,7 @@ public class BloodBankFrag extends Fragment {
         tabLayout.addTab(tabLayout.newTab().setText("Donors").setCustomView((ListView)v.findViewById(R.id.listview)));
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
         final ViewPager viewPager = (ViewPager)v.findViewById(R.id.pager);
-        viewPager.setAdapter(mListener.getPagerAdapter1(tabLayout));
+        viewPager.setAdapter(mListener.getPagerAdapter(tabLayout));
         viewPager.setOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
         tabLayout.setOnTabSelectedListener(new TabLayout.BaseOnTabSelectedListener() {
             @Override
@@ -100,7 +100,7 @@ public class BloodBankFrag extends Fragment {
     }
     public interface OnFragmentInteractionListener {
         void onFragmentInteraction(Uri uri);
-        BloodBank_PagerAdapter getPagerAdapter1(TabLayout tabLayout);
+        BloodBank_PagerAdapter getPagerAdapter(TabLayout tabLayout);
     }
 
 }
