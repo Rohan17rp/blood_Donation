@@ -153,33 +153,7 @@
                 android:id="@+id/textview15"
                 android:text="23"/>
         </TableRow>
-        <TableRow>
-            <TextView
-                android:text="Brain(if possible)"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_column="1"
-                android:padding="2dp"
-                android:id="@+id/textview16"
-                android:textAlignment="center"/>
 
-            <TextView
-                android:hint="Available Stock"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_column="1"
-                android:padding="2dp"
-                android:id="@+id/textview17"
-                android:text="23"/>
-            <TextView
-                android:hint="No. of Donors"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_column="1"
-                android:padding="2dp"
-                android:id="@+id/textview18"
-                android:text="23"/>
-        </TableRow>
         <TableRow>
 
             <TextView

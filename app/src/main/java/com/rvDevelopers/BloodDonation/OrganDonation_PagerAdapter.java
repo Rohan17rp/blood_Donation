@@ -15,12 +15,9 @@ public class OrganDonation_PagerAdapter extends FragmentStatePagerAdapter {
     public Fragment getItem(int position) {
         switch (position){
             case 0:
-                OrganBank organBank = new OrganBank();
-                return organBank;
+                return new OrganBank();
             case 1:
-                OrganDonors organDonors= new OrganDonors();
-                return organDonors;
-
+                return new OrganDonors();
             default:
                 return null;
         }
