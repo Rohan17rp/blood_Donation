@@ -26,7 +26,7 @@ import java.util.ArrayList;
 import java.util.Map;
 
 public class Profile extends AppCompatActivity implements ProfileFrag.OnFragmentInteractionListener, Help.helpListner, BloodBankFrag.OnFragmentInteractionListener,
-        AvailableBlood.OnFragmentInteractionListener, BloodDonors.OnFragmentInteractionListener, ReceiverFrag.OnFragmentInteractionListener {
+        AvailableBlood.OnFragmentInteractionListener, BloodDonors.OnFragmentInteractionListener, ReceiverFrag.OnFragmentInteractionListener,OrganDonationFrag.OnFragmentInteractionListener, OrganBank.OnFragmentInteractionListener,OrganDonors.OnFragmentInteractionListener {
 
     TextView welcome;
     int age;
@@ -84,8 +84,10 @@ public class Profile extends AppCompatActivity implements ProfileFrag.OnFragment
                                 .commit();
                         break;
                     case R.id.organ_donate:
-                        donate_list(findViewById(R.id.editText9));
-                        Toast.makeText(Profile.this, "Organ Donation", Toast.LENGTH_SHORT).show();
+                        getSupportFragmentManager()
+                                .beginTransaction()
+                                .replace(R.id.fragment_container, new OrganDonationFrag())
+                                .commit();
                         break;
                     case R.id.blood_donate:
                         getSupportFragmentManager()
@@ -203,8 +205,12 @@ public class Profile extends AppCompatActivity implements ProfileFrag.OnFragment
     }
 
     @Override
-    public BloodBank_PagerAdapter getPagerAdapter(TabLayout tabLayout) {
+    public BloodBank_PagerAdapter getPagerAdapter1(TabLayout tabLayout) {
         return new BloodBank_PagerAdapter(getSupportFragmentManager(),tabLayout.getTabCount());
+    }
+    @Override
+    public OrganDonation_PagerAdapter getPagerAdapter(TabLayout tabLayout) {
+        return new OrganDonation_PagerAdapter(getSupportFragmentManager(),tabLayout.getTabCount());
     }
 
     @Override

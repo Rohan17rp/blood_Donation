@@ -1,0 +1,270 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".AvailableBlood">
+
+    <!-- TODO: Update database -->
+
+    <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:orientation="vertical"
+        android:layout_marginBottom="2dp">
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="2dp"
+            android:layout_marginBottom="1dp">
+            <TextView
+                android:text="Organs"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_column="1"
+                android:padding="2dp"
+                android:id="@+id/textview"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:text="Available Stock"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_column="1"
+                android:padding="2dp"
+                android:textStyle="bold"
+                android:id="@+id/textview2"/>
+            <TextView
+                android:text="No. of Donors"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_column="1"
+                android:padding="2dp"
+                android:textStyle="bold"
+                android:id="@+id/textview3"/>
+        </TableRow>
+
+        <TableRow>
+            <TextView
+                android:text="Heart"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_column="1"
+                android:padding="2dp"
+                android:id="@+id/textview4"
+                android:textAlignment="center"/>
+
+            <TextView
+                android:hint="Available Stock"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_column="1"
+                android:padding="2dp"
+                android:id="@+id/textview5"
+                android:text="23"/>
+            <TextView
+                android:hint="No. of Donors"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_column="1"
+                android:padding="2dp"
+                android:id="@+id/textview6"
+                android:text="23"/>
+        </TableRow>
+        <TableRow>
+            <TextView
+                android:text="Eyes"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_column="1"
+                android:padding="2dp"
+                android:id="@+id/textview7"
+                android:textAlignment="center" />
+
+            <TextView
+                android:hint="Available Stock"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_column="1"
+                android:padding="2dp"
+                android:id="@+id/textview8"
+                android:text="23"/>
+            <TextView
+                android:hint="No. of Donors"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_column="1"
+                android:padding="2dp"
+                android:id="@+id/textview9"
+                android:text="23"/>
+        </TableRow>
+        <TableRow>
+            <TextView
+                android:text="Kidney"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_column="1"
+                android:padding="2dp"
+                android:id="@+id/textview10"
+                android:textAlignment="center"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_column="1"
+                android:padding="2dp"
+                android:id="@+id/textview11"
+                android:text="23"/>
+            <TextView
+                android:hint="No. of Donors"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_column="1"
+                android:padding="2dp"
+                android:id="@+id/textview12"
+                android:text="23"/>
+        </TableRow>
+        <TableRow>
+            <TextView
+                android:text="Liver"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_column="1"
+                android:padding="2dp"
+                android:id="@+id/textview13"
+                android:textAlignment="center"/>
+
+            <TextView
+                android:hint="Available Stock"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_column="1"
+                android:padding="2dp"
+                android:id="@+id/textview14"
+                android:text="23"/>
+            <TextView
+                android:hint="No. of Donors"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_column="1"
+                android:padding="2dp"
+                android:id="@+id/textview15"
+                android:text="23"/>
+        </TableRow>
+        <TableRow>
+            <TextView
+                android:text="Brain(if possible)"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_column="1"
+                android:padding="2dp"
+                android:id="@+id/textview16"
+                android:textAlignment="center"/>
+
+            <TextView
+                android:hint="Available Stock"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_column="1"
+                android:padding="2dp"
+                android:id="@+id/textview17"
+                android:text="23"/>
+            <TextView
+                android:hint="No. of Donors"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_column="1"
+                android:padding="2dp"
+                android:id="@+id/textview18"
+                android:text="23"/>
+        </TableRow>
+        <TableRow>
+
+            <TextView
+                android:id="@+id/textview19"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_column="1"
+                android:padding="2dp"
+                android:text="Lungs"
+                android:textAlignment="center" />
+
+            <TextView
+                android:hint="Available Stock"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_column="1"
+                android:padding="2dp"
+                android:id="@+id/textview20"
+                android:text="23"/>
+            <TextView
+                android:hint="No. of Donors"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_column="1"
+                android:padding="2dp"
+                android:id="@+id/textview21"
+                android:text="23"/>
+        </TableRow>
+        <TableRow>
+            <TextView
+                android:text="Oragan"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_column="1"
+                android:padding="2dp"
+                android:id="@+id/textview22"
+                android:textAlignment="center"/>
+
+            <TextView
+                android:hint="Available Stock"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_column="1"
+                android:padding="2dp"
+                android:id="@+id/textview23"
+                android:text="23"/>
+            <TextView
+                android:hint="No. of Donors"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_column="1"
+                android:padding="2dp"
+                android:id="@+id/textview24"
+                android:text="23"/>
+        </TableRow>
+        <TableRow>
+            <TextView
+                android:text="Organ 2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_column="1"
+                android:padding="2dp"
+                android:id="@+id/textview25"
+                android:textAlignment="center"/>
+
+            <TextView
+                android:hint="Available Stock"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_column="1"
+                android:padding="2dp"
+                android:id="@+id/textview26"
+                android:text="23"/>
+            <TextView
+                android:hint="No. of Donors"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_column="1"
+                android:padding="2dp"
+                android:id="@+id/textview27"
+                android:text="23"/>
+        </TableRow>
+
+
+
+
+    </TableLayout>
+</RelativeLayout>
