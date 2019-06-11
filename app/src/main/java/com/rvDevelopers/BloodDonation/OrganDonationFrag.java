@@ -72,7 +72,7 @@ public class OrganDonationFrag extends Fragment {
         tabLayout.addTab(tabLayout.newTab().setText("Donors").setCustomView((ListView)v.findViewById(R.id.listview1)));
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
         final ViewPager viewPager = (ViewPager)v.findViewById(R.id.pager2);
-        viewPager.setAdapter(mListener.getPagerAdapter(tabLayout));
+        viewPager.setAdapter(mListener.getPagerAdapter1(tabLayout));
         viewPager.setOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
         tabLayout.setOnTabSelectedListener(new TabLayout.BaseOnTabSelectedListener() {
             @Override
@@ -131,6 +131,6 @@ public class OrganDonationFrag extends Fragment {
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
-        OrganDonation_PagerAdapter getPagerAdapter(TabLayout tabLayout);
+        OrganDonation_PagerAdapter getPagerAdapter1(TabLayout tabLayout);
     }
 }
