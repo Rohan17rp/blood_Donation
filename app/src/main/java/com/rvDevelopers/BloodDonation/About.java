@@ -3,33 +3,29 @@ package com.rvDevelopers.BloodDonation;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.CheckBox;
-import android.widget.EditText;
+import android.widget.TextView;
 
-public class LoginFrag extends Fragment {
+public class About extends Fragment {
+
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
     private String mParam1;
     private String mParam2;
 
-    EditText username, password;
-    Button login, exit;
-    CheckBox checkBox;
     private OnFragmentInteractionListener mListener;
 
-    public LoginFrag() {
-        // Required empty public constructor
+    public About() {
+
     }
 
-    public static LoginFrag newInstance(String param1, String param2) {
-        LoginFrag fragment = new LoginFrag();
+    public static About newInstance(String param1, String param2) {
+        About fragment = new About();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -47,25 +43,10 @@ public class LoginFrag extends Fragment {
     }
 
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.login_fragment, container, false);
-        username = v.findViewById(R.id.editText);
-        password = v.findViewById(R.id.editText2);
-        login = v.findViewById(R.id.button);
-        exit = v.findViewById(R.id.button2);
-        checkBox = v.findViewById(R.id.checkBox2);
-        login.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mListener.Login(username, password, checkBox);
-            }
-        });
-        exit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mListener.Exit();
-            }
-        });
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View v = inflater.inflate(R.layout.about, container, false);
+        TextView About = v.findViewById(R.id.about_page);
+        About.setText("\tIt is a app used for blood as well as organ donation\n\tBy\n\tRohan Patil\n\tVed Patil\n");
         return v;
     }
 
@@ -94,7 +75,5 @@ public class LoginFrag extends Fragment {
 
     public interface OnFragmentInteractionListener {
         void onFragmentInteraction(Uri uri);
-        void Login(EditText username, EditText password, CheckBox checkBox);
-        void Exit();
     }
 }
