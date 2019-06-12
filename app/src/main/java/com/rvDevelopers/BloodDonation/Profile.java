@@ -25,8 +25,11 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.Map;
 
-public class Profile extends AppCompatActivity implements ProfileFrag.OnFragmentInteractionListener, Help.helpListner, BloodBankFrag.OnFragmentInteractionListener,
-        AvailableBlood.OnFragmentInteractionListener, BloodDonors.OnFragmentInteractionListener, ReceiverFrag.OnFragmentInteractionListener, About.OnFragmentInteractionListener,OrganDonors.OnFragmentInteractionListener,OrganBank.OnFragmentInteractionListener,OrganDonationFrag.OnFragmentInteractionListener {
+public class Profile extends AppCompatActivity implements ProfileFrag.OnFragmentInteractionListener,
+        Help.helpListner, BloodBankFrag.OnFragmentInteractionListener, AvailableBlood.OnFragmentInteractionListener,
+        BloodDonors.OnFragmentInteractionListener, ReceiverFrag.OnFragmentInteractionListener,
+        About.OnFragmentInteractionListener, OrganDonors.OnFragmentInteractionListener,
+        OrganBank.OnFragmentInteractionListener,OrganDonationFrag.OnFragmentInteractionListener, RequestOrgans.OnFragmentInteractionListener {
 
     TextView welcome;
     int age;
@@ -85,6 +88,12 @@ public class Profile extends AppCompatActivity implements ProfileFrag.OnFragment
                         getSupportFragmentManager()
                                 .beginTransaction()
                                 .replace(R.id.fragment_container, new ReceiverFrag())
+                                .commit();
+                        break;
+                    case R.id.request_organs:
+                        getSupportFragmentManager()
+                                .beginTransaction()
+                                .replace(R.id.fragment_container, new RequestOrgans())
                                 .commit();
                         break;
                     case R.id.organ_donate:
