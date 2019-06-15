@@ -16,8 +16,10 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -46,6 +48,8 @@ public class Profile extends AppCompatActivity implements ProfileFrag.OnFragment
     ActionBarDrawerToggle t;
     NavigationView nv;
     Toolbar toolbar;
+
+    SharedPreferences heartPref, eyePref, kidneyPref, LiverPref, panPref, lungPref, intPref;
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -86,9 +90,6 @@ public class Profile extends AppCompatActivity implements ProfileFrag.OnFragment
                                 .beginTransaction()
                                 .replace(R.id.fragment_container, new PendingRequest())
                                 .commit();
-                        break;
-                    case R.id.hospitals:
-                        Toast.makeText(Profile.this, "Hospitals", Toast.LENGTH_SHORT).show();
                         break;
                     case R.id.cart:
                         getSupportFragmentManager()
@@ -160,6 +161,14 @@ public class Profile extends AppCompatActivity implements ProfileFrag.OnFragment
         check = donarList_pref.getBoolean(Uname, false);
         age = age_pref.getInt(Uname, 0);
         donate = findViewById(R.id.button);
+
+        heartPref = this.getSharedPreferences("heartPref", MODE_PRIVATE);
+        eyePref = this.getSharedPreferences("eyePref", MODE_PRIVATE);
+        kidneyPref = this.getSharedPreferences("kidneyPref", MODE_PRIVATE);
+        LiverPref = this.getSharedPreferences("LiverPref", MODE_PRIVATE);
+        panPref = this.getSharedPreferences("pancreasPref", MODE_PRIVATE);
+        lungPref = this.getSharedPreferences("lungPref", MODE_PRIVATE);
+        intPref = this.getSharedPreferences("instestinePref", MODE_PRIVATE);
     }
 
     public void logout() {
@@ -339,5 +348,52 @@ public class Profile extends AppCompatActivity implements ProfileFrag.OnFragment
                         .commit();
             }
         }, 1000);
+    }
+
+    @Override
+    public ArrayList<String> getDonorUserNameList1(AdapterView<?> parent, View view, int position, long id) {
+        SharedPreferences Donor_name = this.getSharedPreferences(organGetter(parent, view, position, id), MODE_PRIVATE);
+        Map<String, Boolean> donorNames = (Map<String, Boolean>) Donor_name.getAll();
+
+        ArrayList<String> names = new ArrayList<>();
+        for(Map.Entry<String, Boolean> stringMap : donorNames.entrySet()) {
+            if(stringMap.getValue()) {
+                names.add(stringMap.getKey());
+            }
+        }
+        return names;
+    }
+
+    @Override
+    public ArrayList<String> getNames1(ArrayList<String> username) {
+        int i;
+        SharedPreferences Donor_name = this.getSharedPreferences("Name_data", MODE_PRIVATE);
+        ArrayList<String> name = new ArrayList<>();
+        for(i=0;i<username.size();i++) {
+            name.add(Donor_name.getString(username.get(i), "null"));
+        }
+        return name;
+    }
+
+    @Override
+    public String organGetter(AdapterView<?> parent, View view, int position, long id) {
+        switch (parent.getItemAtPosition(position).toString()) {
+            case "Heart":
+                return "heartPref";
+            case "Eyes":
+                return "eyePref";
+            case "Kidney":
+                return "kidneyPref";
+            case "Liver":
+                return "LiverPref";
+            case "Pancreas":
+                return "pancreasPref";
+            case "Lungs":
+                return "lungPref";
+            case "Intestine":
+                return "instestinePref";
+        }
+
+        return null;
     }
 }

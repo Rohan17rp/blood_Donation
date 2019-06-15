@@ -14,18 +14,8 @@ import android.widget.Spinner;
 
 import java.util.ArrayList;
 
-
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link OrganDonors.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link OrganDonors#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class OrganDonors extends Fragment {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
+
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
@@ -33,25 +23,15 @@ public class OrganDonors extends Fragment {
     Spinner organ_selector;
     ArrayAdapter organ_type;
 
-    // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
 
     private OnFragmentInteractionListener mListener;
 
     public OrganDonors() {
-        // Required empty public constructor
+
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment OrganDonors.
-     */
-    // TODO: Rename and change types and number of parameters
     public static OrganDonors newInstance(String param1, String param2) {
         OrganDonors fragment = new OrganDonors();
         Bundle args = new Bundle();
@@ -70,31 +50,52 @@ public class OrganDonors extends Fragment {
         }
     }
 
+    ArrayAdapter<String> listViewAdapter;
+    ArrayList<String> donarUserName;
+    ListView listView;
+
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
         View view = inflater.inflate(R.layout.fragment_organ_donors, container, false);
         organ_selector = view.findViewById(R.id.spinner);
         CharSequence[] groups = { "Heart", "Eyes", "Kidney", "Liver", "Pancreas", "Lungs", "Platelets", "Intestine" };
         organ_type = new ArrayAdapter(this.getActivity(), android.R.layout.simple_spinner_item, groups);
         organ_type.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         organ_selector.setAdapter(organ_type);
-        final ArrayList<String> donarUserName = mListener.getDonorUserNameList();
-        ListView listView = (ListView) view.findViewById(R.id.listview1);
-        ArrayAdapter<String> listViewAdapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_1, mListener.getNames(donarUserName));
+
+        listView = (ListView) view.findViewById(R.id.listview1);
+
+        organ_selector.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                donarUserName = mListener.getDonorUserNameList1(parent, view, position, id);
+
+                listViewAdapter = new ArrayAdapter<String>(getActivity(),
+                        android.R.layout.simple_list_item_1,
+                        mListener.getNames1(donarUserName));
+
+                listView.setAdapter(listViewAdapter);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 mListener.showData(donarUserName.get(position));
             }
         });
-        listView.setAdapter(listViewAdapter);
+
         return view;
 
     }
 
-    // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
         if (mListener != null) {
             mListener.onFragmentInteraction(uri);
@@ -119,12 +120,12 @@ public class OrganDonors extends Fragment {
     }
 
     public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
         String donorName (String UserName);
         void onFragmentInteraction(Uri uri);
-        ArrayList<String> getDonorUserNameList();
-        ArrayList<String> getNames(ArrayList<String> username);
+        ArrayList<String> getDonorUserNameList1(AdapterView<?> parent, View view, int position, long id);
+        ArrayList<String> getNames1(ArrayList<String> username);
         void showData(String username);
+        String organGetter(AdapterView<?> parent, View view, int position, long id);
     }
 
 
