@@ -193,6 +193,14 @@ public class Profile extends AppCompatActivity implements ProfileFrag.OnFragment
         finish();
     }
 
+    @Override
+    public void organDonateForm() {
+        Intent edit = new Intent(this, EditProfile.class);
+        edit.putExtra("uname", Uname);
+        startActivity(edit);
+        finish();
+    }
+
     public void donate_list(View view){
         Intent donate = new Intent(this, Donate_list.class);
         startActivity(donate);
