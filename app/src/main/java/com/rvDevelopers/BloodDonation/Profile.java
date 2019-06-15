@@ -29,7 +29,8 @@ public class Profile extends AppCompatActivity implements ProfileFrag.OnFragment
         Help.helpListner, BloodBankFrag.OnFragmentInteractionListener, AvailableBlood.OnFragmentInteractionListener,
         BloodDonors.OnFragmentInteractionListener, ReceiverFrag.OnFragmentInteractionListener,
         About.OnFragmentInteractionListener, OrganDonors.OnFragmentInteractionListener,
-        OrganBank.OnFragmentInteractionListener,OrganDonationFrag.OnFragmentInteractionListener, RequestOrgans.OnFragmentInteractionListener {
+        OrganBank.OnFragmentInteractionListener,OrganDonationFrag.OnFragmentInteractionListener,
+        RequestOrgans.OnFragmentInteractionListener, PendingRequest.OnFragmentInteractionListener {
 
     TextView welcome;
     int age;
@@ -79,6 +80,12 @@ public class Profile extends AppCompatActivity implements ProfileFrag.OnFragment
                         getSupportFragmentManager()
                                 .beginTransaction()
                                 .replace(R.id.fragment_container, new ProfileFrag())
+                                .commit();
+                        break;
+                    case R.id.pending_requests:
+                        getSupportFragmentManager()
+                                .beginTransaction()
+                                .replace(R.id.fragment_container, new PendingRequest())
                                 .commit();
                         break;
                     case R.id.hospitals:
