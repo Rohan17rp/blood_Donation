@@ -21,6 +21,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -334,10 +336,14 @@ public class Profile extends AppCompatActivity implements ProfileFrag.OnFragment
     }
 
     @Override
-    public void submitRequest() {
-        Toast
-                .makeText(this, "Feature Under Development", Toast.LENGTH_SHORT)
-                .show();
+    public void submitRequest(EditText address, EditText amount, Spinner organ_selector, AdapterView<?> parent, int position) {
+
+        SharedPreferences prefA = this.getSharedPreferences(getPrefName(parent, position), MODE_PRIVATE);
+        SharedPreferences.Editor editor = prefA.edit();
+        SharedPreferences pref = this.getSharedPreferences(getAMPrefName(parent, position), MODE_PRIVATE);
+        SharedPreferences.Editor am = pref.edit();
+        editor.putString(Uname, address.getText().toString()).commit();
+        am.putString(Uname, amount.getText().toString()).commit();
         Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
             @Override
@@ -348,6 +354,57 @@ public class Profile extends AppCompatActivity implements ProfileFrag.OnFragment
                         .commit();
             }
         }, 1000);
+    }
+
+    @Override
+    public String getPrefName(AdapterView<?> parent, int position) {
+        switch (parent.getItemAtPosition(position).toString()) {
+            case "Heart":
+                return "heartARPref";
+            case "Eyes":
+                return "eyeARPref";
+            case "Kidney":
+                return "kidneyARPref";
+            case "Liver":
+                return "LiverARPref";
+            case "Pancreas":
+                return "pancreasARPref";
+            case "Lungs":
+                return "lungARPref";
+            case "Intestine":
+                return "instestineARPref";
+        }
+        return null;
+    }
+
+    @Override
+    public String getAMPrefName(AdapterView<?> parent, int position) {
+        switch (parent.getItemAtPosition(position).toString()) {
+            case "Heart":
+                return "heartARPref";
+            case "Eyes":
+                return "eyeARPref";
+            case "Kidney":
+                return "kidneyARPref";
+            case "Liver":
+                return "LiverARPref";
+            case "Pancreas":
+                return "pancreasARPref";
+            case "Lungs":
+                return "lungARPref";
+            case "Intestine":
+                return "instestineARPref";
+        }
+        return null;
+    }
+
+    @Override
+    public void submitRequest(EditText address, EditText date, EditText amount) {
+        SharedPreferences pref = this.getSharedPreferences("BloodRequestA", MODE_PRIVATE);
+        SharedPreferences prefA = this.getSharedPreferences("BloodRequestAmount", MODE_PRIVATE);
+        SharedPreferences.Editor editor, editor1;
+        editor = pref.edit();
+        editor1 = prefA.edit();
     }
 
     @Override
