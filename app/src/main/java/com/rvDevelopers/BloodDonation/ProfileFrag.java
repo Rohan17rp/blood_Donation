@@ -1,6 +1,7 @@
 package com.rvDevelopers.BloodDonation;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -100,4 +101,5 @@ public class ProfileFrag extends Fragment {
         void showData(TextView name ,TextView uname, TextView blood, TextView email, TextView donationCheckBox, TextView welcome);
         void EditProfile();
     }
+
 }
