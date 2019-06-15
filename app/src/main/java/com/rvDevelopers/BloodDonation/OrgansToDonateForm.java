@@ -57,10 +57,8 @@ public class OrgansToDonateForm extends AppCompatActivity {
     }
 
     public void Save(View view) {
-        heartEdit.putBoolean(UserName, heart.isChecked());
-        heartEdit.commit();
-        eueEdit.putBoolean(UserName, eye.isChecked());
-        eueEdit.commit();
+        heartEdit.putBoolean(UserName, heart.isChecked()).commit();
+        eueEdit.putBoolean(UserName, eye.isChecked()).commit();
         kidEdit.putBoolean(UserName, kid.isChecked()).commit();
         livEdit.putBoolean(UserName, liv.isChecked()).commit();
         panEdit.putBoolean(UserName, pan.isChecked()).commit();

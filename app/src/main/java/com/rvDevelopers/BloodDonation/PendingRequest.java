@@ -13,15 +13,11 @@ import android.widget.ListView;
 
 import java.util.ArrayList;
 
-
-
 public class PendingRequest extends Fragment {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
+
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
-    // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
 
@@ -30,7 +26,6 @@ public class PendingRequest extends Fragment {
     public PendingRequest() {
     }
 
-    // TODO: Rename and change types and number of parameters
     public static PendingRequest newInstance(String param1, String param2) {
         PendingRequest fragment = new PendingRequest();
         Bundle args = new Bundle();
@@ -54,7 +49,6 @@ public class PendingRequest extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_organ_donors, container, false);
 
-
         final ArrayList<String> donarUserName = mListener.getDonorUserNameList();
         ListView listView = (ListView) view.findViewById(R.id.listview1);
         ArrayAdapter<String> listViewAdapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_1, mListener.getNames(donarUserName));
@@ -69,7 +63,6 @@ public class PendingRequest extends Fragment {
 
     }
 
-    // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
         if (mListener != null) {
             mListener.onFragmentInteraction(uri);
@@ -94,8 +87,6 @@ public class PendingRequest extends Fragment {
     }
 
     public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        String donorName (String UserName);
         void onFragmentInteraction(Uri uri);
         ArrayList<String> getDonorUserNameList();
         ArrayList<String> getNames(ArrayList<String> username);
