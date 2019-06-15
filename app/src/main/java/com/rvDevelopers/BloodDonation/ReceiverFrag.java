@@ -56,7 +56,7 @@ public class ReceiverFrag extends Fragment {
         Request.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mListener.submitRequest();
+                mListener.submitRequest(address, date, amount);
             }
         });
         return v;
@@ -87,6 +87,6 @@ public class ReceiverFrag extends Fragment {
 
     public interface OnFragmentInteractionListener {
         void onFragmentInteraction(Uri uri);
-        void submitRequest();
+        void submitRequest(EditText address, EditText date, EditText amount);
     }
 }
