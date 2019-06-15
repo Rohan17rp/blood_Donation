@@ -7,6 +7,9 @@
         <item android:id="@+id/profile"
             android:icon="@drawable/ic_person"
             android:title="Profile" />
+        <item android:id="@+id/pending_requests"
+            android:icon="@drawable/ic_person"
+            android:title="Pending Requests" />
         <item android:id="@+id/hospitals"
             android:icon="@drawable/hospital"
             android:title="Hospitals"/>
@@ -16,7 +19,6 @@
         <item android:id="@+id/request_organs"
             android:icon="@drawable/cart"
             android:title="Request Organs"/>
-
         <item android:id="@+id/organ_donate"
             android:icon="@drawable/donate"
             android:title="Organ Donate" />
