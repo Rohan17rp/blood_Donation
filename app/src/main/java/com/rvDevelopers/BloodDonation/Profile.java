@@ -39,7 +39,6 @@ public class Profile extends AppCompatActivity implements ProfileFrag.OnFragment
     SharedPreferences age_pref, name_pref, blood_pref, email_pref, donarList_pref, prev_user;
     SharedPreferences.Editor prev_editor;
     Button donate;
-    TextView About;
 
     boolean check;
 
@@ -195,7 +194,7 @@ public class Profile extends AppCompatActivity implements ProfileFrag.OnFragment
 
     @Override
     public void organDonateForm() {
-        Intent edit = new Intent(this, EditProfile.class);
+        Intent edit = new Intent(this, OrgansToDonateForm.class);
         edit.putExtra("uname", Uname);
         startActivity(edit);
         finish();
