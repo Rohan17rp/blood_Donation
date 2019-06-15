@@ -12,7 +12,8 @@
         android:layout_height="wrap_content"
         xmlns:tools="http://schemas.android.com/tools"
         android:orientation="vertical"
-        android:layout_marginBottom="2dp">
+        android:layout_marginBottom="2dp"
+        android:layout_margin="2dp" >
 
         <TableRow
             android:layout_width="match_parent"
