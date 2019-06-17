@@ -45,21 +45,36 @@ public class PendingRequest extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_pending_request, container, false);
+    public View onCreateView(final LayoutInflater inflater, final ViewGroup container,
+                             final Bundle savedInstanceState) {
+        View v = inflater.inflate(R.layout.fragment_pending_request, container, false);
 
-        final ArrayList<String> donarUserName = mListener.getDonorUserNameList();
-        ListView listView = (ListView) view.findViewById(R.id.listview1);
-        ArrayAdapter<String> listViewAdapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_1, mListener.getNames(donarUserName));
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        final ArrayList<String> donarUserNameHeart = mListener.getDonorUserNameListS(R.id.pendingHeart);
+
+        ListView listViewHeart = v.findViewById(R.id.pendingHeart);
+        ArrayAdapter<String> heartAdapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_1, mListener.getNamesS(donarUserNameHeart));
+        listViewHeart.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                mListener.showData(donarUserName.get(position));
+                mListener.showDataS(donarUserNameHeart.get(position), R.id.pendingHeart);
             }
         });
-        listView.setAdapter(listViewAdapter);
-        return view;
+        listViewHeart.setAdapter(heartAdapter);
+
+        final ArrayList<String> donarUserNameEye = mListener.getDonorUserNameListS(R.id.pendingEye);
+
+        ListView listViewEye = v.findViewById(R.id.pendingEye);
+        ArrayAdapter<String> heartEye = new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_1, mListener.getNamesS(donarUserNameEye));
+        listViewEye.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                mListener.showDataS(donarUserNameEye.get(position), R.id.pendingEye);
+            }
+        });
+        listViewEye.setAdapter(heartEye);
+
+
+        return v;
 
     }
 
@@ -88,8 +103,8 @@ public class PendingRequest extends Fragment {
 
     public interface OnFragmentInteractionListener {
         void onFragmentInteraction(Uri uri);
-        ArrayList<String> getDonorUserNameList();
-        ArrayList<String> getNames(ArrayList<String> username);
-        void showData(String username);
+        ArrayList<String> getDonorUserNameListS(int id);
+        ArrayList<String> getNamesS(ArrayList<String> username);
+        void showDataS(String username, int id);
     }
 }

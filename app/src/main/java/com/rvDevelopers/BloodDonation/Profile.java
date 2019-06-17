@@ -349,6 +349,7 @@ public class Profile extends AppCompatActivity implements ProfileFrag.OnFragment
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
+                nv.setCheckedItem(R.id.profile);
                 getSupportFragmentManager()
                         .beginTransaction()
                         .replace(R.id.fragment_container, new ProfileFrag())
@@ -384,23 +385,126 @@ public class Profile extends AppCompatActivity implements ProfileFrag.OnFragment
     public String getAMPrefName(AdapterView<?> parent, int position) {
         switch (parent.getItemAtPosition(position).toString()) {
             case "Heart":
-                return "heartARPref";
+                return "heartAMPref";
             case "Eyes":
-                return "eyeARPref";
+                return "eyeAMPref";
             case "Kidney":
-                return "kidneyARPref";
+                return "kidneyAMPref";
             case "Liver":
-                return "LiverARPref";
+                return "LiverAMPref";
             case "Pancreas":
-                return "pancreasARPref";
+                return "pancreasAMPref";
             case "Lungs":
-                return "lungARPref";
+                return "lungAMPref";
             case "Platelets":
-                return "plateARPref";
+                return "plateAMPref";
             case "Intestine":
-                return "instestineARPref";
+                return "instestineAMPref";
         }
         return null;
+    }
+
+    @Override
+    public ArrayList<String> getDonorUserNameListS(int id) {
+        SharedPreferences nameAGetter;
+        String prefName = "";
+        switch (id) {
+            case R.id.pendingHeart:
+                prefName = "heartAMPref";
+                break;
+            case R.id.pendingEye:
+                prefName = "eyeAMPref";
+                break;
+            case R.id.pendingKidney:
+                prefName = "kidneyAMPref";
+                break;
+            case R.id.pendingLiver:
+                prefName = "LiverAMPref";
+                break;
+            case R.id.pendingPancreas:
+                prefName = "pancreasAMPref";
+                break;
+            case R.id.pendingLungs:
+                prefName = "lungAMPref";
+                break;
+            case R.id.pendingIntestine:
+                prefName = "instestineAMPref";
+                break;
+            default:
+                prefName = "";
+        }
+        nameAGetter = this.getSharedPreferences(prefName, MODE_PRIVATE);
+
+        Map<String, Boolean> names = (Map<String, Boolean>) nameAGetter.getAll();
+        ArrayList<String> unames = new ArrayList<String>();
+        for(Map.Entry<String, Boolean> str : names.entrySet()) {
+            unames.add(str.getKey());
+        }
+
+        return unames;
+    }
+
+    @Override
+    public ArrayList<String> getNamesS(ArrayList<String> username) {
+        int i;
+        SharedPreferences Donor_name = this.getSharedPreferences("Name_data", MODE_PRIVATE);
+        ArrayList<String> name = new ArrayList<>();
+        for(i=0;i<username.size();i++) {
+            name.add(Donor_name.getString(username.get(i), "null"));
+        }
+        return name;
+    }
+
+    @Override
+    public void showDataS(String username, int id) {
+        String address = "", amount = "";
+        SharedPreferences AD, AM;
+        String prefName, am;
+        switch (id) {
+            case R.id.pendingHeart:
+                prefName = "heartAMPref";
+                am = "heartARPref";
+                break;
+            case R.id.pendingEye:
+                prefName = "eyeAMPref";
+                am = "eyeARPref";
+                break;
+            case R.id.pendingKidney:
+                prefName = "kidneyAMPref";
+                am = "kidneyARPref";
+                break;
+            case R.id.pendingLiver:
+                prefName = "LiverAMPref";
+                am = "LiverARPref";
+                break;
+            case R.id.pendingPancreas:
+                prefName = "pancreasAMPref";
+                am = "pancreasARPref";
+                break;
+            case R.id.pendingLungs:
+                prefName = "lungAMPref";
+                am = "lungAMPref";
+                break;
+            case R.id.pendingIntestine:
+                prefName = "instestineAMPref";
+                am = "instestineARPref";
+                break;
+            default:
+                prefName = "";
+                am = "";
+        }
+        AD = this.getSharedPreferences(am, MODE_PRIVATE);
+        AM = this.getSharedPreferences(prefName, MODE_PRIVATE);
+        address = AD.getString(username, "");
+        amount = AM.getString(username, "");
+
+        String message = "Address: " + address + "\nAmount" + amount;
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder
+                .setTitle("Donate_list info")
+                .setMessage(message)
+                .setCancelable(true)
+                .show();
     }
 
     @Override

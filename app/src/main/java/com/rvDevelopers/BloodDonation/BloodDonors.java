@@ -18,8 +18,6 @@ public class BloodDonors extends Fragment  {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
-    String UserName;
-
     private String mParam1;
     private String mParam2;
 
@@ -54,10 +52,6 @@ public class BloodDonors extends Fragment  {
         View view = inflater.inflate(R.layout.blood_donors, container, false);
 
         final ArrayList<String> donarUserName = mListener.getDonorUserNameList();
-//        ArrayList<String> donors = new ArrayList<>();
-//
-//        donors.add(mListener.donorName(UserName));
-//
         ListView listView = (ListView) view.findViewById(R.id.listview);
         ArrayAdapter<String> listViewAdapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_1, mListener.getNames(donarUserName));
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
