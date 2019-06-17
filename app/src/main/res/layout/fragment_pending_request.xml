@@ -7,6 +7,7 @@
     tools:context=".Profile">
 
     <TextView
+        android:id="@+id/h"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Heart"
@@ -20,6 +21,7 @@
         android:layout_height="wrap_content"/>
 
     <TextView
+        android:id="@+id/eye"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Eyes"
@@ -32,6 +34,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
     <TextView
+        android:id="@+id/kid"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Kidney"
@@ -45,6 +48,7 @@
         android:layout_height="wrap_content"/>
 
     <TextView
+        android:id="@+id/liver"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Liver"
@@ -58,6 +62,7 @@
         android:layout_height="wrap_content"/>
 
     <TextView
+        android:id="@+id/pancre"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Pancreas"
@@ -71,6 +76,7 @@
         android:layout_height="wrap_content"/>
 
     <TextView
+        android:id="@+id/lung"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Lungs"
@@ -84,6 +90,7 @@
         android:layout_height="wrap_content"/>
 
     <TextView
+        android:id="@+id/intes"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Intestine"

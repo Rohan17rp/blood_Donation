@@ -7,7 +7,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
-
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.GravityCompat;
@@ -16,7 +15,6 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -24,7 +22,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Map;
@@ -498,7 +495,7 @@ public class Profile extends AppCompatActivity implements ProfileFrag.OnFragment
         address = AD.getString(username, "");
         amount = AM.getString(username, "");
 
-        String message = "Address: " + address + "\nAmount" + amount;
+        String message = "Address: " + address + "\nAmount: " + amount;
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder
                 .setTitle("Donate_list info")
