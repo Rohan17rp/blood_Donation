@@ -51,7 +51,7 @@ public class Profile extends AppCompatActivity implements ProfileFrag.OnFragment
     NavigationView nv;
     Toolbar toolbar;
 
-    SharedPreferences heartPref, eyePref, kidneyPref, LiverPref, panPref, lungPref, intPref;
+    SharedPreferences heartPref, eyePref, kidneyPref, LiverPref, panPref, lungPref, intPref, platePref;
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -170,6 +170,7 @@ public class Profile extends AppCompatActivity implements ProfileFrag.OnFragment
         LiverPref = this.getSharedPreferences("LiverPref", MODE_PRIVATE);
         panPref = this.getSharedPreferences("pancreasPref", MODE_PRIVATE);
         lungPref = this.getSharedPreferences("lungPref", MODE_PRIVATE);
+        platePref = this.getSharedPreferences("plateletsPref", MODE_PRIVATE);
         intPref = this.getSharedPreferences("instestinePref", MODE_PRIVATE);
     }
 
@@ -371,6 +372,8 @@ public class Profile extends AppCompatActivity implements ProfileFrag.OnFragment
                 return "pancreasARPref";
             case "Lungs":
                 return "lungARPref";
+            case "Platelets":
+                return "plateARPref";
             case "Intestine":
                 return "instestineARPref";
         }
@@ -392,6 +395,8 @@ public class Profile extends AppCompatActivity implements ProfileFrag.OnFragment
                 return "pancreasARPref";
             case "Lungs":
                 return "lungARPref";
+            case "Platelets":
+                return "plateARPref";
             case "Intestine":
                 return "instestineARPref";
         }
@@ -447,6 +452,8 @@ public class Profile extends AppCompatActivity implements ProfileFrag.OnFragment
                 return "pancreasPref";
             case "Lungs":
                 return "lungPref";
+            case "Platelets":
+                return "platePref";
             case "Intestine":
                 return "instestinePref";
         }
