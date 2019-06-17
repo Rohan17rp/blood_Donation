@@ -9,7 +9,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 
 public class ReceiverFrag extends Fragment {
 
@@ -56,7 +55,7 @@ public class ReceiverFrag extends Fragment {
         Request.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mListener.submitRequest(address, date, amount);
+                mListener.submitRequest(address, amount);
             }
         });
         return v;
@@ -87,6 +86,6 @@ public class ReceiverFrag extends Fragment {
 
     public interface OnFragmentInteractionListener {
         void onFragmentInteraction(Uri uri);
-        void submitRequest(EditText address, EditText date, EditText amount);
+        void submitRequest(EditText address, EditText amount);
     }
 }

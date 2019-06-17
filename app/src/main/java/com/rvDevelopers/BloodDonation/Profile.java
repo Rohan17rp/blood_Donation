@@ -486,6 +486,9 @@ public class Profile extends AppCompatActivity implements ProfileFrag.OnFragment
                 prefName = "instestineAMPref";
                 am = "instestineARPref";
                 break;
+            case R.id.pendingBlood:
+                am = "BloodRequestA";
+                prefName = "BloodRequestAmount";
             default:
                 prefName = "";
                 am = "";
@@ -505,12 +508,25 @@ public class Profile extends AppCompatActivity implements ProfileFrag.OnFragment
     }
 
     @Override
-    public void submitRequest(EditText address, EditText date, EditText amount) {
+    public void submitRequest(EditText address, EditText amount) {
         SharedPreferences pref = this.getSharedPreferences("BloodRequestA", MODE_PRIVATE);
         SharedPreferences prefA = this.getSharedPreferences("BloodRequestAmount", MODE_PRIVATE);
         SharedPreferences.Editor editor, editor1;
         editor = pref.edit();
         editor1 = prefA.edit();
+        editor.putString(Uname, address.getText().toString());
+        editor1.putString(Uname, amount.getText().toString());
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                nv.setCheckedItem(R.id.profile);
+                getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.fragment_container, new ProfileFrag())
+                        .commit();
+            }
+        }, 1000);
     }
 
     @Override

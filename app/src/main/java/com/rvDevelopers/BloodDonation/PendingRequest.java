@@ -156,6 +156,22 @@ public class PendingRequest extends Fragment {
             textView.setVisibility(View.GONE);
         }
         listViewInt.setAdapter(IntAdapter);
+
+        final ArrayList<String> donarUserNameBlood = mListener.getDonorUserNameListS(R.id.pendingBlood);
+        ListView listViewBlo = v.findViewById(R.id.pendingBlood);
+        ArrayAdapter<String> BloAdapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_1, mListener.getNamesS(donarUserNameBlood));
+        listViewBlo.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                mListener.showDataS(donarUserNameBlood.get(position), R.id.pendingBlood);
+            }
+        });
+        if(donarUserNameInt.size() == 0) {
+            TextView textView = v.findViewById(R.id.blod);
+            textView.setVisibility(View.GONE);
+        }
+        listViewBlo.setAdapter(BloAdapter);
+
         return v;
     }
 
