@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -52,7 +53,7 @@ public class RequestOrgans extends Fragment {
     String organ;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         View v = inflater.inflate(R.layout.fragment_request_organs, container, false);
 
@@ -60,7 +61,7 @@ public class RequestOrgans extends Fragment {
         amount = v.findViewById(R.id.editText);
         Request = v.findViewById(R.id.button7);
         organ_selector = v.findViewById(R.id.spinner3);
-        CharSequence[] groups = { "Heart", "Eyes", "Kidney", "Liver", "Pancreas", "Lungs", "Platelets", "Intestine" };
+        CharSequence[] groups = { "Heart", "Eyes", "Kidney", "Liver", "Pancreas", "Lungs", "Intestine" };
         organ_type = new ArrayAdapter(this.getActivity(), android.R.layout.simple_spinner_item, groups);
         organ_type.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         organ_selector.setAdapter(organ_type);

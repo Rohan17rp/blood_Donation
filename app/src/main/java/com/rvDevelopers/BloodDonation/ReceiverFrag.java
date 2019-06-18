@@ -7,8 +7,11 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 
 public class ReceiverFrag extends Fragment {
 
@@ -22,6 +25,7 @@ public class ReceiverFrag extends Fragment {
 
     EditText address, date, amount;
     Button Request;
+    Spinner spinner;
 
     public ReceiverFrag() {
 
@@ -51,6 +55,21 @@ public class ReceiverFrag extends Fragment {
 
         address = v.findViewById(R.id.editText16);
         amount = v.findViewById(R.id.editText);
+        spinner = v.findViewById(R.id.spinner2);
+        CharSequence[] groups = { "A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-" };
+        ArrayAdapter<CharSequence> spinnerAdapter = new ArrayAdapter<>(this.getActivity(), android.R.layout.simple_spinner_item, groups);
+        spinner.setAdapter(spinnerAdapter);
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                mListener.saveBloodDonateData(parent.getItemAtPosition(position).toString());
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
         Request = v.findViewById(R.id.button7);
         Request.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -87,5 +106,6 @@ public class ReceiverFrag extends Fragment {
     public interface OnFragmentInteractionListener {
         void onFragmentInteraction(Uri uri);
         void submitRequest(EditText address, EditText amount);
+        void saveBloodDonateData(String s);
     }
 }

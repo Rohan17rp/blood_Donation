@@ -370,8 +370,6 @@ public class Profile extends AppCompatActivity implements ProfileFrag.OnFragment
                 return "pancreasARPref";
             case "Lungs":
                 return "lungARPref";
-            case "Platelets":
-                return "plateARPref";
             case "Intestine":
                 return "instestineARPref";
         }
@@ -393,8 +391,6 @@ public class Profile extends AppCompatActivity implements ProfileFrag.OnFragment
                 return "pancreasAMPref";
             case "Lungs":
                 return "lungAMPref";
-            case "Platelets":
-                return "plateAMPref";
             case "Intestine":
                 return "instestineAMPref";
         }
@@ -492,6 +488,7 @@ public class Profile extends AppCompatActivity implements ProfileFrag.OnFragment
             case R.id.pendingBlood:
                 am = "BloodRequestA";
                 prefName = "BloodRequestAmount";
+                break;
             default:
                 prefName = "";
                 am = "";
@@ -508,6 +505,33 @@ public class Profile extends AppCompatActivity implements ProfileFrag.OnFragment
                 .setMessage(message)
                 .setCancelable(true)
                 .show();
+    }
+
+    @Override
+    public void showBloodDataS(String username, int id) {
+        SharedPreferences AD,AM,T;
+        AD = this.getSharedPreferences("BloodRequestA", MODE_PRIVATE);
+        AM = this.getSharedPreferences("BloodRequestAmount", MODE_PRIVATE);
+        T = this.getSharedPreferences("Blood2Donate", MODE_PRIVATE);
+
+        String address = "", amount = "", type = "";
+        address = AD.getString(username, "");
+        amount = AM.getString(username, "");
+        type = T.getString(username, "");
+        String message = "Address: " + address + "\nAmount: " + amount + " ml\nType: " + type;
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder
+                .setTitle("Donate_list info")
+                .setMessage(message)
+                .setCancelable(true)
+                .show();
+    }
+
+    @Override
+    public void saveBloodDonateData(String s) {
+        SharedPreferences preferences = this.getSharedPreferences("Blood2Donate", MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putString(Uname, s).commit();
     }
 
     @Override
@@ -573,8 +597,6 @@ public class Profile extends AppCompatActivity implements ProfileFrag.OnFragment
                 return "pancreasPref";
             case "Lungs":
                 return "lungPref";
-            case "Platelets":
-                return "platePref";
             case "Intestine":
                 return "instestinePref";
         }

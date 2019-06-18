@@ -163,7 +163,7 @@ public class PendingRequest extends Fragment {
         listViewBlo.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                mListener.showDataS(donarUserNameBlood.get(position), R.id.pendingBlood);
+                mListener.showBloodDataS(donarUserNameBlood.get(position), R.id.pendingBlood);
             }
         });
         if(donarUserNameBlood.size() == 0) {
@@ -203,5 +203,6 @@ public class PendingRequest extends Fragment {
         ArrayList<String> getDonorUserNameListS(int id);
         ArrayList<String> getNamesS(ArrayList<String> username);
         void showDataS(String username, int id);
+        void showBloodDataS(String username, int id);
     }
 }
