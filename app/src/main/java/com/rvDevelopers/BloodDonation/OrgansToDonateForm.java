@@ -29,7 +29,6 @@ public class OrgansToDonateForm extends AppCompatActivity {
         LiverPref = this.getSharedPreferences("LiverPref", MODE_PRIVATE);
         panPref = this.getSharedPreferences("pancreasPref", MODE_PRIVATE);
         lungPref = this.getSharedPreferences("lungPref", MODE_PRIVATE);
-        platePref = this.getSharedPreferences("platePref",MODE_PRIVATE);
         intPref = this.getSharedPreferences("instestinePref", MODE_PRIVATE);
 
         heartEdit = heartPref.edit();
@@ -38,7 +37,6 @@ public class OrgansToDonateForm extends AppCompatActivity {
         livEdit = LiverPref.edit();
         panEdit = panPref.edit();
         lunEdit = lungPref.edit();
-        plateEdit = platePref.edit();
         intEdit = intPref.edit();
 
         heart = findViewById(R.id.checkBox);
@@ -47,7 +45,6 @@ public class OrgansToDonateForm extends AppCompatActivity {
         liv = findViewById(R.id.checkBox4);
         pan = findViewById(R.id.checkBox5);
         lung = findViewById(R.id.checkBox6);
-        plate = findViewById(R.id.checkBox7);
         inte = findViewById(R.id.checkBox8);
 
         heart.setChecked(heartPref.getBoolean(UserName, false));
@@ -56,7 +53,6 @@ public class OrgansToDonateForm extends AppCompatActivity {
         liv.setChecked(LiverPref.getBoolean(UserName, false));
         pan.setChecked(panPref.getBoolean(UserName, false));
         lung.setChecked(lungPref.getBoolean(UserName, false));
-        plate.setChecked(platePref.getBoolean(UserName,false));
         inte.setChecked(intPref.getBoolean(UserName, false));
     }
 
@@ -67,7 +63,6 @@ public class OrgansToDonateForm extends AppCompatActivity {
         livEdit.putBoolean(UserName, liv.isChecked()).commit();
         panEdit.putBoolean(UserName, pan.isChecked()).commit();
         lunEdit.putBoolean(UserName, lung.isChecked()).commit();
-        plateEdit.putBoolean(UserName,plate.isChecked()).commit();
         intEdit.putBoolean(UserName, inte.isChecked()).commit();
         onBackPressed();
     }

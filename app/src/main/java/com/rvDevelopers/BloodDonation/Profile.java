@@ -167,7 +167,6 @@ public class Profile extends AppCompatActivity implements ProfileFrag.OnFragment
         LiverPref = this.getSharedPreferences("LiverPref", MODE_PRIVATE);
         panPref = this.getSharedPreferences("pancreasPref", MODE_PRIVATE);
         lungPref = this.getSharedPreferences("lungPref", MODE_PRIVATE);
-        platePref = this.getSharedPreferences("plateletsPref", MODE_PRIVATE);
         intPref = this.getSharedPreferences("instestinePref", MODE_PRIVATE);
     }
 

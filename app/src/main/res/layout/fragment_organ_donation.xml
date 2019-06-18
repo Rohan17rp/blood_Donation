@@ -210,33 +210,6 @@
         </TableRow>
         <TableRow>
             <TextView
-                android:text="platelets"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_column="1"
-                android:padding="2dp"
-                android:id="@+id/textview22"
-                android:textAlignment="center"/>
-
-            <TextView
-                android:hint="Available Stock"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_column="1"
-                android:padding="2dp"
-                android:id="@+id/textview23"
-                android:text="23"/>
-            <TextView
-                android:hint="No. of Donors"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_column="1"
-                android:padding="2dp"
-                android:id="@+id/textview24"
-                android:text="23"/>
-        </TableRow>
-        <TableRow>
-            <TextView
                 android:text="Intestine"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

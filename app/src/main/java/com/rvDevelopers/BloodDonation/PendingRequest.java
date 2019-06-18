@@ -157,7 +157,7 @@ public class PendingRequest extends Fragment {
         }
         listViewInt.setAdapter(IntAdapter);
 
-        final ArrayList<String> donarUserNameBlood = mListener.getDonorUserNameListS(R.id.pendingBlood);
+              final ArrayList<String> donarUserNameBlood = mListener.getDonorUserNameListS(R.id.pendingBlood);
         ListView listViewBlo = v.findViewById(R.id.pendingBlood);
         ArrayAdapter<String> BloAdapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_1, mListener.getNamesS(donarUserNameBlood));
         listViewBlo.setOnItemClickListener(new AdapterView.OnItemClickListener() {
