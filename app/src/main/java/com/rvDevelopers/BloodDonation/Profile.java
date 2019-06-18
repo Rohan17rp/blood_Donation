@@ -427,6 +427,9 @@ public class Profile extends AppCompatActivity implements ProfileFrag.OnFragment
             case R.id.pendingIntestine:
                 prefName = "instestineAMPref";
                 break;
+            case R.id.pendingBlood:
+                prefName = "BloodRequestAmount";
+                break;
             default:
                 prefName = "";
         }
@@ -514,8 +517,9 @@ public class Profile extends AppCompatActivity implements ProfileFrag.OnFragment
         SharedPreferences.Editor editor, editor1;
         editor = pref.edit();
         editor1 = prefA.edit();
-        editor.putString(Uname, address.getText().toString());
-        editor1.putString(Uname, amount.getText().toString());
+        editor.putString(Uname, address.getText().toString()).commit();
+        editor1.putString(Uname, amount.getText().toString()).commit();
+
         Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
             @Override

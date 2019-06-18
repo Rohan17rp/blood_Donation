@@ -48,8 +48,8 @@ public class ReceiverFrag extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.receiver, container, false);
+
         address = v.findViewById(R.id.editText16);
-        date = v.findViewById(R.id.editText17);
         amount = v.findViewById(R.id.editText);
         Request = v.findViewById(R.id.button7);
         Request.setOnClickListener(new View.OnClickListener() {

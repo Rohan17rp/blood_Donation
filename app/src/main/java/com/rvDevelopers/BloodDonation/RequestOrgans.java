@@ -57,7 +57,6 @@ public class RequestOrgans extends Fragment {
         View v = inflater.inflate(R.layout.fragment_request_organs, container, false);
 
         address = v.findViewById(R.id.editText16);
-        date = v.findViewById(R.id.editText17);
         amount = v.findViewById(R.id.editText);
         Request = v.findViewById(R.id.button7);
         organ_selector = v.findViewById(R.id.spinner3);

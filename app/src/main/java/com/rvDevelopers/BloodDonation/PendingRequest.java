@@ -166,7 +166,7 @@ public class PendingRequest extends Fragment {
                 mListener.showDataS(donarUserNameBlood.get(position), R.id.pendingBlood);
             }
         });
-        if(donarUserNameInt.size() == 0) {
+        if(donarUserNameBlood.size() == 0) {
             TextView textView = v.findViewById(R.id.blod);
             textView.setVisibility(View.GONE);
         }
