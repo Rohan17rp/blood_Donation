@@ -5,6 +5,8 @@
     android:layout_height="match_parent"
     tools:context=".Contact">
 
+    <!-- TODO: Delete This -->
+
     <TextView
         android:id="@+id/editText8"
         android:layout_width="wrap_content"

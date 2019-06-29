@@ -5,7 +5,8 @@
     android:layout_height="match_parent"
     tools:context=".AvailableBlood">
 
-    <!-- TODO: Update database -->
+    <!-- TODO: Put it in tab 1 after merging lists after clicking Stock -->
+
 
     <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"

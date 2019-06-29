@@ -5,6 +5,8 @@
     android:layout_height="match_parent"
     tools:context=".Profile">
 
+    <!-- TODO: Put it in tab 1 after merging lists of donors -->
+
     <ListView
         android:id="@+id/listview"
         android:layout_width="match_parent"

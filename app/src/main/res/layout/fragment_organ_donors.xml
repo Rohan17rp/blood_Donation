@@ -6,6 +6,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     tools:context=".Profile">
+
+    <!-- TODO: Put it in tab 2 after merging lists of donors which opens on clicking Become a donor  -->
+
     <Spinner
         android:id="@+id/spinner"
         android:layout_width="match_parent"

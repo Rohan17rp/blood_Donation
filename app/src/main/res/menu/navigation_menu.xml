@@ -3,31 +3,23 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:showIn="navigation_view">
-    <group>
+
+    <!-- TODO: Assign appropriate calls for them from profile -->
+
         <item android:id="@+id/profile"
             android:icon="@drawable/ic_person"
-            android:title="Profile" />
+            android:title="Profile"/>
         <item android:id="@+id/pending_requests"
             android:icon="@drawable/ic_person"
-            android:title="Pending Requests" />
-    </group>
-    <group>
-        <item android:id="@+id/cart"
+            android:title="Pending Requests"/>
+        <item android:id="@+id/request"
             android:icon="@drawable/cart"
-            android:title="Request Blood"/>
-        <item android:id="@+id/request_organs"
-            android:icon="@drawable/cart"
-            android:title="Request Organs"/>
-    </group>
-    <group>
-        <item android:id="@+id/organ_donate"
+            android:title="Request"/>
+
+        <item android:id="@+id/donate"
             android:icon="@drawable/donate"
-            android:title="Organ Donate" />
-        <item android:id="@+id/blood_donate"
-            android:icon="@drawable/donate"
-            android:title="Blood Donate" />
-    </group>
-    <group>
+            android:title="Donate" />
+
         <item android:id="@+id/help"
             android:icon="@drawable/help"
             android:title="Help"/>
@@ -35,14 +27,13 @@
             android:icon="@drawable/about"
             android:title="About"/>
         <item android:id="@+id/tnc"
-        android:title="Terms and Conditions"/>
-    </group>
-    <group>
+            android:icon="@drawable/tnc"
+            android:title="Terms and Conditions"/>
+
         <item android:id="@+id/logout"
             android:icon="@drawable/exit"
             android:title="Logout" />
         <item android:id="@+id/exit"
             android:icon="@drawable/cross"
             android:title="Exit"/>
-    </group>
 </menu>
