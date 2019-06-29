@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".Profile">
+
+    <TextView
+        android:id="@+id/h"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Heart"
+        android:textSize="20sp"
+        android:textColor="@android:color/black"
+        android:gravity="center_horizontal"/>
+
+    <ListView
+        android:id="@+id/pendingHeart"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:id="@+id/eye"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Eyes"
+        android:textSize="20sp"
+        android:textColor="@android:color/black"
+        android:gravity="center_horizontal"/>
+
+    <ListView
+        android:id="@+id/pendingEye"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+    <TextView
+        android:id="@+id/kid"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Kidney"
+        android:textSize="20sp"
+        android:textColor="@android:color/black"
+        android:gravity="center_horizontal"/>
+
+    <ListView
+        android:id="@+id/pendingKidney"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:id="@+id/liver"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Liver"
+        android:textSize="20sp"
+        android:textColor="@android:color/black"
+        android:gravity="center_horizontal"/>
+
+    <ListView
+        android:id="@+id/pendingLiver"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:id="@+id/pancre"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Pancreas"
+        android:textSize="20sp"
+        android:textColor="@android:color/black"
+        android:gravity="center_horizontal"/>
+
+    <ListView
+        android:id="@+id/pendingPancreas"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:id="@+id/lung"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Lungs"
+        android:textSize="20sp"
+        android:textColor="@android:color/black"
+        android:gravity="center_horizontal"/>
+
+    <ListView
+        android:id="@+id/pendingLungs"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:id="@+id/intes"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Intestine"
+        android:textSize="20sp"
+        android:textColor="@android:color/black"
+        android:gravity="center_horizontal"/>
+
+    <ListView
+        android:id="@+id/pendingIntestine"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+    <TextView
+        android:id="@+id/blod"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Blood"
+        android:textColor="@android:color/black"
+        android:textSize="20sp"
+        android:gravity="center_horizontal"/>
+    <ListView
+        android:id="@+id/pendingBlood"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+</LinearLayout>

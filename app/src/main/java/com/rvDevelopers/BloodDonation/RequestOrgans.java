@@ -1,6 +1,7 @@
 package com.rvDevelopers.BloodDonation;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -8,28 +9,31 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.Spinner;
 
-public class LoginFrag extends Fragment {
+public class RequestOrgans extends Fragment {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
     private String mParam1;
     private String mParam2;
 
-    EditText username, password;
-    Button login, exit;
-    CheckBox checkBox;
     private OnFragmentInteractionListener mListener;
 
-    public LoginFrag() {
-        // Required empty public constructor
+    EditText address, date, amount;
+    Button Request;
+    Spinner organ_selector;
+    ArrayAdapter<CharSequence> organ_type;
+
+    public RequestOrgans() {
     }
 
-    public static LoginFrag newInstance(String param1, String param2) {
-        LoginFrag fragment = new LoginFrag();
+    public static RequestOrgans newInstance(String param1, String param2) {
+        RequestOrgans fragment = new RequestOrgans();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -46,24 +50,36 @@ public class LoginFrag extends Fragment {
         }
     }
 
+    String organ;
+
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.login_fragment, container, false);
-        username = v.findViewById(R.id.editText);
-        password = v.findViewById(R.id.editText2);
-        login = v.findViewById(R.id.button);
-        exit = v.findViewById(R.id.button2);
-        checkBox = v.findViewById(R.id.checkBox2);
-        login.setOnClickListener(new View.OnClickListener() {
+
+        View v = inflater.inflate(R.layout.fragment_request_organs, container, false);
+
+        address = v.findViewById(R.id.editText16);
+        amount = v.findViewById(R.id.editText);
+        Request = v.findViewById(R.id.button7);
+        organ_selector = v.findViewById(R.id.spinner3);
+        CharSequence[] groups = { "Heart", "Eyes", "Kidney", "Liver", "Pancreas", "Lungs", "Intestine" };
+        organ_type = new ArrayAdapter(this.getActivity(), android.R.layout.simple_spinner_item, groups);
+        organ_type.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        organ_selector.setAdapter(organ_type);
+        organ_selector.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
-            public void onClick(View v) {
-                mListener.Login(username, password, checkBox);
+            public void onItemSelected(final AdapterView<?> parent, View view, final int position, long id) {
+                organ = parent.getItemAtPosition(position).toString();
+                Request.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        mListener.submitRequest(address, amount, organ_selector, parent, position);
+                    }
+                });
             }
-        });
-        exit.setOnClickListener(new View.OnClickListener() {
+
             @Override
-            public void onClick(View v) {
-                mListener.Exit();
+            public void onNothingSelected(AdapterView<?> parent) {
+
             }
         });
         return v;
@@ -94,7 +110,8 @@ public class LoginFrag extends Fragment {
 
     public interface OnFragmentInteractionListener {
         void onFragmentInteraction(Uri uri);
-        void Login(EditText username, EditText password, CheckBox checkBox);
-        void Exit();
+        void submitRequest(EditText address, EditText amount, Spinner organ_selector, AdapterView<?> parent, int position);
+        String getPrefName(AdapterView<?> parent, int position);
+        String getAMPrefName(AdapterView<?> parent, int position);
     }
 }

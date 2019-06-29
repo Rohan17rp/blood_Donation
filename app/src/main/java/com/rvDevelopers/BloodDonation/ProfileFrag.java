@@ -4,32 +4,33 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.CheckBox;
-import android.widget.EditText;
+import android.widget.TextView;
 
-public class LoginFrag extends Fragment {
+public class ProfileFrag extends Fragment {
+
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
     private String mParam1;
     private String mParam2;
 
-    EditText username, password;
-    Button login, exit;
-    CheckBox checkBox;
+    TextView welcome;
+    TextView name ,uname, blood, email, donationCheckBox;
+    Button edit, organDonate;
     private OnFragmentInteractionListener mListener;
 
-    public LoginFrag() {
-        // Required empty public constructor
+    public ProfileFrag() {
+
     }
 
-    public static LoginFrag newInstance(String param1, String param2) {
-        LoginFrag fragment = new LoginFrag();
+    public static ProfileFrag newInstance(String param1, String param2) {
+        ProfileFrag fragment = new ProfileFrag();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -48,25 +49,34 @@ public class LoginFrag extends Fragment {
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.login_fragment, container, false);
-        username = v.findViewById(R.id.editText);
-        password = v.findViewById(R.id.editText2);
-        login = v.findViewById(R.id.button);
-        exit = v.findViewById(R.id.button2);
-        checkBox = v.findViewById(R.id.checkBox2);
-        login.setOnClickListener(new View.OnClickListener() {
+        View v = inflater.inflate(R.layout.fragment_profile, container, false);
+        name = v.findViewById(R.id.textNameShow);
+        uname = v.findViewById(R.id.textUserNameShow);
+        blood = v.findViewById(R.id.textBloodGroupShow);
+        email = v.findViewById(R.id.textEmailShow);
+        welcome = v.findViewById(R.id.textView);
+        edit = v.findViewById(R.id.button8);
+        organDonate = v.findViewById(R.id.button5);
+        donationCheckBox = v.findViewById(R.id.textDonarStatus);
+        edit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mListener.Login(username, password, checkBox);
+                mListener.EditProfile();
             }
         });
-        exit.setOnClickListener(new View.OnClickListener() {
+        organDonate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mListener.Exit();
+                mListener.organDonateForm();
             }
         });
         return v;
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        mListener.showData(name, uname, blood, email, donationCheckBox, welcome);
     }
 
     public void onButtonPressed(Uri uri) {
@@ -94,7 +104,9 @@ public class LoginFrag extends Fragment {
 
     public interface OnFragmentInteractionListener {
         void onFragmentInteraction(Uri uri);
-        void Login(EditText username, EditText password, CheckBox checkBox);
-        void Exit();
+        void showData(TextView name ,TextView uname, TextView blood, TextView email, TextView donationCheckBox, TextView welcome);
+        void EditProfile();
+        void organDonateForm();
     }
+
 }

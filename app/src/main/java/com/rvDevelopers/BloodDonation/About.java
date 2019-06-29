@@ -7,8 +7,10 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.TextView;
 
-public class AvailableBlood extends Fragment {
+public class About extends Fragment {
 
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
@@ -18,12 +20,12 @@ public class AvailableBlood extends Fragment {
 
     private OnFragmentInteractionListener mListener;
 
-    public AvailableBlood() {
+    public About() {
 
     }
 
-    public static AvailableBlood newInstance(String param1, String param2) {
-        AvailableBlood fragment = new AvailableBlood();
+    public static About newInstance(String param1, String param2) {
+        About fragment = new About();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -42,7 +44,10 @@ public class AvailableBlood extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.available_blood, container, false);
+        View v = inflater.inflate(R.layout.about, container, false);
+        TextView About = v.findViewById(R.id.about_page);
+        About.setText("\tIt is a app used for blood as well as organ donation\n\tBy\n\tRohan Patil\n\tVed Patil\n");
+        return v;
     }
 
     public void onButtonPressed(Uri uri) {

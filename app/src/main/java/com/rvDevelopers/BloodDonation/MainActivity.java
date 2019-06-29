@@ -11,6 +11,7 @@ import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -23,8 +24,8 @@ public class MainActivity extends AppCompatActivity implements LoginFrag.OnFragm
     TabLayout tabLayout;
 
     SharedPreferences pref;
-    SharedPreferences sign_up, contact_no, contact_email, customer_name, user_blood, user_age;
-    SharedPreferences.Editor login_editor, contact_editor, email_editor, name_editor, blood_editor, age_editor;
+    SharedPreferences sign_up, contact_no, contact_email, customer_name, user_blood, user_age, previous_user;
+    SharedPreferences.Editor login_editor, contact_editor, email_editor, name_editor, blood_editor, age_editor, previous_editor;
 
     ArrayAdapter<CharSequence> blood_type;
 
@@ -33,10 +34,20 @@ public class MainActivity extends AppCompatActivity implements LoginFrag.OnFragm
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_activity);
 
+        previous_user = this.getSharedPreferences("SignedInPref", MODE_PRIVATE);
+        previous_editor = previous_user.edit();
+
         pref = this.getSharedPreferences("Sign_upData", MODE_PRIVATE);
 
         sign_up = this.getSharedPreferences("Sign_upData", MODE_PRIVATE);
         login_editor = sign_up.edit();
+
+        if(previous_user.getBoolean("is", false)) {
+            Intent category = new Intent(this, Profile.class);
+            category.putExtra("uname", previous_user.getString("name", "user"));
+            startActivity(category);
+            endActivity();
+        }
 
         contact_no = this.getSharedPreferences("Contact_no", MODE_PRIVATE);
         contact_editor = contact_no.edit();
@@ -162,10 +173,13 @@ public class MainActivity extends AppCompatActivity implements LoginFrag.OnFragm
     }
 
     @Override
-    public void Login(EditText username, EditText password) {
+    public void Login(EditText username, EditText password, CheckBox checkBox) {
         String UserName = username.getText().toString();
         String Password = password.getText().toString();
         if (CheckCredential(UserName, Password)) {
+            previous_editor.putString("name", UserName);
+            previous_editor.putBoolean("is", checkBox.isChecked());
+            previous_editor.commit();
             Intent category = new Intent(this, Profile.class);
             category.putExtra("uname", UserName);
             startActivity(category);

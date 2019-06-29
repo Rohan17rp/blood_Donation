@@ -3,30 +3,46 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:showIn="navigation_view">
-    <group android:checkableBehavior="single">
-        <item android:id="@+id/edit"
-            android:icon="@drawable/edit"
-            android:title="Edit Profile" />
-        <item android:id="@+id/hospitals"
-            android:icon="@drawable/hospital"
-            android:title="Hospitals"/>
+    <group>
+        <item android:id="@+id/profile"
+            android:icon="@drawable/ic_person"
+            android:title="Profile" />
+        <item android:id="@+id/pending_requests"
+            android:icon="@drawable/ic_person"
+            android:title="Pending Requests" />
+    </group>
+    <group>
         <item android:id="@+id/cart"
             android:icon="@drawable/cart"
-            android:title="Request"/>
+            android:title="Request Blood"/>
+        <item android:id="@+id/request_organs"
+            android:icon="@drawable/cart"
+            android:title="Request Organs"/>
+    </group>
+    <group>
         <item android:id="@+id/organ_donate"
             android:icon="@drawable/donate"
             android:title="Organ Donate" />
         <item android:id="@+id/blood_donate"
             android:icon="@drawable/donate"
             android:title="Blood Donate" />
+    </group>
+    <group>
         <item android:id="@+id/help"
             android:icon="@drawable/help"
             android:title="Help"/>
         <item android:id="@+id/about"
             android:icon="@drawable/about"
             android:title="About"/>
-        <item android:id="@+id/exit"
+        <item android:id="@+id/tnc"
+        android:title="Terms and Conditions"/>
+    </group>
+    <group>
+        <item android:id="@+id/logout"
             android:icon="@drawable/exit"
+            android:title="Logout" />
+        <item android:id="@+id/exit"
+            android:icon="@drawable/cross"
             android:title="Exit"/>
     </group>
 </menu>

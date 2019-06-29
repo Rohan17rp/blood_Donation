@@ -3,10 +3,12 @@ package com.rvDevelopers.BloodDonation;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.NonNull;
-
 import android.support.design.widget.NavigationView;
+import android.support.design.widget.TabLayout;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -15,21 +17,30 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
-public class Profile extends AppCompatActivity {
+import java.util.ArrayList;
+import java.util.Map;
+
+public class Profile extends AppCompatActivity implements ProfileFrag.OnFragmentInteractionListener,
+        Help.helpListner, BloodBankFrag.OnFragmentInteractionListener, AvailableBlood.OnFragmentInteractionListener,
+        BloodDonors.OnFragmentInteractionListener, ReceiverFrag.OnFragmentInteractionListener,
+        About.OnFragmentInteractionListener, OrganDonors.OnFragmentInteractionListener,
+        OrganBank.OnFragmentInteractionListener,OrganDonationFrag.OnFragmentInteractionListener,
+        RequestOrgans.OnFragmentInteractionListener, PendingRequest.OnFragmentInteractionListener,
+        TermsAndConditions.OnFragmentInteractionListener {
 
     TextView welcome;
     int age;
     String Message, Name, Uname, Blood, Email;
     Intent category;
-    SharedPreferences age_pref, name_pref, blood_pref, email_pref, donarList_pref;
+    SharedPreferences age_pref, name_pref, blood_pref, email_pref, donarList_pref, prev_user;
+    SharedPreferences.Editor prev_editor;
     Button donate;
-    TextView name ,uname, blood, email, donationCheckBox;
-    TextView About,help;
-    Intent edit;
 
     boolean check;
 
@@ -38,58 +49,96 @@ public class Profile extends AppCompatActivity {
     NavigationView nv;
     Toolbar toolbar;
 
+    SharedPreferences heartPref, eyePref, kidneyPref, LiverPref, panPref, lungPref, intPref, platePref;
+
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.profile);
+
+        prev_user = this.getSharedPreferences("SignedInPref", MODE_PRIVATE);
+        prev_editor = prev_user.edit();
 
         toolbar = findViewById(R.id.toolbar);
         dl = findViewById(R.id.drawerLayout);
         t = new ActionBarDrawerToggle(this, dl, toolbar, R.string.open, R.string.close);
         dl.addDrawerListener(t);
         t.syncState();
-//        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
         setSupportActionBar(toolbar);
         nv = findViewById(R.id.nv);
+
+        if(savedInstanceState == null) {
+            nv.setCheckedItem(R.id.profile);
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.fragment_container, new ProfileFrag())
+                    .commit();
+        }
 
         nv.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 int id = item.getItemId();
                 switch (id) {
-                    case R.id.edit:
-                        EditProfile(findViewById(R.id.editText9));
-                        Toast.makeText(Profile.this, "Edit Account", Toast.LENGTH_SHORT).show();
+                    case R.id.profile:
+                        getSupportFragmentManager()
+                                .beginTransaction()
+                                .replace(R.id.fragment_container, new ProfileFrag())
+                                .commit();
                         break;
-                    case R.id.hospitals:
-                        Toast.makeText(Profile.this, "Hospitals", Toast.LENGTH_SHORT).show();
+                    case R.id.pending_requests:
+                        getSupportFragmentManager()
+                                .beginTransaction()
+                                .replace(R.id.fragment_container, new PendingRequest())
+                                .commit();
                         break;
                     case R.id.cart:
-                        receiver(findViewById(R.id.editText9));
-                        Toast.makeText(Profile.this, "Request", Toast.LENGTH_SHORT).show();
+                        getSupportFragmentManager()
+                                .beginTransaction()
+                                .replace(R.id.fragment_container, new ReceiverFrag())
+                                .commit();
+                        break;
+                    case R.id.request_organs:
+                        getSupportFragmentManager()
+                                .beginTransaction()
+                                .replace(R.id.fragment_container, new RequestOrgans())
+                                .commit();
                         break;
                     case R.id.organ_donate:
-                        donate_list(findViewById(R.id.editText9));
-                        Toast.makeText(Profile.this, "Organ Donation", Toast.LENGTH_SHORT).show();
+                        getSupportFragmentManager()
+                                .beginTransaction()
+                                .replace(R.id.fragment_container, new OrganDonationFrag())
+                                .commit();
+
                         break;
                     case R.id.blood_donate:
-                        Test(findViewById(R.id.editText9));
-                        Toast.makeText(Profile.this, "Blood Donation", Toast.LENGTH_SHORT).show();
+                        getSupportFragmentManager()
+                                .beginTransaction()
+                                .replace(R.id.fragment_container, new BloodBankFrag())
+                                .commit();
                         break;
                     case R.id.help:
-                        setContentView(R.layout.help);
-                        help = findViewById(R.id.help_page);
-                        help .setText("\nFor help Call on Helpline no \nHelpline No. : XXXXXXXXXX\nOr mail us on \nMail Id : XXXXX@XXXXX.XX");
-                        Toast.makeText(Profile.this, "Help", Toast.LENGTH_SHORT).show();
+                        getSupportFragmentManager()
+                                .beginTransaction()
+                                .replace(R.id.fragment_container, new Help())
+                                .commit();
                         break;
                     case R.id.about:
-                        setContentView(R.layout.about);
-                        About = findViewById(R.id.about_page);
-                        About.setText("It is a app used for blood as well as organ donation\nBy\nRohan Patil\tVed Patil\n");
-                        Toast.makeText(Profile.this, "About", Toast.LENGTH_SHORT).show();
+                        getSupportFragmentManager()
+                                .beginTransaction()
+                                .replace(R.id.fragment_container, new About())
+                                .commit();
+                        break;
+                    case R.id.tnc:
+                        getSupportFragmentManager()
+                                .beginTransaction()
+                                .replace(R.id.fragment_container, new TermsAndConditions())
+                                .commit();
+                        break;
+                    case R.id.logout:
+                        logout();
                         break;
                     case R.id.exit:
-                    Toast.makeText(Profile.this, "You have been successfully logged out", Toast.LENGTH_SHORT).show();
-                        logout();
+                        exit();
                         break;
                     default:
                         return true;
@@ -114,85 +163,86 @@ public class Profile extends AppCompatActivity {
         Email = email_pref.getString(Uname, "No Mail ID");
         Name = name_pref.getString(Uname, "user");
         Message += Name;
-        welcome.setText(Message);
 
         check = donarList_pref.getBoolean(Uname, false);
         age = age_pref.getInt(Uname, 0);
         donate = findViewById(R.id.button);
 
-        name = findViewById(R.id.textNameShow);
-        uname = findViewById(R.id.textUserNameShow);
-        blood = findViewById(R.id.textBloodGroupShow);
-        email = findViewById(R.id.textEmailShow);
-        donationCheckBox = findViewById(R.id.textDonarStatus);
-
-        name.setText(Name);
-        uname.setText(Uname);
-        blood.setText(Blood);
-        email.setText(Email);
-        if(check) {
-            donationCheckBox.setText("Yes");
-        } else {
-            donationCheckBox.setText("No");
-        }
+        heartPref = this.getSharedPreferences("heartPref", MODE_PRIVATE);
+        eyePref = this.getSharedPreferences("eyePref", MODE_PRIVATE);
+        kidneyPref = this.getSharedPreferences("kidneyPref", MODE_PRIVATE);
+        LiverPref = this.getSharedPreferences("LiverPref", MODE_PRIVATE);
+        panPref = this.getSharedPreferences("pancreasPref", MODE_PRIVATE);
+        lungPref = this.getSharedPreferences("lungPref", MODE_PRIVATE);
+        intPref = this.getSharedPreferences("instestinePref", MODE_PRIVATE);
     }
 
-    public void EditProfile(View view) {
+    public void logout() {
+        new AlertDialog.Builder(this)
+                .setTitle("Warning")
+                .setMessage("Are you sure you want to logout?")
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Back();
+                    }
+                })
+                .setNegativeButton("No", null)
+                .setCancelable(true)
+                .show();
+    }
+
+    public void Back() {
+        prev_editor.putBoolean("is", false);
+        prev_editor.commit();
+        startActivity(new Intent(this, MainActivity.class));
+        finish();
+    }
+
+    @Override
+    public void EditProfile() {
         Intent edit = new Intent(this, EditProfile.class);
         edit.putExtra("uname", Uname);
         startActivity(edit);
         finish();
     }
 
-    public void receiver(View view){
-        Intent request = new Intent(this, Receiver.class);
-        startActivity(request);
-        Profile.this.finish();
+    @Override
+    public void organDonateForm() {
+        Intent edit = new Intent(this, OrgansToDonateForm.class);
+        edit.putExtra("uname", Uname);
+        startActivity(edit);
+        finish();
     }
+
     public void donate_list(View view){
         Intent donate = new Intent(this, Donate_list.class);
         startActivity(donate);
         Profile.this.finish();
     }
-    /*public void donor(View d){
-        if(age >= 18 && age <= 60) {
-            Intent Donate_list = new Intent(this, donor.class);
-            startActivity(Donate_list);
-            Profile.this.finish();
-        } else {
-            Toast
-                    .makeText(this, "To donate blood age should be between 18 and 60", Toast.LENGTH_LONG)
-                    .show();
-        }
-    }*/
+
     @Override
     public void onBackPressed() {
         if(dl.isDrawerOpen(GravityCompat.START)) {
             dl.closeDrawer(GravityCompat.START);
         } else {
-            new AlertDialog.Builder(this)
-                    .setMessage("Are you sure you want to logout")
-                    .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            logout();
-                        }
-                    })
-                    .setNegativeButton("No", null)
-                    .setCancelable(true)
-                    .show();
+            logout();
         }
     }
 
-    public void logout() {
-        startActivity(new Intent(this, MainActivity.class));
-        finish();
-    }
-    public void Test(View view) {
-        Intent category = new Intent(this, BloodBank.class);
-        category.putExtra("uname", Uname);
-        startActivity(category);
-        Profile.this.finish();
+    public void exit() {
+        new AlertDialog.Builder(this)
+                .setMessage("Warning")
+                .setMessage("Do you want to exit")
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        finish();
+                    }
+                })
+                .setNegativeButton("No", null)
+                .setCancelable(true)
+                .show();
     }
 
     @Override
@@ -205,6 +255,36 @@ public class Profile extends AppCompatActivity {
     public void Cancel(View view) {
         savedata();
     }
+
+    @Override
+    public void onFragmentInteraction(Uri uri) {
+
+    }
+
+    @Override
+    public BloodBank_PagerAdapter getPagerAdapter(TabLayout tabLayout) {
+        return new BloodBank_PagerAdapter(getSupportFragmentManager(),tabLayout.getTabCount());
+    }
+
+    public OrganDonation_PagerAdapter getPagerAdapter1(TabLayout tabLayout) {
+        return new OrganDonation_PagerAdapter(getSupportFragmentManager(),tabLayout.getTabCount());
+    }
+
+    @Override
+    public void showData(TextView name ,TextView uname, TextView blood, TextView email, TextView donationCheckBox, TextView welcome) {
+        name.setText(Name);
+        uname.setText(Uname);
+        blood.setText(Blood);
+        email.setText(Email);
+        if(check) {
+            donationCheckBox.setText("Yes");
+        } else {
+            donationCheckBox.setText("No");
+        }
+
+        welcome.setText(Message);
+    }
+
     public void savedata() {
         Intent category = new Intent(this, Profile.class);
         category.putExtra("uname", Uname);
@@ -212,4 +292,321 @@ public class Profile extends AppCompatActivity {
         finish();
     }
 
+    @Override
+    public String donorName(String UserName) {
+        SharedPreferences pref = this.getSharedPreferences("Name_data", MODE_PRIVATE);
+        String Donor_name = pref.getString(UserName,"null");
+        return (Donor_name);
+    }
+
+    @Override
+    public ArrayList<String> getDonorUserNameList() {
+        Map<String, Boolean> donorNames = (Map<String, Boolean>) donarList_pref.getAll();
+        ArrayList<String> names = new ArrayList<>();
+        for(Map.Entry<String, Boolean> stringMap : donorNames.entrySet()) {
+            if(stringMap.getValue()) {
+                names.add(stringMap.getKey());
+            }
+        }
+        return names;
+    }
+
+    @Override
+    public ArrayList<String> getNames(ArrayList<String> username) {
+        int i;
+        SharedPreferences Donor_name = this.getSharedPreferences("Name_data", MODE_PRIVATE);
+        ArrayList<String> name = new ArrayList<>();
+        for(i=0;i<username.size();i++) {
+            name.add(Donor_name.getString(username.get(i), "null"));
+        }
+        return name;
+    }
+
+    @Override
+    public void showData(String username) {
+        String bloodGroup = blood_pref.getString(username, "");
+        SharedPreferences contact_pref = this.getSharedPreferences("Contact_no", MODE_PRIVATE);
+        String contact = contact_pref.getString(username, "");
+        String email = email_pref.getString(username, "");
+        age = age_pref.getInt(username, 0);
+
+        String message = "Blood group: "+bloodGroup+"\nAge:"+age+"\nContact number:"+contact+"\nEmail id:"+email;
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder
+                .setTitle("Donate_list info")
+                .setMessage(message)
+                .setCancelable(true)
+                .show();
+    }
+
+    @Override
+    public void submitRequest(EditText address, EditText amount, Spinner organ_selector, AdapterView<?> parent, int position) {
+
+        SharedPreferences prefA = this.getSharedPreferences(getPrefName(parent, position), MODE_PRIVATE);
+        SharedPreferences.Editor editor = prefA.edit();
+        SharedPreferences pref = this.getSharedPreferences(getAMPrefName(parent, position), MODE_PRIVATE);
+        SharedPreferences.Editor am = pref.edit();
+        editor.putString(Uname, address.getText().toString()).commit();
+        am.putString(Uname, amount.getText().toString()).commit();
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                nv.setCheckedItem(R.id.profile);
+                getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.fragment_container, new ProfileFrag())
+                        .commit();
+            }
+        }, 1000);
+    }
+
+    @Override
+    public String getPrefName(AdapterView<?> parent, int position) {
+        switch (parent.getItemAtPosition(position).toString()) {
+            case "Heart":
+                return "heartARPref";
+            case "Eyes":
+                return "eyeARPref";
+            case "Kidney":
+                return "kidneyARPref";
+            case "Liver":
+                return "LiverARPref";
+            case "Pancreas":
+                return "pancreasARPref";
+            case "Lungs":
+                return "lungARPref";
+            case "Intestine":
+                return "instestineARPref";
+        }
+        return null;
+    }
+
+    @Override
+    public String getAMPrefName(AdapterView<?> parent, int position) {
+        switch (parent.getItemAtPosition(position).toString()) {
+            case "Heart":
+                return "heartAMPref";
+            case "Eyes":
+                return "eyeAMPref";
+            case "Kidney":
+                return "kidneyAMPref";
+            case "Liver":
+                return "LiverAMPref";
+            case "Pancreas":
+                return "pancreasAMPref";
+            case "Lungs":
+                return "lungAMPref";
+            case "Intestine":
+                return "instestineAMPref";
+        }
+        return null;
+    }
+
+    @Override
+    public ArrayList<String> getDonorUserNameListS(int id) {
+        SharedPreferences nameAGetter;
+        String prefName = "";
+        switch (id) {
+            case R.id.pendingHeart:
+                prefName = "heartAMPref";
+                break;
+            case R.id.pendingEye:
+                prefName = "eyeAMPref";
+                break;
+            case R.id.pendingKidney:
+                prefName = "kidneyAMPref";
+                break;
+            case R.id.pendingLiver:
+                prefName = "LiverAMPref";
+                break;
+            case R.id.pendingPancreas:
+                prefName = "pancreasAMPref";
+                break;
+            case R.id.pendingLungs:
+                prefName = "lungAMPref";
+                break;
+            case R.id.pendingIntestine:
+                prefName = "instestineAMPref";
+                break;
+            case R.id.pendingBlood:
+                prefName = "BloodRequestAmount";
+                break;
+            default:
+                prefName = "";
+        }
+        nameAGetter = this.getSharedPreferences(prefName, MODE_PRIVATE);
+
+        Map<String, Boolean> names = (Map<String, Boolean>) nameAGetter.getAll();
+        ArrayList<String> unames = new ArrayList<String>();
+        for(Map.Entry<String, Boolean> str : names.entrySet()) {
+            unames.add(str.getKey());
+        }
+
+        return unames;
+    }
+
+    @Override
+    public ArrayList<String> getNamesS(ArrayList<String> username) {
+        int i;
+        SharedPreferences Donor_name = this.getSharedPreferences("Name_data", MODE_PRIVATE);
+        ArrayList<String> name = new ArrayList<>();
+        for(i=0;i<username.size();i++) {
+            name.add(Donor_name.getString(username.get(i), "null"));
+        }
+        return name;
+    }
+
+    @Override
+    public void showDataS(String username, int id) {
+        String address = "", amount = "";
+        SharedPreferences AD, AM;
+        String prefName, am;
+        switch (id) {
+            case R.id.pendingHeart:
+                prefName = "heartAMPref";
+                am = "heartARPref";
+                break;
+            case R.id.pendingEye:
+                prefName = "eyeAMPref";
+                am = "eyeARPref";
+                break;
+            case R.id.pendingKidney:
+                prefName = "kidneyAMPref";
+                am = "kidneyARPref";
+                break;
+            case R.id.pendingLiver:
+                prefName = "LiverAMPref";
+                am = "LiverARPref";
+                break;
+            case R.id.pendingPancreas:
+                prefName = "pancreasAMPref";
+                am = "pancreasARPref";
+                break;
+            case R.id.pendingLungs:
+                prefName = "lungAMPref";
+                am = "lungAMPref";
+                break;
+            case R.id.pendingIntestine:
+                prefName = "instestineAMPref";
+                am = "instestineARPref";
+                break;
+            case R.id.pendingBlood:
+                am = "BloodRequestA";
+                prefName = "BloodRequestAmount";
+                break;
+            default:
+                prefName = "";
+                am = "";
+        }
+        AD = this.getSharedPreferences(am, MODE_PRIVATE);
+        AM = this.getSharedPreferences(prefName, MODE_PRIVATE);
+        address = AD.getString(username, "");
+        amount = AM.getString(username, "");
+
+        String message = "Address: " + address + "\nAmount: " + amount;
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder
+                .setTitle("Donate_list info")
+                .setMessage(message)
+                .setCancelable(true)
+                .show();
+    }
+
+    @Override
+    public void showBloodDataS(String username, int id) {
+        SharedPreferences AD,AM,T;
+        AD = this.getSharedPreferences("BloodRequestA", MODE_PRIVATE);
+        AM = this.getSharedPreferences("BloodRequestAmount", MODE_PRIVATE);
+        T = this.getSharedPreferences("Blood2Donate", MODE_PRIVATE);
+
+        String address = "", amount = "", type = "";
+        address = AD.getString(username, "");
+        amount = AM.getString(username, "");
+        type = T.getString(username, "");
+        String message = "Address: " + address + "\nAmount: " + amount + " ml\nType: " + type;
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder
+                .setTitle("Donate_list info")
+                .setMessage(message)
+                .setCancelable(true)
+                .show();
+    }
+
+    @Override
+    public void saveBloodDonateData(String s) {
+        SharedPreferences preferences = this.getSharedPreferences("Blood2Donate", MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putString(Uname, s).commit();
+    }
+
+    @Override
+    public void submitRequest(EditText address, EditText amount) {
+        SharedPreferences pref = this.getSharedPreferences("BloodRequestA", MODE_PRIVATE);
+        SharedPreferences prefA = this.getSharedPreferences("BloodRequestAmount", MODE_PRIVATE);
+        SharedPreferences.Editor editor, editor1;
+        editor = pref.edit();
+        editor1 = prefA.edit();
+        editor.putString(Uname, address.getText().toString()).commit();
+        editor1.putString(Uname, amount.getText().toString()).commit();
+
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                nv.setCheckedItem(R.id.profile);
+                getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.fragment_container, new ProfileFrag())
+                        .commit();
+            }
+        }, 1000);
+    }
+
+    @Override
+    public ArrayList<String> getDonorUserNameList1(AdapterView<?> parent, View view, int position, long id) {
+        SharedPreferences Donor_name = this.getSharedPreferences(organGetter(parent, view, position, id), MODE_PRIVATE);
+        Map<String, Boolean> donorNames = (Map<String, Boolean>) Donor_name.getAll();
+
+        ArrayList<String> names = new ArrayList<>();
+        for(Map.Entry<String, Boolean> stringMap : donorNames.entrySet()) {
+            if(stringMap.getValue()) {
+                names.add(stringMap.getKey());
+            }
+        }
+        return names;
+    }
+
+    @Override
+    public ArrayList<String> getNames1(ArrayList<String> username) {
+        int i;
+        SharedPreferences Donor_name = this.getSharedPreferences("Name_data", MODE_PRIVATE);
+        ArrayList<String> name = new ArrayList<>();
+        for(i=0;i<username.size();i++) {
+            name.add(Donor_name.getString(username.get(i), "null"));
+        }
+        return name;
+    }
+
+    @Override
+    public String organGetter(AdapterView<?> parent, View view, int position, long id) {
+        switch (parent.getItemAtPosition(position).toString()) {
+            case "Heart":
+                return "heartPref";
+            case "Eyes":
+                return "eyePref";
+            case "Kidney":
+                return "kidneyPref";
+            case "Liver":
+                return "LiverPref";
+            case "Pancreas":
+                return "pancreasPref";
+            case "Lungs":
+                return "lungPref";
+            case "Intestine":
+                return "instestinePref";
+        }
+
+        return null;
+    }
 }

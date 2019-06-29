@@ -10,25 +10,30 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Spinner;
 
 import java.util.ArrayList;
 
-public class BloodDonors extends Fragment  {
+public class OrganDonors extends Fragment {
 
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+
+    String UserName;
+    Spinner organ_selector;
+    ArrayAdapter organ_type;
 
     private String mParam1;
     private String mParam2;
 
     private OnFragmentInteractionListener mListener;
 
-    public BloodDonors() {
+    public OrganDonors() {
 
     }
 
-    public static BloodDonors newInstance(String param1, String param2) {
-        BloodDonors fragment = new BloodDonors();
+    public static OrganDonors newInstance(String param1, String param2) {
+        OrganDonors fragment = new OrganDonors();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -45,23 +50,50 @@ public class BloodDonors extends Fragment  {
         }
     }
 
+    ArrayAdapter<String> listViewAdapter;
+    ArrayList<String> donarUserName;
+    ListView listView;
 
     @Override
-    public View onCreateView (LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.blood_donors, container, false);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        final ArrayList<String> donarUserName = mListener.getDonorUserNameList();
-        ListView listView = (ListView) view.findViewById(R.id.listview);
-        ArrayAdapter<String> listViewAdapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_1, mListener.getNames(donarUserName));
+        View view = inflater.inflate(R.layout.fragment_organ_donors, container, false);
+        organ_selector = view.findViewById(R.id.spinner);
+        CharSequence[] groups = { "Heart", "Eyes", "Kidney", "Liver", "Pancreas", "Lungs", "Intestine" };
+        organ_type = new ArrayAdapter(this.getActivity(), android.R.layout.simple_spinner_item, groups);
+        organ_type.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        organ_selector.setAdapter(organ_type);
+
+        listView = (ListView) view.findViewById(R.id.listview1);
+
+        organ_selector.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                donarUserName = mListener.getDonorUserNameList1(parent, view, position, id);
+
+                listViewAdapter = new ArrayAdapter<String>(getActivity(),
+                        android.R.layout.simple_list_item_1,
+                        mListener.getNames1(donarUserName));
+
+                listView.setAdapter(listViewAdapter);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 mListener.showData(donarUserName.get(position));
             }
         });
-        listView.setAdapter(listViewAdapter);
+
         return view;
+
     }
 
     public void onButtonPressed(Uri uri) {
@@ -90,8 +122,11 @@ public class BloodDonors extends Fragment  {
     public interface OnFragmentInteractionListener {
         String donorName (String UserName);
         void onFragmentInteraction(Uri uri);
-        ArrayList<String> getDonorUserNameList();
-        ArrayList<String> getNames(ArrayList<String> username);
+        ArrayList<String> getDonorUserNameList1(AdapterView<?> parent, View view, int position, long id);
+        ArrayList<String> getNames1(ArrayList<String> username);
         void showData(String username);
+        String organGetter(AdapterView<?> parent, View view, int position, long id);
     }
+
+
 }

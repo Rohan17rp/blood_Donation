@@ -15,11 +15,6 @@ public class donor extends AppCompatActivity {
         setContentView(R.layout.edit_profile);
     }
 
-    public void Test(View view) {
-        Intent Test = new Intent(this, BloodBank.class);
-        startActivity(Test);
-        donor.this.finish();
-    }
     @Override
     public void onBackPressed() {
         startActivity(new Intent(this, Profile.class));
