@@ -9,16 +9,24 @@
         <item android:id="@+id/profile"
             android:icon="@drawable/ic_person"
             android:title="Profile"/>
+
         <item android:id="@+id/pending_requests"
             android:icon="@drawable/ic_person"
-            android:title="Pending Requests"/>
-        <item android:id="@+id/request"
-            android:icon="@drawable/cart"
-            android:title="Request"/>
+            android:title="Pending Requests"/>  <!--TODO: Only visible to Admins -->
 
-        <item android:id="@+id/donate"
+         <item android:id="@+id/request"
+            android:icon="@drawable/cart"
+            android:title="Request"/> <!-- TODO: contains reciever as tab 1, fragment_request_organs as tab 2 ,fragment_request_body a tab 3   -->
+
+        <item android:id="@+id/donate_list"
             android:icon="@drawable/donate"
-            android:title="Donate" />
+            android:title="Donor List" /> <!-- TODO: Visible only to admins
+                                                tab 1: blood_donors, tab 2: fragment_organ_donors tab, Tab 3: fragment_organ_donors  -->
+
+        <item android:id="@+id/stock"
+             android:icon="@drawable/cart"
+             android:title="Stock"/>    <!-- TODO: Visible only to admins
+                                                tab 1: available_blood, tab 2: fragment_organ_donation, tab 3 fragment_body_donation -->
 
         <item android:id="@+id/help"
             android:icon="@drawable/help"
