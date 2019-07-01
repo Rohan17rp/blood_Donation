@@ -50,11 +50,14 @@ public class BloodBankFrag extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.blood_bank, container, false);
+
         tabLayout = v.findViewById(R.id.tablayout);
         tabLayout.addTab(tabLayout.newTab().setText("Available BLood"));
         tabLayout.addTab(tabLayout.newTab().setText("Donors").setCustomView((ListView)v.findViewById(R.id.listview)));
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
+
         final ViewPager viewPager = (ViewPager)v.findViewById(R.id.pager);
+
         viewPager.setAdapter(mListener.getPagerAdapter(tabLayout));
         viewPager.setOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
         tabLayout.setOnTabSelectedListener(new TabLayout.BaseOnTabSelectedListener() {

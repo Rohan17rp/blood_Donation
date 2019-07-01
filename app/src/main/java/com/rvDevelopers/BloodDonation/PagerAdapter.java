@@ -16,11 +16,9 @@ public class PagerAdapter extends FragmentStatePagerAdapter {
     public Fragment getItem(int position) {
         switch (position){
             case 0:
-                final LoginFrag loginFrag = LoginFrag.newInstance("", "");
-                return loginFrag;
+                return new LoginFrag();
             case 1:
-                final SignUpFrag signUpFrag = SignUpFrag.newInstance();
-                return signUpFrag;
+                return new SignUpFrag();
             default:
                 return null;
         }

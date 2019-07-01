@@ -67,7 +67,7 @@ public class TermsAndConditions extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.help, container,false);
 
-        inflater.inflate(R.layout.help, container,false);
+//        inflater.inflate(R.layout.help, container,false);
         TextView info = v.findViewById(R.id.help_page);
         info.setText("\t\nAny kind of donation is by the will of Donor \t\nOrgans and body could be donated only after death with the consent of family members\t\nThe Organs to be donated can be altered by the donor\t\n");
         return v;

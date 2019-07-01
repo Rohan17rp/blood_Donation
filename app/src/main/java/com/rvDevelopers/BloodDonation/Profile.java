@@ -49,7 +49,7 @@ public class Profile extends AppCompatActivity implements ProfileFrag.OnFragment
     NavigationView nv;
     Toolbar toolbar;
 
-    SharedPreferences heartPref, eyePref, kidneyPref, LiverPref, panPref, lungPref, intPref, platePref;
+    SharedPreferences heartPref, eyePref, kidneyPref, LiverPref, panPref, lungPref, intPref;
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

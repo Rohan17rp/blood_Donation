@@ -58,6 +58,7 @@ public class OrganDonors extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_organ_donors, container, false);
+
         organ_selector = view.findViewById(R.id.spinner);
         CharSequence[] groups = { "Heart", "Eyes", "Kidney", "Liver", "Pancreas", "Lungs", "Intestine" };
         organ_type = new ArrayAdapter(this.getActivity(), android.R.layout.simple_spinner_item, groups);

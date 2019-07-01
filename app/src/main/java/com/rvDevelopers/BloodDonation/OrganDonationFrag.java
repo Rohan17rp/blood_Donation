@@ -48,6 +48,7 @@ public class OrganDonationFrag extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_organ_donation2, container, false);
+
         tabLayout = v.findViewById(R.id.tablayout2);
         tabLayout.addTab(tabLayout.newTab().setText("Available Organs"));
         tabLayout.addTab(tabLayout.newTab().setText("Donors").setCustomView((ListView)v.findViewById(R.id.listview1)));

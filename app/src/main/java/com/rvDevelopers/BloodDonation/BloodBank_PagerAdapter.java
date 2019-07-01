@@ -16,11 +16,9 @@ public class BloodBank_PagerAdapter extends FragmentStatePagerAdapter {
     public Fragment getItem(int position) {
         switch (position){
             case 0:
-                AvailableBlood availableBlood = new AvailableBlood();
-                return availableBlood;
+                return new AvailableBlood();
             case 1:
-                BloodDonors bloodDonors = new BloodDonors();
-                return bloodDonors;
+                return new BloodDonors();
 //            case 2:
 //                Contact contact = new Contact();
 //                return contact;

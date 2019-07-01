@@ -45,6 +45,7 @@ public class About extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.about, container, false);
+
         TextView About = v.findViewById(R.id.about_page);
         About.setText("\tIt is a app used for blood as well as organ donation\n\tBy\n\tRohan Patil\n\tVed Patil\n");
         return v;

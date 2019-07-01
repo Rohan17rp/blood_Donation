@@ -12,8 +12,6 @@ import android.widget.TextView;
 
 public class Help extends Fragment {
 
-    String uname;
-
     helpListner listner;
     public Help() {
 
