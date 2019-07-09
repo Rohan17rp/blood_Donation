@@ -16,7 +16,7 @@
 
          <item android:id="@+id/request"
             android:icon="@drawable/cart"
-            android:title="Request"/> <!-- TODO: contains reciever as tab 1, fragment_request_organs as tab 2 ,fragment_request_body a tab 3   -->
+            android:title="Request"/>
 
         <item android:id="@+id/donate_list"
             android:icon="@drawable/donate"
@@ -25,8 +25,7 @@
 
         <item android:id="@+id/stock"
              android:icon="@drawable/cart"
-             android:title="Stock"/>    <!-- TODO: Visible only to admins
-                                                tab 1: available_blood, tab 2: fragment_organ_donation, tab 3 fragment_body_donation -->
+             android:title="Stock"/>    <!-- TODO: Visible only to admins-->
 
         <item android:id="@+id/help"
             android:icon="@drawable/help"

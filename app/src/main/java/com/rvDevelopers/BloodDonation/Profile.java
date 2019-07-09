@@ -32,7 +32,9 @@ public class Profile extends AppCompatActivity implements ProfileFrag.OnFragment
         About.OnFragmentInteractionListener, OrganDonors.OnFragmentInteractionListener,
         OrganBank.OnFragmentInteractionListener,OrganDonationFrag.OnFragmentInteractionListener,
         RequestOrgans.OnFragmentInteractionListener, PendingRequest.OnFragmentInteractionListener,
-        TermsAndConditions.OnFragmentInteractionListener {
+        TermsAndConditions.OnFragmentInteractionListener, RequestAnything.OnFragmentInteractionListener,
+        RequestBody.OnFragmentInteractionListener, Stocks.OnFragmentInteractionListener,
+        BodyDonation.OnFragmentInteractionListener{
 
     TextView welcome;
     int age;
@@ -64,7 +66,10 @@ public class Profile extends AppCompatActivity implements ProfileFrag.OnFragment
         dl.addDrawerListener(t);
         t.syncState();
         setSupportActionBar(toolbar);
+
         nv = findViewById(R.id.nv);
+
+        nv.setCheckedItem(R.id.profile);
 
         if(savedInstanceState == null) {
             nv.setCheckedItem(R.id.profile);
@@ -91,31 +96,43 @@ public class Profile extends AppCompatActivity implements ProfileFrag.OnFragment
                                 .replace(R.id.fragment_container, new PendingRequest())
                                 .commit();
                         break;
-                    case R.id.cart:
+                    case R.id.request:
                         getSupportFragmentManager()
                                 .beginTransaction()
-                                .replace(R.id.fragment_container, new ReceiverFrag())
+                                .replace(R.id.fragment_container, new RequestAnything())
                                 .commit();
                         break;
-                    case R.id.request_organs:
+                    case R.id.stock:
                         getSupportFragmentManager()
                                 .beginTransaction()
-                                .replace(R.id.fragment_container, new RequestOrgans())
+                                .replace(R.id.fragment_container, new Stocks())
                                 .commit();
                         break;
-                    case R.id.organ_donate:
-                        getSupportFragmentManager()
-                                .beginTransaction()
-                                .replace(R.id.fragment_container, new OrganDonationFrag())
-                                .commit();
-
-                        break;
-                    case R.id.blood_donate:
-                        getSupportFragmentManager()
-                                .beginTransaction()
-                                .replace(R.id.fragment_container, new BloodBankFrag())
-                                .commit();
-                        break;
+//                    case R.id.cart:
+//                        getSupportFragmentManager()
+//                                .beginTransaction()
+//                                .replace(R.id.fragment_container, new ReceiverFrag())
+//                                .commit();
+//                        break;
+//                    case R.id.request_organs:
+//                        getSupportFragmentManager()
+//                                .beginTransaction()
+//                                .replace(R.id.fragment_container, new RequestOrgans())
+//                                .commit();
+//                        break;
+//                    case R.id.organ_donate:
+//                        getSupportFragmentManager()
+//                                .beginTransaction()
+//                                .replace(R.id.fragment_container, new OrganDonationFrag())
+//                                .commit();
+//
+//                        break;
+//                    case R.id.blood_donate:
+//                        getSupportFragmentManager()
+//                                .beginTransaction()
+//                                .replace(R.id.fragment_container, new BloodBankFrag())
+//                                .commit();
+//                        break;
                     case R.id.help:
                         getSupportFragmentManager()
                                 .beginTransaction()
@@ -269,6 +286,11 @@ public class Profile extends AppCompatActivity implements ProfileFrag.OnFragment
     public OrganDonation_PagerAdapter getPagerAdapter1(TabLayout tabLayout) {
         return new OrganDonation_PagerAdapter(getSupportFragmentManager(),tabLayout.getTabCount());
     }
+
+    /*@Override
+    public RequestAnything.RequestAnythingAdapter setRequestAnythingAdapter(TabLayout tabLayout) {
+        return new RequestAnything.RequestAnythingAdapter(getSupportFragmentManager(), tabLayout.getTabCount());
+    }*/
 
     @Override
     public void showData(TextView name ,TextView uname, TextView blood, TextView email, TextView donationCheckBox, TextView welcome) {

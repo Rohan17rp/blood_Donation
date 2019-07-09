@@ -3,15 +3,17 @@ package com.rvDevelopers.BloodDonation;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ListView;
 
-public class BloodBankFrag extends Fragment {
+public class RequestAnything extends Fragment {
 
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
@@ -21,12 +23,12 @@ public class BloodBankFrag extends Fragment {
 
     private OnFragmentInteractionListener mListener;
 
-    public BloodBankFrag() {
+    public RequestAnything() {
 
     }
 
-    public static BloodBankFrag newInstance(String param1, String param2) {
-        BloodBankFrag fragment = new BloodBankFrag();
+    public static RequestAnything newInstance(String param1, String param2) {
+        RequestAnything fragment = new RequestAnything();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -41,23 +43,26 @@ public class BloodBankFrag extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+
     }
 
     TabLayout tabLayout;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.blood_bank, container, false);
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View v = inflater.inflate(R.layout.fragment_request_anything, container, false);
 
-        tabLayout = v.findViewById(R.id.tablayout);
-        tabLayout.addTab(tabLayout.newTab().setText("Available BLood"));
-        tabLayout.addTab(tabLayout.newTab().setText("Donors").setCustomView((ListView)v.findViewById(R.id.listview)));
+        tabLayout = v.findViewById(R.id.tablayout4);
+        tabLayout.addTab(tabLayout.newTab().setText("Blood"));
+        tabLayout.addTab(tabLayout.newTab().setText("Organs"));
+        tabLayout.addTab(tabLayout.newTab().setText("Body"));
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
 
-        final ViewPager viewPager = (ViewPager)v.findViewById(R.id.pager);
-
-        viewPager.setAdapter(mListener.getPagerAdapter(tabLayout));
+        final ViewPager viewPager = v.findViewById(R.id.pager4);
+//        viewPager.setAdapter(mListener.setRequestAnythingAdapter(tabLayout));
+        viewPager.setAdapter(new RequestAnythingAdapter(getFragmentManager(), tabLayout.getTabCount()));
         viewPager.setOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
+
         tabLayout.setOnTabSelectedListener(new TabLayout.BaseOnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
@@ -99,9 +104,39 @@ public class BloodBankFrag extends Fragment {
         super.onDetach();
         mListener = null;
     }
+
     public interface OnFragmentInteractionListener {
         void onFragmentInteraction(Uri uri);
-        BloodBank_PagerAdapter getPagerAdapter(TabLayout tabLayout);
+//        RequestAnythingAdapter setRequestAnythingAdapter(TabLayout tabLayout);
+    }
+
+    public class RequestAnythingAdapter extends FragmentStatePagerAdapter {
+
+        private int NumberOfTabs;
+
+        public RequestAnythingAdapter(FragmentManager fm, int NumberOfTabs) {
+            super(fm);
+            this.NumberOfTabs = NumberOfTabs;
+        }
+
+        @Override
+        public Fragment getItem(int position) {
+            switch (position) {
+                case 0:
+                    return new ReceiverFrag();
+                case 1:
+                    return new RequestOrgans();
+                case 2:
+                    return new RequestBody();
+                default:
+                    return null;
+            }
+        }
+
+        @Override
+        public int getCount() {
+            return NumberOfTabs;
+        }
     }
 
 }

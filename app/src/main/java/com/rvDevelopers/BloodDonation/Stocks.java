@@ -5,13 +5,15 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ListView;
 
-public class BloodBankFrag extends Fragment {
+public class Stocks extends Fragment {
 
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
@@ -21,12 +23,12 @@ public class BloodBankFrag extends Fragment {
 
     private OnFragmentInteractionListener mListener;
 
-    public BloodBankFrag() {
+    public Stocks() {
 
     }
 
-    public static BloodBankFrag newInstance(String param1, String param2) {
-        BloodBankFrag fragment = new BloodBankFrag();
+    public static Stocks newInstance(String param1, String param2) {
+        Stocks fragment = new Stocks();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -47,17 +49,18 @@ public class BloodBankFrag extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.blood_bank, container, false);
+        View v = inflater.inflate(R.layout.fragment_stocks, container, false);
 
-        tabLayout = v.findViewById(R.id.tablayout);
-        tabLayout.addTab(tabLayout.newTab().setText("Available BLood"));
-        tabLayout.addTab(tabLayout.newTab().setText("Donors").setCustomView((ListView)v.findViewById(R.id.listview)));
+        tabLayout = v.findViewById(R.id.tab5);
+        tabLayout.addTab(tabLayout.newTab().setText("Available Blood"));
+        tabLayout.addTab(tabLayout.newTab().setText("Available Organs"));
+        tabLayout.addTab(tabLayout.newTab().setText("Bodies"));
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
 
-        final ViewPager viewPager = (ViewPager)v.findViewById(R.id.pager);
-
-        viewPager.setAdapter(mListener.getPagerAdapter(tabLayout));
+        final ViewPager viewPager = v.findViewById(R.id.pager5);
+        viewPager.setAdapter(new StocksAdapter(getFragmentManager(), tabLayout.getTabCount()));
         viewPager.setOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
+
         tabLayout.setOnTabSelectedListener(new TabLayout.BaseOnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
@@ -99,9 +102,36 @@ public class BloodBankFrag extends Fragment {
         super.onDetach();
         mListener = null;
     }
+
     public interface OnFragmentInteractionListener {
         void onFragmentInteraction(Uri uri);
-        BloodBank_PagerAdapter getPagerAdapter(TabLayout tabLayout);
     }
 
+    public class StocksAdapter extends FragmentStatePagerAdapter {
+
+        int noOfTabs;
+        public StocksAdapter(FragmentManager fm, int noOfTabs) {
+            super(fm);
+            this.noOfTabs = noOfTabs;
+        }
+
+        @Override
+        public Fragment getItem(int i) {
+            switch (i) {
+                case 0:
+                    return new AvailableBlood();
+                case 1:
+                    return new OrganBank();
+                case 2:
+                    return new BodyDonation();
+                default:
+                    return null;
+            }
+        }
+
+        @Override
+        public int getCount() {
+            return noOfTabs;
+        }
+    }
 }
