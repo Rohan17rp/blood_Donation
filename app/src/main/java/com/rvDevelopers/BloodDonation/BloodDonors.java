@@ -47,8 +47,7 @@ public class BloodDonors extends Fragment  {
 
 
     @Override
-    public View onCreateView (LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView (LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.blood_donors, container, false);
 
         final ArrayList<String> donarUserName = mListener.getDonorUserNameList();

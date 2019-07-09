@@ -20,8 +20,7 @@
 
         <item android:id="@+id/donate_list"
             android:icon="@drawable/donate"
-            android:title="Donor List" /> <!-- TODO: Visible only to admins
-                                                tab 1: blood_donors, tab 2: fragment_organ_donors tab, Tab 3: fragment_organ_donors  -->
+            android:title="Donor List" /> <!-- TODO: Visible only to admins, Tab 3: fragment_organ_donors  -->
 
         <item android:id="@+id/stock"
              android:icon="@drawable/cart"

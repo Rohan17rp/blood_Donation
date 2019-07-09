@@ -34,7 +34,7 @@ public class Profile extends AppCompatActivity implements ProfileFrag.OnFragment
         RequestOrgans.OnFragmentInteractionListener, PendingRequest.OnFragmentInteractionListener,
         TermsAndConditions.OnFragmentInteractionListener, RequestAnything.OnFragmentInteractionListener,
         RequestBody.OnFragmentInteractionListener, Stocks.OnFragmentInteractionListener,
-        BodyDonation.OnFragmentInteractionListener{
+        BodyDonation.OnFragmentInteractionListener, DonorList.OnFragmentInteractionListener {
 
     TextView welcome;
     int age;
@@ -106,6 +106,12 @@ public class Profile extends AppCompatActivity implements ProfileFrag.OnFragment
                         getSupportFragmentManager()
                                 .beginTransaction()
                                 .replace(R.id.fragment_container, new Stocks())
+                                .commit();
+                        break;
+                    case R.id.donate_list:
+                        getSupportFragmentManager()
+                                .beginTransaction()
+                                .replace(R.id.fragment_container, new DonorList())
                                 .commit();
                         break;
 //                    case R.id.cart:
