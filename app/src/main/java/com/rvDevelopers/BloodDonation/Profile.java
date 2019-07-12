@@ -19,6 +19,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -34,7 +35,8 @@ public class Profile extends AppCompatActivity implements ProfileFrag.OnFragment
         RequestOrgans.OnFragmentInteractionListener, PendingRequest.OnFragmentInteractionListener,
         TermsAndConditions.OnFragmentInteractionListener, RequestAnything.OnFragmentInteractionListener,
         RequestBody.OnFragmentInteractionListener, Stocks.OnFragmentInteractionListener,
-        BodyDonation.OnFragmentInteractionListener, DonorList.OnFragmentInteractionListener {
+        BodyDonation.OnFragmentInteractionListener, DonorList.OnFragmentInteractionListener, BecomeADonor.OnFragmentInteractionListener,
+        BodyDonorList.OnFragmentInteractionListener {
 
     TextView welcome;
     int age;
@@ -52,6 +54,7 @@ public class Profile extends AppCompatActivity implements ProfileFrag.OnFragment
     Toolbar toolbar;
 
     SharedPreferences heartPref, eyePref, kidneyPref, LiverPref, panPref, lungPref, intPref;
+    SharedPreferences bodyPref;
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -114,31 +117,12 @@ public class Profile extends AppCompatActivity implements ProfileFrag.OnFragment
                                 .replace(R.id.fragment_container, new DonorList())
                                 .commit();
                         break;
-//                    case R.id.cart:
-//                        getSupportFragmentManager()
-//                                .beginTransaction()
-//                                .replace(R.id.fragment_container, new ReceiverFrag())
-//                                .commit();
-//                        break;
-//                    case R.id.request_organs:
-//                        getSupportFragmentManager()
-//                                .beginTransaction()
-//                                .replace(R.id.fragment_container, new RequestOrgans())
-//                                .commit();
-//                        break;
-//                    case R.id.organ_donate:
-//                        getSupportFragmentManager()
-//                                .beginTransaction()
-//                                .replace(R.id.fragment_container, new OrganDonationFrag())
-//                                .commit();
-//
-//                        break;
-//                    case R.id.blood_donate:
-//                        getSupportFragmentManager()
-//                                .beginTransaction()
-//                                .replace(R.id.fragment_container, new BloodBankFrag())
-//                                .commit();
-//                        break;
+                    case R.id.bedonor:
+                        getSupportFragmentManager()
+                                .beginTransaction()
+                                .replace(R.id.fragment_container, new BecomeADonor())
+                                .commit();
+                        break;
                     case R.id.help:
                         getSupportFragmentManager()
                                 .beginTransaction()
@@ -175,12 +159,12 @@ public class Profile extends AppCompatActivity implements ProfileFrag.OnFragment
         Message = "Welcome ";
         Uname = category.getStringExtra("uname");
         welcome = findViewById(R.id.textView);
-
         name_pref = this.getSharedPreferences("Name_data", MODE_PRIVATE);
         age_pref = this.getSharedPreferences("age_preference", MODE_PRIVATE);
         blood_pref = this.getSharedPreferences("blood_preference", MODE_PRIVATE);
         email_pref = this.getSharedPreferences("Email_id", MODE_PRIVATE);
         donarList_pref = this.getSharedPreferences("donation_pref", MODE_PRIVATE);
+        bodyPref = this.getSharedPreferences("body_donation_pref", MODE_PRIVATE);
 
         Blood = blood_pref.getString(Uname, "");
         Email = email_pref.getString(Uname, "No Mail ID");
@@ -238,12 +222,6 @@ public class Profile extends AppCompatActivity implements ProfileFrag.OnFragment
         finish();
     }
 
-    public void donate_list(View view){
-        Intent donate = new Intent(this, Donate_list.class);
-        startActivity(donate);
-        Profile.this.finish();
-    }
-
     @Override
     public void onBackPressed() {
         if(dl.isDrawerOpen(GravityCompat.START)) {
@@ -293,11 +271,6 @@ public class Profile extends AppCompatActivity implements ProfileFrag.OnFragment
         return new OrganDonation_PagerAdapter(getSupportFragmentManager(),tabLayout.getTabCount());
     }
 
-    /*@Override
-    public RequestAnything.RequestAnythingAdapter setRequestAnythingAdapter(TabLayout tabLayout) {
-        return new RequestAnything.RequestAnythingAdapter(getSupportFragmentManager(), tabLayout.getTabCount());
-    }*/
-
     @Override
     public void showData(TextView name ,TextView uname, TextView blood, TextView email, TextView donationCheckBox, TextView welcome) {
         name.setText(Name);
@@ -325,6 +298,22 @@ public class Profile extends AppCompatActivity implements ProfileFrag.OnFragment
         SharedPreferences pref = this.getSharedPreferences("Name_data", MODE_PRIVATE);
         String Donor_name = pref.getString(UserName,"null");
         return (Donor_name);
+    }
+
+    @Override
+    public void saveState(CheckBox blood, CheckBox body) {
+        SharedPreferences.Editor editor = donarList_pref.edit();
+        editor.putBoolean(Uname, blood.isChecked()).commit();
+        SharedPreferences.Editor bodysaver = bodyPref.edit();
+        bodysaver.putBoolean(Uname, body.isChecked()).commit();
+
+        new Handler().postDelayed(() -> {
+            nv.setCheckedItem(R.id.profile);
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.fragment_container, new ProfileFrag())
+                    .commit();
+        }, 500);
     }
 
     @Override
@@ -365,6 +354,29 @@ public class Profile extends AppCompatActivity implements ProfileFrag.OnFragment
                 .setMessage(message)
                 .setCancelable(true)
                 .show();
+    }
+
+    @Override
+    public ArrayList<String> getDonorUserNameListB() {
+        Map<String, Boolean> donorNames = (Map<String, Boolean>) bodyPref.getAll();
+        ArrayList<String> names = new ArrayList<>();
+        for(Map.Entry<String, Boolean> stringMap : donorNames.entrySet()) {
+            if(stringMap.getValue()) {
+                names.add(stringMap.getKey());
+            }
+        }
+        return names;
+    }
+
+    @Override
+    public ArrayList<String> getNamesB(ArrayList<String> username) {
+        int i;
+        SharedPreferences Donor_name = this.getSharedPreferences("Name_data", MODE_PRIVATE);
+        ArrayList<String> name = new ArrayList<>();
+        for(i=0;i<username.size();i++) {
+            name.add(Donor_name.getString(username.get(i), "null"));
+        }
+        return name;
     }
 
     @Override

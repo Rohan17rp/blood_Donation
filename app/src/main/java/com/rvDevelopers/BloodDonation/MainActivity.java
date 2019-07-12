@@ -184,6 +184,11 @@ public class MainActivity extends AppCompatActivity implements LoginFrag.OnFragm
             category.putExtra("uname", UserName);
             startActivity(category);
             endActivity();
+        } else if (UserName.equals("NotAdmin") && Password.equals("admin")) {
+            Intent category = new Intent(this, Profile.class);
+            category.putExtra("uname", UserName);
+            startActivity(category);
+            endActivity();
         } else {
             Toast
                     .makeText(this , "Invalid Credentials", Toast.LENGTH_LONG)

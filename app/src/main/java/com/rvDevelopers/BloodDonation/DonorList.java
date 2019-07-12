@@ -53,7 +53,7 @@ public class DonorList extends Fragment {
         tabLayout = v.findViewById(R.id.tab6);
         tabLayout.addTab(tabLayout.newTab().setText("Blood donors"));
         tabLayout.addTab(tabLayout.newTab().setText("Organ donors"));
-//        tabLayout.addTab(tabLayout.newTab().setText("Body donors"));
+        tabLayout.addTab(tabLayout.newTab().setText("Body donors"));
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
 
         final ViewPager viewPager = v.findViewById(R.id.pager6);
@@ -121,6 +121,8 @@ public class DonorList extends Fragment {
                     return new BloodDonors();
                 case 1:
                     return new OrganDonors();
+                case 2:
+                    return new BodyDonorList();
                 default:
                     return null;
             }

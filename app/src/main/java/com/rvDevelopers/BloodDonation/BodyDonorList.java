@@ -7,10 +7,12 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.CheckBox;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 
-public class BecomeADonor extends Fragment {
+import java.util.ArrayList;
+
+public class BodyDonorList extends Fragment {
 
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
@@ -20,12 +22,12 @@ public class BecomeADonor extends Fragment {
 
     private OnFragmentInteractionListener mListener;
 
-    public BecomeADonor() {
+    public BodyDonorList() {
 
     }
 
-    public static BecomeADonor newInstance(String param1, String param2) {
-        BecomeADonor fragment = new BecomeADonor();
+    public static BodyDonorList newInstance(String param1, String param2) {
+        BodyDonorList fragment = new BodyDonorList();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -42,21 +44,14 @@ public class BecomeADonor extends Fragment {
         }
     }
 
-    CheckBox blood, body;
-    Button button;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View v =  inflater.inflate(R.layout.fragment_become_adonor, container, false);
-        blood = v.findViewById(R.id.checkBox);
-        body = v.findViewById(R.id.checkBox1);
-        button = v.findViewById(R.id.button11);
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                mListener.saveState(blood, body);
-            }
-        });
-//        donarList_pref = this.getSharedPreferences("donation_pref", MODE_PRIVATE);
+        View v = inflater.inflate(R.layout.fragment_body_donors, container, false);
+
+        final ArrayList<String> donarUserName = mListener.getDonorUserNameListB();
+        ListView listView = (ListView) v.findViewById(R.id.listview);
+        ArrayAdapter<String> listViewAdapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_1, mListener.getNamesB(donarUserName));
+        listView.setAdapter(listViewAdapter);
         return v;
     }
 
@@ -85,6 +80,7 @@ public class BecomeADonor extends Fragment {
 
     public interface OnFragmentInteractionListener {
         void onFragmentInteraction(Uri uri);
-        void saveState(CheckBox blood, CheckBox body);
+        ArrayList<String> getDonorUserNameListB();
+        ArrayList<String> getNamesB(ArrayList<String> username);
     }
 }
