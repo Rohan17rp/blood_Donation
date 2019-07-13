@@ -11,9 +11,9 @@ public class OrgansToDonateForm extends AppCompatActivity {
 
     Intent edit;
     String UserName;
-    SharedPreferences heartPref, eyePref, kidneyPref, LiverPref, panPref, lungPref, intPref, platePref;
-    SharedPreferences.Editor heartEdit, eueEdit, kidEdit, livEdit, panEdit, lunEdit, intEdit, plateEdit;
-    CheckBox heart, eye, kid, liv, pan, lung, plate, inte;
+    SharedPreferences heartPref, eyePref, kidneyPref, LiverPref, panPref, lungPref, intPref;
+    SharedPreferences.Editor heartEdit, eueEdit, kidEdit, livEdit, panEdit, lunEdit, intEdit;
+    CheckBox heart, eye, kid, liv, pan, lung, inte;
 
     @Override
     protected void onCreate(Bundle bundle) {

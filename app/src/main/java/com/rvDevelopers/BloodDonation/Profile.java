@@ -36,13 +36,14 @@ public class Profile extends AppCompatActivity implements ProfileFrag.OnFragment
         TermsAndConditions.OnFragmentInteractionListener, RequestAnything.OnFragmentInteractionListener,
         RequestBody.OnFragmentInteractionListener, Stocks.OnFragmentInteractionListener,
         BodyDonation.OnFragmentInteractionListener, DonorList.OnFragmentInteractionListener, BecomeADonor.OnFragmentInteractionListener,
-        BodyDonorList.OnFragmentInteractionListener {
+        BodyDonorList.OnFragmentInteractionListener, OrganToDonateFormTab.OnFragmentInteractionListener {
 
     TextView welcome;
     int age;
     String Message, Name, Uname, Blood, Email;
     Intent category;
     SharedPreferences age_pref, name_pref, blood_pref, email_pref, donarList_pref, prev_user;
+    SharedPreferences.Editor heartEdit, eueEdit, kidEdit, livEdit, panEdit, lunEdit, intEdit;
     SharedPreferences.Editor prev_editor;
     Button donate;
 
@@ -69,6 +70,14 @@ public class Profile extends AppCompatActivity implements ProfileFrag.OnFragment
         dl.addDrawerListener(t);
         t.syncState();
         setSupportActionBar(toolbar);
+
+        heartEdit = heartPref.edit();
+        eueEdit = eyePref.edit();
+        kidEdit = kidneyPref.edit();
+        livEdit = LiverPref.edit();
+        panEdit = panPref.edit();
+        lunEdit = lungPref.edit();
+        intEdit = intPref.edit();
 
         nv = findViewById(R.id.nv);
 
@@ -377,6 +386,30 @@ public class Profile extends AppCompatActivity implements ProfileFrag.OnFragment
             name.add(Donor_name.getString(username.get(i), "null"));
         }
         return name;
+    }
+
+    @Override
+    public void onFormOpen(CheckBox heart, CheckBox eye, CheckBox kid, CheckBox liv, CheckBox pan, CheckBox lung, CheckBox inte) {
+        heart.setChecked(heartPref.getBoolean(Uname, false));
+        eye.setChecked(eyePref.getBoolean(Uname, false));
+        kid.setChecked(kidneyPref.getBoolean(Uname, false));
+        liv.setChecked(LiverPref.getBoolean(Uname, false));
+        pan.setChecked(panPref.getBoolean(Uname, false));
+        lung.setChecked(lungPref.getBoolean(Uname, false));
+        inte.setChecked(intPref.getBoolean(Uname, false));
+    }
+
+    @Override
+    public void saveOrganform(CheckBox heart, CheckBox eye, CheckBox kid, CheckBox liv, CheckBox pan, CheckBox lung, CheckBox inte) {
+        new Handler().postDelayed(() -> {
+            heartEdit.putBoolean(Uname, heart.isChecked()).commit();
+            eueEdit.putBoolean(Uname, eye.isChecked()).commit();
+            kidEdit.putBoolean(Uname, kid.isChecked()).commit();
+            livEdit.putBoolean(Uname, liv.isChecked()).commit();
+            panEdit.putBoolean(Uname, pan.isChecked()).commit();
+            lunEdit.putBoolean(Uname, lung.isChecked()).commit();
+            intEdit.putBoolean(Uname, inte.isChecked()).commit();
+        }, 500);
     }
 
     @Override
