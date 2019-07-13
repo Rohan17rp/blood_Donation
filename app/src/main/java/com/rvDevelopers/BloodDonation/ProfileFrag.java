@@ -22,7 +22,7 @@ public class ProfileFrag extends Fragment {
 
     TextView welcome;
     TextView name ,uname, blood, email, donationCheckBox;
-    Button edit, organDonate;
+    Button edit;
     private OnFragmentInteractionListener mListener;
 
     public ProfileFrag() {
@@ -56,18 +56,11 @@ public class ProfileFrag extends Fragment {
         email = v.findViewById(R.id.textEmailShow);
         welcome = v.findViewById(R.id.textView);
         edit = v.findViewById(R.id.button8);
-        organDonate = v.findViewById(R.id.button5);
         donationCheckBox = v.findViewById(R.id.textDonarStatus);
         edit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 mListener.EditProfile();
-            }
-        });
-        organDonate.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mListener.organDonateForm();
             }
         });
         return v;
@@ -106,7 +99,6 @@ public class ProfileFrag extends Fragment {
         void onFragmentInteraction(Uri uri);
         void showData(TextView name ,TextView uname, TextView blood, TextView email, TextView donationCheckBox, TextView welcome);
         void EditProfile();
-        void organDonateForm();
     }
 
 }

@@ -36,7 +36,7 @@ public class Profile extends AppCompatActivity implements ProfileFrag.OnFragment
         TermsAndConditions.OnFragmentInteractionListener, RequestAnything.OnFragmentInteractionListener,
         RequestBody.OnFragmentInteractionListener, Stocks.OnFragmentInteractionListener,
         BodyDonation.OnFragmentInteractionListener, DonorList.OnFragmentInteractionListener, BecomeADonor.OnFragmentInteractionListener,
-        BodyDonorList.OnFragmentInteractionListener, OrganToDonateFormTab.OnFragmentInteractionListener {
+        BodyDonorList.OnFragmentInteractionListener, OrganToDonateFormTab.OnFragmentInteractionListener, BecomeDonorTabManager.OnFragmentInteractionListener {
 
     TextView welcome;
     int age;
@@ -70,6 +70,14 @@ public class Profile extends AppCompatActivity implements ProfileFrag.OnFragment
         dl.addDrawerListener(t);
         t.syncState();
         setSupportActionBar(toolbar);
+
+        heartPref = this.getSharedPreferences("heartPref", MODE_PRIVATE);
+        eyePref = this.getSharedPreferences("eyePref", MODE_PRIVATE);
+        kidneyPref = this.getSharedPreferences("kidneyPref", MODE_PRIVATE);
+        LiverPref = this.getSharedPreferences("LiverPref", MODE_PRIVATE);
+        panPref = this.getSharedPreferences("pancreasPref", MODE_PRIVATE);
+        lungPref = this.getSharedPreferences("lungPref", MODE_PRIVATE);
+        intPref = this.getSharedPreferences("instestinePref", MODE_PRIVATE);
 
         heartEdit = heartPref.edit();
         eueEdit = eyePref.edit();
@@ -129,7 +137,7 @@ public class Profile extends AppCompatActivity implements ProfileFrag.OnFragment
                     case R.id.bedonor:
                         getSupportFragmentManager()
                                 .beginTransaction()
-                                .replace(R.id.fragment_container, new BecomeADonor())
+                                .replace(R.id.fragment_container, new BecomeDonorTabManager())
                                 .commit();
                         break;
                     case R.id.help:
@@ -183,14 +191,6 @@ public class Profile extends AppCompatActivity implements ProfileFrag.OnFragment
         check = donarList_pref.getBoolean(Uname, false);
         age = age_pref.getInt(Uname, 0);
         donate = findViewById(R.id.button);
-
-        heartPref = this.getSharedPreferences("heartPref", MODE_PRIVATE);
-        eyePref = this.getSharedPreferences("eyePref", MODE_PRIVATE);
-        kidneyPref = this.getSharedPreferences("kidneyPref", MODE_PRIVATE);
-        LiverPref = this.getSharedPreferences("LiverPref", MODE_PRIVATE);
-        panPref = this.getSharedPreferences("pancreasPref", MODE_PRIVATE);
-        lungPref = this.getSharedPreferences("lungPref", MODE_PRIVATE);
-        intPref = this.getSharedPreferences("instestinePref", MODE_PRIVATE);
     }
 
     public void logout() {
@@ -218,14 +218,6 @@ public class Profile extends AppCompatActivity implements ProfileFrag.OnFragment
     @Override
     public void EditProfile() {
         Intent edit = new Intent(this, EditProfile.class);
-        edit.putExtra("uname", Uname);
-        startActivity(edit);
-        finish();
-    }
-
-    @Override
-    public void organDonateForm() {
-        Intent edit = new Intent(this, OrgansToDonateForm.class);
         edit.putExtra("uname", Uname);
         startActivity(edit);
         finish();
