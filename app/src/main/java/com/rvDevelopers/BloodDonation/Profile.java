@@ -175,6 +175,11 @@ public class Profile extends AppCompatActivity implements ProfileFrag.OnFragment
         category = getIntent();
         Message = "Welcome ";
         Uname = category.getStringExtra("uname");
+        if(!Uname.equals("NotAdmin")) {
+            nv.getMenu().findItem(R.id.pending_requests).setVisible(false);
+            nv.getMenu().findItem(R.id.donate_list).setVisible(false);
+            nv.getMenu().findItem(R.id.stock).setVisible(false);
+        }
         welcome = findViewById(R.id.textView);
         name_pref = this.getSharedPreferences("Name_data", MODE_PRIVATE);
         age_pref = this.getSharedPreferences("age_preference", MODE_PRIVATE);
