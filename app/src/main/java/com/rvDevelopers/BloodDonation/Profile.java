@@ -202,6 +202,7 @@ public class Profile extends AppCompatActivity implements ProfileFrag.OnFragment
                 .replace(R.id.fragment_container, new ProfileFrag())
                 .commit();
     }
+
     public void logout() {
         new AlertDialog.Builder(this)
                 .setTitle("Warning")
@@ -231,6 +232,7 @@ public class Profile extends AppCompatActivity implements ProfileFrag.OnFragment
         startActivity(donateProfile);
         finish();
     }
+
     @Override
     public void EditProfile() {
         Intent edit = new Intent(this, EditProfile.class);
@@ -697,7 +699,7 @@ public class Profile extends AppCompatActivity implements ProfileFrag.OnFragment
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                nv.setCheckedItem(R.id.profile);
+                showProfileFrag();
             }
         }, 500);
     }
