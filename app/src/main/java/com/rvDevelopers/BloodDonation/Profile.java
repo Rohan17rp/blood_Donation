@@ -511,6 +511,9 @@ public class Profile extends AppCompatActivity implements ProfileFrag.OnFragment
             case R.id.pendingBlood:
                 prefName = "BloodRequestAmount";
                 break;
+            case R.id.pendingBody:
+                prefName = "body_request_amount";
+                break;
             default:
                 prefName = "";
         }
@@ -574,6 +577,9 @@ public class Profile extends AppCompatActivity implements ProfileFrag.OnFragment
                 am = "BloodRequestA";
                 prefName = "BloodRequestAmount";
                 break;
+            case R.id.pendingBody:
+                am = "body_request_address";
+                prefName = "body_request_amount";
             default:
                 prefName = "";
                 am = "";

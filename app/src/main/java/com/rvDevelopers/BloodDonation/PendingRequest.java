@@ -48,8 +48,7 @@ public class PendingRequest extends Fragment {
     TextView textView;
 
     @Override
-    public View onCreateView(final LayoutInflater inflater, final ViewGroup container,
-                             final Bundle savedInstanceState) {
+    public View onCreateView(final LayoutInflater inflater, final ViewGroup container, final Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_pending_request, container, false);
 
         final ArrayList<String> donarUserNameHeart = mListener.getDonorUserNameListS(R.id.pendingHeart);
@@ -173,6 +172,21 @@ public class PendingRequest extends Fragment {
         }
         listViewBlo.setAdapter(BloAdapter);
 
+
+        final ArrayList<String> donarUserNameBody = mListener.getDonorUserNameListS(R.id.pendingBody);
+        ListView listViewBody = v.findViewById(R.id.pendingBody);
+        ArrayAdapter<String> BodyAdapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_1, mListener.getNamesS(donarUserNameBody));
+        listViewBlo.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                mListener.showDataS(donarUserNameBody.get(position), R.id.pendingBlood);
+            }
+        });
+        if(donarUserNameBody.size() == 0) {
+            TextView textView = v.findViewById(R.id.body);
+            textView.setVisibility(View.GONE);
+        }
+        listViewBody.setAdapter(BodyAdapter);
         return v;
     }
 
