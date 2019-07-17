@@ -35,8 +35,9 @@ public class Profile extends AppCompatActivity implements ProfileFrag.OnFragment
         RequestOrgans.OnFragmentInteractionListener, PendingRequest.OnFragmentInteractionListener,
         TermsAndConditions.OnFragmentInteractionListener, RequestAnything.OnFragmentInteractionListener,
         RequestBody.OnFragmentInteractionListener, Stocks.OnFragmentInteractionListener,
-        BodyDonation.OnFragmentInteractionListener, DonorList.OnFragmentInteractionListener, BecomeADonor.OnFragmentInteractionListener,
-        BodyDonorList.OnFragmentInteractionListener, OrganToDonateFormTab.OnFragmentInteractionListener, BecomeDonorTabManager.OnFragmentInteractionListener {
+        BodyDonation.OnFragmentInteractionListener, DonorList.OnFragmentInteractionListener,
+        BecomeADonor.OnFragmentInteractionListener, BodyDonorList.OnFragmentInteractionListener,
+        OrganToDonateFormTab.OnFragmentInteractionListener, BecomeDonorTabManager.OnFragmentInteractionListener {
 
     TextView welcome;
     int age;
@@ -220,6 +221,13 @@ public class Profile extends AppCompatActivity implements ProfileFrag.OnFragment
         finish();
     }
 
+    @Override
+    public void DonateProfile(){
+        Intent donateProfile = new Intent(this, DonorProfileView.class);
+        donateProfile.putExtra("uname", Uname);
+        startActivity(donateProfile);
+        finish();
+    }
     @Override
     public void EditProfile() {
         Intent edit = new Intent(this, EditProfile.class);
