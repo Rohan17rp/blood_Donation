@@ -176,10 +176,10 @@ public class PendingRequest extends Fragment {
         final ArrayList<String> donarUserNameBody = mListener.getDonorUserNameListS(R.id.pendingBody);
         ListView listViewBody = v.findViewById(R.id.pendingBody);
         ArrayAdapter<String> BodyAdapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_1, mListener.getNamesS(donarUserNameBody));
-        listViewBlo.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        listViewBody.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                mListener.showDataS(donarUserNameBody.get(position), R.id.pendingBlood);
+                mListener.showDataS(donarUserNameBody.get(position), R.id.pendingBody);
             }
         });
         if(donarUserNameBody.size() == 0) {
