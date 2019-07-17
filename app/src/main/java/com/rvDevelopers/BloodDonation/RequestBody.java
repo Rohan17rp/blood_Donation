@@ -7,6 +7,8 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
 
 public class RequestBody extends Fragment {
 
@@ -40,11 +42,23 @@ public class RequestBody extends Fragment {
         }
     }
 
+    EditText address, amount;
+    Button button;
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_request_body, container, false);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View v =  inflater.inflate(R.layout.fragment_request_body, container, false);
+
+        address = v.findViewById(R.id.editText);
+        amount = v.findViewById(R.id.editText1);
+        button = v.findViewById(R.id.button);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mListener.saveBodyRequest(address.getText().toString(), amount.getText().toString());
+            }
+        });
+
+        return v;
     }
 
     public void onButtonPressed(Uri uri) {
@@ -72,5 +86,6 @@ public class RequestBody extends Fragment {
 
     public interface OnFragmentInteractionListener {
         void onFragmentInteraction(Uri uri);
+        void saveBodyRequest(String address, String amount);
     }
 }

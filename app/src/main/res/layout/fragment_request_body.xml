@@ -13,7 +13,7 @@
         android:layout_marginTop="50dp"
         android:layout_marginEnd="8dp"
         android:ems="10"
-        android:hint="Adress Of Delivery"
+        android:hint="Address Of Delivery"
         android:inputType="textPostalAddress"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -41,8 +41,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="345dp"
-        android:onClick="submitRequest"
-        android:text="@string/request"
+        android:text="Submit"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

@@ -93,11 +93,7 @@ public class Profile extends AppCompatActivity implements ProfileFrag.OnFragment
         nv.setCheckedItem(R.id.profile);
 
         if(savedInstanceState == null) {
-            nv.setCheckedItem(R.id.profile);
-            getSupportFragmentManager()
-                    .beginTransaction()
-                    .replace(R.id.fragment_container, new ProfileFrag())
-                    .commit();
+            showProfileFrag();
         }
 
         nv.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
@@ -199,6 +195,13 @@ public class Profile extends AppCompatActivity implements ProfileFrag.OnFragment
         donate = findViewById(R.id.button);
     }
 
+    public void showProfileFrag() {
+        nv.setCheckedItem(R.id.profile);
+        getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.fragment_container, new ProfileFrag())
+                .commit();
+    }
     public void logout() {
         new AlertDialog.Builder(this)
                 .setTitle("Warning")
@@ -322,11 +325,7 @@ public class Profile extends AppCompatActivity implements ProfileFrag.OnFragment
         bodysaver.putBoolean(Uname, body.isChecked()).commit();
 
         new Handler().postDelayed(() -> {
-            nv.setCheckedItem(R.id.profile);
-            getSupportFragmentManager()
-                    .beginTransaction()
-                    .replace(R.id.fragment_container, new ProfileFrag())
-                    .commit();
+            showProfileFrag();
         }, 500);
     }
 
@@ -632,11 +631,7 @@ public class Profile extends AppCompatActivity implements ProfileFrag.OnFragment
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                nv.setCheckedItem(R.id.profile);
-                getSupportFragmentManager()
-                        .beginTransaction()
-                        .replace(R.id.fragment_container, new ProfileFrag())
-                        .commit();
+                showProfileFrag();
             }
         }, 1000);
     }
@@ -684,7 +679,26 @@ public class Profile extends AppCompatActivity implements ProfileFrag.OnFragment
             case "Intestine":
                 return "instestinePref";
         }
-
         return null;
+    }
+
+    @Override
+    public void saveBodyRequest(String address, String amount) {
+        SharedPreferences ad,am;
+        SharedPreferences.Editor D, M;
+        ad = this.getSharedPreferences("body_request_address", MODE_PRIVATE);
+        am = this.getSharedPreferences("body_request_amount", MODE_PRIVATE);
+        D = ad.edit();
+        M = am.edit();
+        D.putString(Uname, address).commit();
+        M.putString(Uname, amount).commit();
+
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                nv.setCheckedItem(R.id.profile);
+            }
+        }, 500);
     }
 }

@@ -205,7 +205,6 @@ public class MainActivity extends AppCompatActivity implements LoginFrag.OnFragm
 
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
         finish();
     }
 
